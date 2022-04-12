@@ -39,3 +39,10 @@
 .vs/Ajedrez/v16/Browse.VC.opendb
 .vs/Ajedrez/v16/Browse.VC.db
 .vs/Ajedrez/v16/Browse.VC.db
+*.db
+*.db-shm
+*.db-wal
+*.db
+*.opendb
+*.ipch
+.vs/Ajedrez/v17/Browse.VC.db
