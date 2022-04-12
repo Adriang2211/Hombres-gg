@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Interacciones.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piezas.cpp" />
     <ClCompile Include="Posicionamiento.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Interacciones.h" />
     <ClInclude Include="Piezas.h" />
     <ClInclude Include="Posicionamiento.h" />
   </ItemGroup>
