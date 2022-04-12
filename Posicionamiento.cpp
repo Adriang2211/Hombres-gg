@@ -18,14 +18,14 @@ void Coords::setXY(int xi, int yi) {
 	y = yi;
 }
 
-int Coords::getX() {
+int const Coords::getX() {
 	return x;
 }
 
-int Coords::getY() {
+int const Coords::getY() {
 	return y;
 }
 
-Coords Coords::getXY() {
+Coords const Coords::getXY() {
 	return {x,y};
 }
