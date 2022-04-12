@@ -46,3 +46,8 @@
 *.opendb
 *.ipch
 .vs/Ajedrez/v17/Browse.VC.db
+.vs/Ajedrez/v17/.suo
+.vs/Ajedrez/v17/Browse.VC.db
+Ajedrez.vcxproj
+*.db
+*.vcxproj

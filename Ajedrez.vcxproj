@@ -141,9 +141,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Piezas.cpp" />
+    <ClCompile Include="Posicionamiento.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Piezas.h" />
+    <ClInclude Include="Posicionamiento.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
