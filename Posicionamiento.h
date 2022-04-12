@@ -14,8 +14,8 @@ public:
 	void setX(int xi);
 	void setY(int yi);
 	void setXY(int xi, int yi);
-	int getX();
-	int getY();
-	Coords getXY();
+	int const getX();
+	int const getY();
+	Coords const getXY();
 
 };
