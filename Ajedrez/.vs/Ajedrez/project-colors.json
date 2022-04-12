@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a81bd8a5-7cde-42cc-9893-10baa4be6233": {
+      "ProjectGuid": "a81bd8a5-7cde-42cc-9893-10baa4be6233",
+      "DisplayName": "Ajedrez",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
