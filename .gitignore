@@ -51,3 +51,5 @@
 Ajedrez.vcxproj
 *.db
 *.vcxproj
+.vs/Ajedrez/v17/.suo
+.vs/Ajedrez/v17/Browse.VC.db
