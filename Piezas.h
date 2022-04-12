@@ -9,25 +9,31 @@
 #include "Posicionamiento.h" //Incluye la clase para el uso del sistema de coordenadas
 
 class Torre {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
 
 class Caballo {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
 
 class Alfil {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
 
 class Dama {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
 
 class Rey {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
 
 class Peon {
-
+	Coords coordenadas;
+	bool color; //TRUE = blancas; FALSE = negras
 };
