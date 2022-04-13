@@ -22,12 +22,8 @@ public:
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
 	void setCoordenadas(Coords a) { coordenadas = a; }
-}
-class Torre {
-	Coords coordenadas;
-	bool color; //True=blancas, flase = negras
-
 };
+
 
 class Caballo {
 	Coords coordenadas;
