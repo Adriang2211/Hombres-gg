@@ -18,7 +18,7 @@ public:
 	bool color; //True=blancas, flase = negras
 public:
 	//Sets y gets
-	Coords getCorodenadas() { return coordenadas; }
+	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
 	void setCoordenadas(Coords a) { coordenadas = a; }

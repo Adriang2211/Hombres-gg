@@ -1,5 +1,5 @@
 #include "Interacciones.h"
-
+#include "Piezas.h"
 
 bool Interacciones::consultaBlancas(Coords& const coordenada) {
 	for (int i = 0; i < 16; i++) {
@@ -17,8 +17,8 @@ bool Interacciones::consultaNegras(Coords& const coordenada) {
 	return false;
 }
 
-
-Coords Interacciones::movimeintos(Torre& const torre) {
+/*
+Coords Interacciones::movimientos(Torre& const torre) {
 	int var1=0, var2=0, var3=0, var4=0;
 	bool encontrado = false;
 
@@ -149,3 +149,4 @@ Coords Interacciones::movimeintos(Torre& const torre) {
 
 	return *coordenadas_disponibles;
 }
+*/
