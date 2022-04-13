@@ -18,24 +18,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Piezas.cpp">
+    <ClCompile Include="src\Interacciones.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Posicionamiento.cpp">
+    <ClCompile Include="src\Piezas.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Interacciones.cpp">
+    <ClCompile Include="src\Posicionamiento.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Piezas.h">
+    <ClInclude Include="src\Interacciones.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Posicionamiento.h">
+    <ClInclude Include="src\Piezas.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="Interacciones.h">
+    <ClInclude Include="src\Posicionamiento.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
