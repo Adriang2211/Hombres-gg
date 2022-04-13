@@ -1,7 +1,7 @@
 # Hombres GG
-## Ajedrez en Cpp para el trabajo en grupo de la asignatura de Informática Industrial y de Comunicaciones
+## Ajedrez en C++ para el trabajo en grupo de la asignatura de Informática Industrial y de Comunicaciones
 Trabajo en grupo para la asignatura de Informática industrial y de comunicaciones.
-Próximamente se publicara aquí más información sobre el trabajo.
+¡Para más información sobre el trabajo consulta nuestra wiki en: https://github.com/Adriang2211/Hombres-gg/wiki!
 
 ## Integrantes del equipo:
 Por orden alfabético:
