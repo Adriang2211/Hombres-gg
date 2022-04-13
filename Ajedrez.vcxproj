@@ -147,8 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="src\Interacciones.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\Posicionamiento.cpp" />
   </ItemGroup>
