@@ -1,10 +1,10 @@
 ﻿  Interacciones.cpp
 C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.h(18,47): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
 C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.h(19,46): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.h(20,39): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
 C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.cpp(4,61): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
 C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.cpp(12,60): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.cpp(21,53): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
   Piezas.cpp
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.h(18,47): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Interacciones.h(19,46): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
   Generando código...
   Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe

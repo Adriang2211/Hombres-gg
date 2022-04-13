@@ -17,7 +17,7 @@ bool Interacciones::consultaNegras(Coords& const coordenada) {
 	return false;
 }
 
-/*
+
 Coords Interacciones::movimientos(Torre& const torre) {
 	int var1=0, var2=0, var3=0, var4=0;
 	bool encontrado = false;
@@ -149,4 +149,3 @@ Coords Interacciones::movimientos(Torre& const torre) {
 
 	return *coordenadas_disponibles;
 }
-*/

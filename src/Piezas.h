@@ -7,7 +7,7 @@
 */
 
 #include "Posicionamiento.h" //Incluye la clase para el uso del sistema de coordenadas
-#include "Interacciones.h" //Para declarla como amiga de todas las piezas
+//#include "Interacciones.h" //Para declarla como amiga de todas las piezas
 
 
 
