@@ -41,8 +41,15 @@ class Dama {
 };
 
 class Rey {
+	friend class Interacciones;
+private:
 	Coords coordenadas;
-	bool color;
+	bool color;//True=blancas y False=negras
+public:
+	Coords getCoordenadas() { return coordenadas; }
+	bool getColor() { return color; }
+	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
+	void setCoordenadas(Coords a) { coordenadas = a; }
 };
 
 class Peon {

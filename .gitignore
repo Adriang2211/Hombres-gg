@@ -67,3 +67,5 @@ Ajedrez.vcxproj
 .vs/Ajedrez/v17/.suo
 *.tlog
 *.log
+*.db
+.vs/Ajedrez/v17/.suo

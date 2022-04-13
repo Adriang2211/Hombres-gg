@@ -153,3 +153,256 @@ Coords Interacciones::movimientos(Torre& const torre) {
 
 	return *coordenadas_disponibles;
 }
+
+Coords Interacciones::movimientos(Rey& const rey) {
+	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey
+	bool encontrado = false;
+	Coords coordenadas_de_consulta;
+	//Movimiento hacia delante 
+	if (rey.coordenadas.getY() == 8) {
+		var1 = 0; //si el rey esta en y=8, no tiene posibilidad de moverse una casilla delante
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX(), rey.coordenadas.getY() + 1);
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca delante, no puede moverse en esa direccion
+			encontrado = true;
+			var1 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una peiza negra delante, no puede moverse en esa direccion
+			encontrado = true;
+			var1 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { 
+			encontrado = true;
+			var1 = 1; //si nuestro rey es blanco, y hay una pieza negra delante, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var1 = 1; //si nuestro rey es negro, y hay una pieza blanca delante, podemos movernos en esa direccion comiendonos a esa pieza 
+		}
+
+		if (!encontrado) {
+			var1 = 1;//si no hay nada delante, podemos movernos en esa direccion
+		}
+	}
+
+	encontrado = false; //ponemos la variable encontrado a false para la comprobacion en la siguiente direccion
+	//Movimiento hacia atras
+	if (rey.coordenadas.getY() == 1) {
+		var2 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX(), rey.coordenadas.getY() - 1);
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca detras, no puede moverse en esa direccion
+			encontrado = true;
+			var2 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una peiza negra detras, no puede moverse en esa direccion
+			encontrado = true;
+			var2 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var2 = 1; //si nuestro rey es blanco, y hay una pieza negra detras, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var2 = 1;//si nuestro rey es negro, y hay una pieza blanca detras, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var2 = 1;//si no hay nada detras, podemos movernos en esa direccion
+		}
+	}
+	encontrado = false;
+	//Movimiento hacia la derecha
+	if (rey.coordenadas.getX() == 8) {
+		var3 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY());
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var3 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var3 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var3 = 1; //si nuestro rey es blanco, y hay una pieza negra a su derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var3 = 1; //si nuestro rey es negro, y hay una pieza blanca a su derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var3 = 1; //si no encontramos ninguna pieza a la derecha del rey, podemos movernos en esa direccion.
+		}
+	}
+
+	encontrado = false;
+	//Movimiento hacia la izquierda
+	if (rey.coordenadas.getX() == 1) {
+		var4 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() - 1, rey.coordenadas.getY());
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var4 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var4 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var4 = 1; //si nuestro rey es blanco, y hay una pieza negra a su izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var4 = 1; //si nuestro rey es negro, y hay una pieza blanca a su izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var4 = 1; //si no encontramos ninguna pieza a la izquierda del rey, podemos movernos en esa direccion.
+		}
+	}
+
+	encontrado = false;
+	//Movimiento diagonal superior derecha
+	if (rey.coordenadas.getX() == 8 || rey.coordenadas.getY() == 8) {
+		var5 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY(+1));
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su esquina superior derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var5 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su esquina superior derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var5 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var5 = 1; //si nuestro rey es blanco, y hay una pieza negra a su esquina superior derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var5 = 1; //si nuestro rey es negro, y hay una pieza blanca a su esquina superior derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var5 = 1; //si no encontramos ninguna pieza a la esquina superior derecha del rey, podemos movernos en esa direccion.
+		}
+	}
+	encontrado = false;
+	//Movimiento diagonal superior izquierda
+	if (rey.coordenadas.getX() == 1 || rey.coordenadas.getY() == 8) {
+		var6 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() - 1, rey.coordenadas.getY() + 1);
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su esquina superior izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var6 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su esquina superior izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var6 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var6 = 1; //si nuestro rey es blanco, y hay una pieza negra a su esquina superior izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var6 = 1; //si nuestro rey es negro, y hay una pieza blanca a su esquina superior izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var6 = 1; //si no encontramos ninguna pieza a la esquina superior izquierda del rey, podemos movernos en esa direccion.
+		}
+	}
+	encontrado = false;
+	//Movimiento diagonal inferior derecha
+	if (rey.coordenadas.getX() == 8 || rey.coordenadas.getY() == 1) {
+		var7 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY() - 1);
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su esquina inferior derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var7 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su esquina inferior derecha, no puede moverse en esa direccion
+			encontrado = true;
+			var7 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var7 = 1; //si nuestro rey es blanco, y hay una pieza negra a su esquina inferior derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var7 = 1; //si nuestro rey es negro, y hay una pieza blanca a su esquina inferior derecha, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var7 = 1; //si no encontramos ninguna pieza a la esquina inferior derecha del rey, podemos movernos en esa direccion.
+		}
+	}
+	encontrado = false;
+	//Movimiento diagonal inferior izquierda
+	if (rey.coordenadas.getX() == 1 || rey.coordenadas.getY() == 1) {
+		var8 = 0;
+	}
+	else {
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() - 1, rey.coordenadas.getY() - 1);
+		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su esquina inferior izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var8 = 0;
+		}
+		else if (!rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es negro, y hay una pieza negra a su esquina inferior izquierda, no puede moverse en esa direccion
+			encontrado = true;
+			var8 = 0;
+
+		}
+
+		if (rey.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var8 = 1; //si nuestro rey es blanco, y hay una pieza negra a su esquina inferior izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+		else if (!rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
+			encontrado = true;
+			var8 = 1; //si nuestro rey es negro, y hay una pieza blanca a su esquina inferior izquierda, podemos movernos en esa direccion comiendonos a esa pieza
+		}
+
+		if (!encontrado) {
+			var8 = 1; //si no encontramos ninguna pieza a la esquina inferior izquierda del rey, podemos movernos en esa direccion.
+		}
+	}
+	encontrado = 0;
+	//falta añadir algun tipo de restriccion en el movimiento en los casos de jaque.
+
+
+
+}
