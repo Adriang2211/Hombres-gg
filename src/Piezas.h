@@ -13,7 +13,7 @@
 
 class Torre {
 	friend class Interacciones;
-public:
+private:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
 public:
