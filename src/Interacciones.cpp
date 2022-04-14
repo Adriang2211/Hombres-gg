@@ -26,7 +26,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
 	//Primero se comprueba dónde se encuentra la pieza más próxima en el semieje horizontal positivo
-	for (int i = torre.coordenadas.getX(); i <= 8; i++) {
+	for (int i = torre.coordenadas.getX() + 1; i <= 8; i++) {
 		coordenadas_de_consulta.setXY(i, torre.coordenadas.getY());
 
 		//Comprobaciones de si hay una pieza del mismo color
@@ -54,7 +54,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	//Se comprueba dónde se encuentra la pieza más próxima en el semieje horizontal negativo
-	for (int i = torre.coordenadas.getX(); i >= 1; i--) {
+	for (int i = torre.coordenadas.getX() - 1; i >= 1; i--) {
 		coordenadas_de_consulta.setXY(i, torre.coordenadas.getY());
 
 		//Comprobaciones de si hay una pieza del mismo color
@@ -83,7 +83,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	//Comprobación del semieje vertical positivo
-	for (int i = torre.coordenadas.getY(); i <= 8; i++) {
+	for (int i = torre.coordenadas.getY() + 1; i <= 8; i++) {
 		coordenadas_de_consulta.setXY(torre.coordenadas.getX(), i);
 
 		//Comprobaciones de si hay una pieza del mismo color
@@ -112,7 +112,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	//Se comprueba dónde se encuentra la pieza más próxima en el semieje vertical negativo
-	for (int i = torre.coordenadas.getY(); i >= 1; i--) {
+	for (int i = torre.coordenadas.getY() - 1; i >= 1; i--) {
 		coordenadas_de_consulta.setXY(torre.coordenadas.getY(), i);
 
 		//Comprobaciones de si hay una pieza del mismo color
