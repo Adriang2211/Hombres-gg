@@ -286,7 +286,7 @@ Coords Interacciones::movimientos(Rey& const rey) {
 		var5 = 0;
 	}
 	else {
-		coordenadas_de_consulta.setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY(+1));
+		coordenadas_de_consulta.setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY()+1);
 		if (rey.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) { //si nuestro rey es blanco, y hay una pieza blanca a su esquina superior derecha, no puede moverse en esa direccion
 			encontrado = true;
 			var5 = 0;
@@ -403,6 +403,6 @@ Coords Interacciones::movimientos(Rey& const rey) {
 	encontrado = 0;
 	//falta añadir algun tipo de restriccion en el movimiento en los casos de jaque.
 
-
+	return { 0, 0 }; //Retorno temporal de la función mientras se termina. (Para poder compilar el proyecto mientras tanto).
 
 }
