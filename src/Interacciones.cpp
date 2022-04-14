@@ -25,7 +25,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
-	//Primero se comprueba dónde se encuentra la pieza más próxima en el semieje horizontal positivo
+	//Primero se comprueba dÃ³nde se encuentra la pieza mÃ¡s prÃ³xima en el semieje horizontal positivo
 	for (int i = torre.coordenadas.getX() + 1; i <= 8; i++) {
 		coordenadas_de_consulta.setXY(i, torre.coordenadas.getY());
 
@@ -49,11 +49,11 @@ Coords Interacciones::movimientos(Torre& const torre) {
 			var1 = i - torre.coordenadas.getX();
 		}
 	}
-	if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
+	if (!encontrado) //Si no encuentra ninguna pieza es el nÃºmero de casillas hasta el borde
 		var1 = 8 - torre.coordenadas.getX();
 
-	encontrado = false; //Se prepara para la siguiente búsqueda
-	//Se comprueba dónde se encuentra la pieza más próxima en el semieje horizontal negativo
+	encontrado = false; //Se prepara para la siguiente bÃºsqueda
+	//Se comprueba dÃ³nde se encuentra la pieza mÃ¡s prÃ³xima en el semieje horizontal negativo
 	for (int i = torre.coordenadas.getX() - 1; i >= 1; i--) {
 		coordenadas_de_consulta.setXY(i, torre.coordenadas.getY());
 
@@ -81,8 +81,8 @@ Coords Interacciones::movimientos(Torre& const torre) {
 		var2 = torre.coordenadas.getX() - 1;
 
 
-	encontrado = false; //Se prepara para la siguiente búsqueda
-	//Comprobación del semieje vertical positivo
+	encontrado = false; //Se prepara para la siguiente bÃºsqueda
+	//ComprobaciÃ³n del semieje vertical positivo
 	for (int i = torre.coordenadas.getY() + 1; i <= 8; i++) {
 		coordenadas_de_consulta.setXY(torre.coordenadas.getX(), i);
 
@@ -106,14 +106,14 @@ Coords Interacciones::movimientos(Torre& const torre) {
 			var3 = i - torre.coordenadas.getY();
 		}
 	}
-	if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
+	if (!encontrado) //Si no encuentra ninguna pieza es el nÃºmero de casillas hasta el borde
 		var3 = 8 - torre.coordenadas.getY();
 
 
-	encontrado = false; //Se prepara para la siguiente búsqueda
-	//Se comprueba dónde se encuentra la pieza más próxima en el semieje vertical negativo
+	encontrado = false; //Se prepara para la siguiente bÃºsqueda
+	//Se comprueba dÃ³nde se encuentra la pieza mÃ¡s prÃ³xima en el semieje vertical negativo
 	for (int i = torre.coordenadas.getY() - 1; i >= 1; i--) {
-		coordenadas_de_consulta.setXY(torre.coordenadas.getY(), i);
+		coordenadas_de_consulta.setXY(torre.coordenadas.getX(), i);
 
 		//Comprobaciones de si hay una pieza del mismo color
 		if (torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
@@ -139,7 +139,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 		var4 = torre.coordenadas.getY() - 1;
 
 
-	//Ya se ha calculado el número de coordenadas que hay que guardar por
+	//Ya se ha calculado el nÃºmero de coordenadas que hay que guardar por
 	Coords* coordenadas_disponibles = new Coords[var1 + var2 + var3 + var4];
 
 	for (int i = 0; i < var1; i++) //Semieje horizontal positivo
@@ -155,7 +155,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 }
 
 Coords Interacciones::movimientos(Rey& const rey) {
-	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey
+	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usarÃ¡ para cada direccion en la que puede moverse el rey
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
 	//Movimiento hacia delante 
@@ -401,8 +401,8 @@ Coords Interacciones::movimientos(Rey& const rey) {
 		}
 	}
 	encontrado = 0;
-	//falta añadir algun tipo de restriccion en el movimiento en los casos de jaque.
+	//falta aÃ±adir algun tipo de restriccion en el movimiento en los casos de jaque.
 
-	return { 0, 0 }; //Retorno temporal de la función mientras se termina. (Para poder compilar el proyecto mientras tanto).
+	return { 0, 0 }; //Retorno temporal de la funciÃ³n mientras se termina. (Para poder compilar el proyecto mientras tanto).
 
 }
