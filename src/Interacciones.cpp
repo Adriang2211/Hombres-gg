@@ -89,25 +89,25 @@ Coords Interacciones::movimientos(Torre& const torre) {
 		//Comprobaciones de si hay una pieza del mismo color
 		if (torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getY() - 1;
+			var3 = i - torre.coordenadas.getY() - 1;
 		}
 		else if (!torre.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getY() - 1;
+			var3 = i - torre.coordenadas.getY() - 1;
 		}
 
 		//Comprobaciones de si hay una pieza de distinto color
 		if (!torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getY();
+			var3 = i - torre.coordenadas.getY();
 		}
 		else if (torre.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getY();
+			var3 = i - torre.coordenadas.getY();
 		}
 	}
 	if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
-		var1 = 8 - torre.coordenadas.getY();
+		var3 = 8 - torre.coordenadas.getY();
 
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
@@ -118,25 +118,25 @@ Coords Interacciones::movimientos(Torre& const torre) {
 		//Comprobaciones de si hay una pieza del mismo color
 		if (torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var2 = torre.coordenadas.getY() - i - 1;
+			var4 = torre.coordenadas.getY() - i - 1;
 		}
 		else if (!torre.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var2 = torre.coordenadas.getY() - i - 1;
+			var4 = torre.coordenadas.getY() - i - 1;
 		}
 
 		//Comprobaciones de si hay una pieza de distinto color
 		if (!torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var2 = torre.coordenadas.getY() - i;
+			var4 = torre.coordenadas.getY() - i;
 		}
 		else if (torre.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var2 = i - torre.coordenadas.getY() - i;
+			var4 = i - torre.coordenadas.getY() - i;
 		}
 	}
 	if (!encontrado)
-		var2 = torre.coordenadas.getY() - 1;
+		var4 = torre.coordenadas.getY() - 1;
 
 
 	//Ya se ha calculado el número de coordenadas que hay que guardar por
