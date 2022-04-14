@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-enum enum_x { A = 1, B, C, D, E, F, G, H }; //Equivalencia en letras para utilizar notación de ajedrez
+enum enum_x { a = 1, b, c, d, e, f, g, h }; //Equivalencia en letras para utilizar notación de ajedrez
 
 class Vector2d {
 	float x, y;

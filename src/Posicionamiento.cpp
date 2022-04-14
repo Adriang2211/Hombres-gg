@@ -37,28 +37,28 @@ ostream& operator << (ostream& os, const Coords& coordenadas) {
 	case 0: //Para cuando una pieza se ha comido y se ha "sacado" del tablero
 		os << "#";
 		break;
-	case A:
+	case a:
 		os << "a";
 		break;
-	case B:
+	case b:
 		os << "b";
 		break;
-	case C:
+	case c:
 		os << "c";
 		break;
-	case D:
+	case d:
 		os << "d";
 		break;
-	case E:
+	case e:
 		os << "e";
 		break;
-	case F:
+	case f:
 		os << "f";
 		break;
-	case G:
+	case g:
 		os << "g";
 		break;
-	case H:
+	case h:
 		os << "h";
 		break;
 	default:
