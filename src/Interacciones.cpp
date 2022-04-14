@@ -21,7 +21,7 @@ bool Interacciones::consultaNegras(Coords& const coordenada) {
 
 
 void Interacciones::movimientos(Torre& torre) {
-	int var1=0, var2=0, var3=0, var4=0; //Se definen tantas variables como direcciones de movimiento
+	int var1 = 0, var2 = 0, var3 = 0, var4 = 0; //Se definen tantas variables como direcciones de movimiento
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
@@ -32,11 +32,11 @@ void Interacciones::movimientos(Torre& torre) {
 		//Comprobaciones de si hay una pieza del mismo color
 		if (torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getX()-1;
+			var1 = i - torre.coordenadas.getX() - 1;
 		}
 		else if (!torre.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var1 = i - torre.coordenadas.getX()-1;
+			var1 = i - torre.coordenadas.getX() - 1;
 		}
 
 		//Comprobaciones de si hay una pieza de distinto color
@@ -113,7 +113,7 @@ void Interacciones::movimientos(Torre& torre) {
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	//Se comprueba dónde se encuentra la pieza más próxima en el semieje vertical negativo
 	for (int i = torre.coordenadas.getY() - 1; i >= 1; i--) {
-		coordenadas_de_consulta.setXY(torre.coordenadas.getY(), i);
+		coordenadas_de_consulta.setXY(torre.coordenadas.getX(), i);
 
 		//Comprobaciones de si hay una pieza del mismo color
 		if (torre.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
@@ -142,17 +142,13 @@ void Interacciones::movimientos(Torre& torre) {
 	//Guardar las coordenadas de los posibles movimientos en el vector de movimientos posibles de la torre
 
 	for (int i = 0; i < var1; i++) //Semieje horizontal positivo
-		//(coordenadas_disponibles + i)->setXY(torre.coordenadas.getX()+i+1, torre.coordenadas.getY());
 		torre.movimientos_posibles[i].setXY(torre.coordenadas.getX() + i + 1, torre.coordenadas.getY());
 	for (int i = 0; i < var2; i++) //Semieje horizontal negativo
-		//(coordenadas_disponibles + var1 + i)->setXY(torre.coordenadas.getX() - i -1, torre.coordenadas.getY());
 		torre.movimientos_posibles[i + var1].setXY(torre.coordenadas.getX() - i - 1, torre.coordenadas.getY());
 	for (int i = 0; i < var3; i++) //Semieje vertical positivo
-		//(coordenadas_disponibles + var1 + var2 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i +1);
 		torre.movimientos_posibles[i + var1 + var2].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i + 1);
 	for (int i = 0; i < var4; i++) //Semieje vertical negativo
-		//(coordenadas_disponibles + var1 + var2 + var3 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i -1);
-		torre.movimientos_posibles[i + var1 + var2 + var3].setXY(torre.coordenadas.getY(), torre.coordenadas.getY() - i - 1);
+		torre.movimientos_posibles[i + var1 + var2 + var3].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i - 1);
 	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV_TORRE; i++)
 		torre.movimientos_posibles[i].setXY(9, 9); //9 como símbolo de que está vacío
 }
