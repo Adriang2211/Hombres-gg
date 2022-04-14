@@ -20,7 +20,7 @@ bool Interacciones::consultaNegras(Coords& const coordenada) {
 }
 
 
-Coords Interacciones::movimientos(Torre& const torre) {
+void Interacciones::movimientos(Torre& torre) {
 	int var1=0, var2=0, var3=0, var4=0; //Se definen tantas variables como direcciones de movimiento
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.
 	bool encontrado = false;
@@ -139,19 +139,22 @@ Coords Interacciones::movimientos(Torre& const torre) {
 		var4 = torre.coordenadas.getY() - 1;
 
 
-	//Ya se ha calculado el número de coordenadas que hay que guardar por
-	Coords* coordenadas_disponibles = new Coords[var1 + var2 + var3 + var4];
+	//Guardar las coordenadas de los posibles movimientos en el vector de movimientos posibles de la torre
 
 	for (int i = 0; i < var1; i++) //Semieje horizontal positivo
-		(coordenadas_disponibles + i)->setXY(torre.coordenadas.getX()+i+1, torre.coordenadas.getY());
+		//(coordenadas_disponibles + i)->setXY(torre.coordenadas.getX()+i+1, torre.coordenadas.getY());
+		torre.movimientos_posibles[i].setXY(torre.coordenadas.getX() + i + 1, torre.coordenadas.getY());
 	for (int i = 0; i < var2; i++) //Semieje horizontal negativo
-		(coordenadas_disponibles + var1 + i)->setXY(torre.coordenadas.getX() - i -1, torre.coordenadas.getY());
+		//(coordenadas_disponibles + var1 + i)->setXY(torre.coordenadas.getX() - i -1, torre.coordenadas.getY());
+		torre.movimientos_posibles[i + var1].setXY(torre.coordenadas.getX() - i - 1, torre.coordenadas.getY());
 	for (int i = 0; i < var3; i++) //Semieje vertical positivo
-		(coordenadas_disponibles + var1 + var2 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i +1);
+		//(coordenadas_disponibles + var1 + var2 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i +1);
+		torre.movimientos_posibles[i + var1 + var2].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i + 1);
 	for (int i = 0; i < var4; i++) //Semieje vertical negativo
-		(coordenadas_disponibles + var1 + var2 + var3 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i -1);
-
-	return *coordenadas_disponibles;
+		//(coordenadas_disponibles + var1 + var2 + var3 + i)->setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i -1);
+		torre.movimientos_posibles[i + var1 + var2 + var3].setXY(torre.coordenadas.getY(), torre.coordenadas.getY() - i - 1);
+	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV_TORRE; i++)
+		torre.movimientos_posibles[i].setXY(9, 9); //9 como símbolo de que está vacío
 }
 
 Coords Interacciones::movimientos(Rey& const rey) {
