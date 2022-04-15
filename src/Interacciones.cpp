@@ -151,7 +151,7 @@ void Interacciones::movimientos(Torre& torre) {
 		torre.movimientos_posibles[i].setXY(9, 9); //9 como s�mbolo de que est� vac�o
 }
 
-void Interacciones::movimientos(Rey& const rey) {
+void Interacciones::movimientos(Rey& rey) {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
@@ -413,7 +413,7 @@ void Interacciones::movimientos(Rey& const rey) {
 
 }
 
-void Interacciones::movimientos(Alfil& const alfil) {
+void Interacciones::movimientos(Alfil& alfil) {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0; //Se definen tantas variables como direcciones de movimiento
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.
 	bool encontrado = false;
