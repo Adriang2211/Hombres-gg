@@ -424,7 +424,7 @@ void Interacciones::movimientos(Alfil& const alfil) {
 	//Primero se comprueba dónde se encuentra la pieza más próxima en el PRIMER CUADRANTE
 	int c1 = 1;
 	for (int i = alfil.coordenadas.getX() + 1; i <= 8; i++) {
-		coordenadas_de_consulta.setXY(i, alfil.coordenadas.getY()+c1);
+		coordenadas_de_consulta.setXY(i, alfil.coordenadas.getY() + c1);
 		c1++;
 		//Comprobaciones de si hay una pieza del mismo color
 		if (alfil.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
@@ -447,13 +447,20 @@ void Interacciones::movimientos(Alfil& const alfil) {
 		}
 	}
 	if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
-		var1 = 8 - alfil.coordenadas.getX();
+	{
+		if (alfil.coordenadas.getX() == 8 && alfil.coordenadas.getY() == 1)
+			var1 = 0;
+		else if (alfil.coordenadas.getY() == 1)
+			var1 = 8 - alfil.coordenadas.getX();
+		else if (alfil.coordenadas.getY() == 8)
+			var1 = 0;
+	}
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	int c2 = 1;
 	//Se comprueba dónde se encuentra la pieza más próxima en el SEGUNDO CUADRANTE
 	for (int i = alfil.coordenadas.getX() - 1; i >= 1; i--) {
-		coordenadas_de_consulta.setXY(i, alfil.coordenadas.getY()+c2);
+		coordenadas_de_consulta.setXY(i, alfil.coordenadas.getY() + c2);
 		c2++;
 
 		//Comprobaciones de si hay una pieza del mismo color
@@ -473,48 +480,60 @@ void Interacciones::movimientos(Alfil& const alfil) {
 		}
 		else if (alfil.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var2 = i - alfil.coordenadas.getX() - i;
+			var2 = alfil.coordenadas.getX() - i;
+			
 		}
 	}
 	if (!encontrado)
-		var2 = alfil.coordenadas.getX() - 1;
-
+	{
+		if (alfil.coordenadas.getX() == 1 && alfil.coordenadas.getY() == 1)
+			var2 = 0;
+		else if (alfil.coordenadas.getY() == 1)
+			var2 = alfil.coordenadas.getX() - 1;
+		else if (alfil.coordenadas.getY() == 8)
+			var2 = 0;
+	}
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	int c3 = 1;
 	//Comprobación del TERCER CUADRANTE
-	for (int i = alfil.coordenadas.getY() - 1; i>=1; i++) {
-		coordenadas_de_consulta.setXY(alfil.coordenadas.getX()-c3, i);
+	for (int i = alfil.coordenadas.getY() - 1; i >= 1; i--) {
+		coordenadas_de_consulta.setXY(alfil.coordenadas.getX() - c3, i);
 		c3++;
 		//Comprobaciones de si hay una pieza del mismo color
 		if (alfil.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var3 = i - alfil.coordenadas.getY() - 1;
+			var3 = alfil.coordenadas.getY() - i - 1;
 		}
 		else if (!alfil.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var3 = i - alfil.coordenadas.getY() - 1;
+			var3 = alfil.coordenadas.getY() - i - 1;
 		}
 
 		//Comprobaciones de si hay una pieza de distinto color
 		if (!alfil.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var3 = i - alfil.coordenadas.getY();
+			var3 = alfil.coordenadas.getY() - i;
 		}
 		else if (alfil.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var3 = i - alfil.coordenadas.getY();
+			var3 = alfil.coordenadas.getY() - i;
 		}
 	}
 	if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
-		var3 = 8 - alfil.coordenadas.getY();
+	{
+		if ((alfil.coordenadas.getX()) > alfil.coordenadas.getY())
+			var3 = alfil.coordenadas.getY() - 1;
+		else 	var3 = alfil.coordenadas.getY() - 1;
+	
+	}
 
 
 	encontrado = false; //Se prepara para la siguiente búsqueda
 	int c4 = 1;
-	//Se comprueba dónde se encuentra la pieza más próxima en el semieje vertical negativo
+	//Se comprueba dónde se encuentra la pieza más próxima en el 4 cuadrante
 	for (int i = alfil.coordenadas.getY() - 1; i >= 1; i--) {
-		coordenadas_de_consulta.setXY(alfil.coordenadas.getX()+c4, i);
+		coordenadas_de_consulta.setXY(alfil.coordenadas.getX() + c4, i);
 		c4++;
 		//Comprobaciones de si hay una pieza del mismo color
 		if (alfil.getColor() && consultaBlancas(coordenadas_de_consulta) && !encontrado) {
@@ -533,11 +552,16 @@ void Interacciones::movimientos(Alfil& const alfil) {
 		}
 		else if (alfil.getColor() && consultaNegras(coordenadas_de_consulta) && !encontrado) {
 			encontrado = true;
-			var4 = i - alfil.coordenadas.getY() - i;
+			var4 = alfil.coordenadas.getY() - i;
 		}
 	}
 	if (!encontrado)
-		var4 = alfil.coordenadas.getY() - 1;
+	{
+		if (alfil.coordenadas.getY() > (8 - alfil.coordenadas.getX()))//siempre tiene dominancia en el numero maximo de posiciones la coordenada menor
+			var4 = 8 - alfil.coordenadas.getX();
+		else var4 = alfil.coordenadas.getY() - 1;
+	}
+
 
 
 	//Ya se ha calculado el número de coordenadas que hay que guardar por
@@ -562,8 +586,9 @@ void Interacciones::movimientos(Alfil& const alfil) {
 
 	for (int i = 0; i < var4; i++) //Cuarto Cuadrante
 	{
-		alfil.coordenadas_disponibles[var1 + var2 +var3 + i].setX(alfil.coordenadas.getX() +i + 1);
-		alfil.coordenadas_disponibles[var1 + var2 +var3 + i].setY(alfil.coordenadas.getY() - i - 1);
+		alfil.coordenadas_disponibles[var1 + var2 + var3 + i].setX(alfil.coordenadas.getX() + i + 1);
+		alfil.coordenadas_disponibles[var1 + var2 + var3 + i].setY(alfil.coordenadas.getY() - i - 1);
 	};
-	
+
 }
+
