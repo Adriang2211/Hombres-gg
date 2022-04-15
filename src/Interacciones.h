@@ -19,6 +19,7 @@ public:
 	bool consultaNegras(Coords& const coordenada);
 	Coords movimientos(Torre& const torre);//error de sintaxis: identificador torre no sé por que 
 	Coords movimientos(Rey& const rey);
+	void movimientos(Alfil& const alfil);
 private:
 	Coords casillas_ocupadas_blancas[16];
 	Coords casillas_ocupadas_negras[16];
