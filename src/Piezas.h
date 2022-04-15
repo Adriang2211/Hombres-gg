@@ -36,8 +36,19 @@ public:
 
 
 class Caballo {
+	friend class Interacciones;
+private:
 	Coords coordenadas;
-	bool color;
+	int valor = 3;
+	bool color; //True=blancas, flase = negras
+public:
+	//Sets y gets
+	Coords coordenadas_disponibles[8];//8 son el numero maximo de movimientos disponibles que va a tener el caballo
+	Coords getCoordenadas() { return coordenadas; }
+	bool getColor() { return color; }
+	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
+	void setCoordenadas(Coords a) { coordenadas = a; }
+	void setColor(bool _color) { color = _color; };
 };
 
 class Alfil {
