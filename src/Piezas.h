@@ -26,6 +26,7 @@ private:
 public:
 	Coords movimientos_posibles[MAX_MOV_TORRE];
 	//Sets y gets
+	
 	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
@@ -40,8 +41,18 @@ class Caballo {
 };
 
 class Alfil {
+	friend class Interacciones;
+private:
 	Coords coordenadas;
-	bool color;
+	bool color; //True=blancas, flase = negras
+public:
+	//Sets y gets
+	Coords coordenadas_disponibles[13];//13 son el numero maximo de movimientos disponibles que va a tener el alfil
+	Coords getCoordenadas() { return coordenadas; }
+	bool getColor() { return color; }
+	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
+	void setCoordenadas(Coords a) { coordenadas = a; }
+	void setColor(bool _color) { color = _color; };
 };
 
 class Dama {
@@ -55,6 +66,7 @@ private:
 	Coords coordenadas;
 	bool color;//True=blancas y False=negras
 public:
+	Coords movimientos_disponibles[8]; //El rey tendra 8 movimientos como maximo. 
 	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
