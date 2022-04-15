@@ -154,7 +154,7 @@ Coords Interacciones::movimientos(Torre& const torre) {
 	return *coordenadas_disponibles;
 }
 
-Coords Interacciones::movimientos(Rey& const rey) {
+void Interacciones::movimientos(Rey& const rey) {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
@@ -403,7 +403,16 @@ Coords Interacciones::movimientos(Rey& const rey) {
 	encontrado = 0;
 	//falta añadir algun tipo de restriccion en el movimiento en los casos de jaque.
 
-	return { 0, 0 }; //Retorno temporal de la función mientras se termina. (Para poder compilar el proyecto mientras tanto).
+	for (int i = 0; i < var1; i++) { //Movimientos hacia delante
+		rey.movimientos_disponibles[i].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() + 1);
+	 }
+	for (int i = 0; i < var2; i++) { //Movimientos hacia atras
+		rey.movimientos_disponibles[i + var1].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() - 1);
+	}
+	for (int i = 0; i < var3; i++) {
+		rey.movimientos_disponibles[i + var1 + var2].setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY());
+	}
+
 
 }
 

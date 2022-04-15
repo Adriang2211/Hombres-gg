@@ -18,7 +18,7 @@ public:
 	bool consultaBlancas(Coords& const coordenada); //Informa de si una casilla está ocupada o no
 	bool consultaNegras(Coords& const coordenada);
 	Coords movimientos(Torre& const torre);//error de sintaxis: identificador torre no sé por que 
-	Coords movimientos(Rey& const rey);
+	void movimientos(Rey& const rey);
 	void movimientos(Alfil& const alfil);
 private:
 	Coords casillas_ocupadas_blancas[16];

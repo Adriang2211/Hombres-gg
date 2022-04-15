@@ -58,6 +58,7 @@ private:
 	Coords coordenadas;
 	bool color;//True=blancas y False=negras
 public:
+	Coords movimientos_disponibles[8]; //El rey tendra 8 movimientos como maximo. 
 	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
