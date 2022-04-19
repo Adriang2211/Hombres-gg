@@ -20,8 +20,11 @@ public:
 	void movimientos(Torre& torre);//error de sintaxis: identificador torre no sé por que 
 	void movimientos(Rey& rey);
 	void movimientos(Alfil& alfil);
+	void movimientos(Caballo& caballo);
+	
 private:
 	Coords casillas_ocupadas_blancas[16];
 	Coords casillas_ocupadas_negras[16];
+	void tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordenadas_inservibles, Caballo& caballo, int i);
 	//Falta por pensar dos cosas: qué hacer cunado una pieza desaparezca y cómo mantener actualizada la lista
 };
