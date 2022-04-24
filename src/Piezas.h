@@ -18,6 +18,9 @@
 #define MAX_MOV_REY 8 //No se incluye la posibilidad del enroque porque en ese caso hay máximo 7 movimientos
 #define MAX_MOV_DAMA 27 //Alfil + torre
 
+//Solo debe quedar esta constante
+#define MAX_MOV 27 //Máximo de movimientos
+
 class Pieza {
 protected:
 	Coords coordenadas;
@@ -29,14 +32,14 @@ public:
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
 	void setCoordenadas(Coords a) { coordenadas = a; }
 	void setColor(bool _color) { color = _color; }
+	Coords coordenadas_disponibles[27]; //Máximos movimientos de la dama, que es la pieza que más movimientos posibles puede tener.
 
 };
 
 class Torre:public Pieza {
 	friend class Interacciones;
 public:
-	Coords coordenadas_disponibles[MAX_MOV_TORRE];
-	//Sets y gets
+	void movimientos();
 };
 
 
@@ -45,9 +48,7 @@ class Caballo:public Pieza {
 private:
 	int valor = 3;
 public:
-	//Sets y gets
-	Coords coordenadas_disponibles[MAX_MOV_CABALLO];//8 son el numero maximo de movimientos disponibles que va a tener el caballo
-
+	
 };
 
 class Alfil:public Pieza {
@@ -56,8 +57,7 @@ private:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
 public:
-	//Sets y gets
-	Coords coordenadas_disponibles[MAX_MOV_ALFIL];//13 son el numero maximo de movimientos disponibles que va a tener el alfil
+	
 };
 
 class Dama:public Pieza {
@@ -68,7 +68,7 @@ class Dama:public Pieza {
 class Rey:public Pieza {
 	friend class Interacciones;
 public:
-	Coords coordenadas_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
+	
 };
 
 class Peon:public Pieza {
