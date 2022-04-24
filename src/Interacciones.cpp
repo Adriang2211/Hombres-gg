@@ -140,15 +140,15 @@ void Interacciones::movimientos(Torre& torre) {
 
 
 	for (int i = 0; i < var1; i++) //Semieje horizontal positivo
-		torre.movimientos_posibles[i].setXY(torre.coordenadas.getX() + i + 1, torre.coordenadas.getY());
+		torre.coordenadas_disponibles[i].setXY(torre.coordenadas.getX() + i + 1, torre.coordenadas.getY());
 	for (int i = 0; i < var2; i++) //Semieje horizontal negativo
-		torre.movimientos_posibles[i + var1].setXY(torre.coordenadas.getX() - i - 1, torre.coordenadas.getY());
+		torre.coordenadas_disponibles[i + var1].setXY(torre.coordenadas.getX() - i - 1, torre.coordenadas.getY());
 	for (int i = 0; i < var3; i++) //Semieje vertical positivo
-		torre.movimientos_posibles[i + var1 + var2].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i + 1);
+		torre.coordenadas_disponibles[i + var1 + var2].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() + i + 1);
 	for (int i = 0; i < var4; i++) //Semieje vertical negativo
-		torre.movimientos_posibles[i + var1 + var2 + var3].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i - 1);
+		torre.coordenadas_disponibles[i + var1 + var2 + var3].setXY(torre.coordenadas.getX(), torre.coordenadas.getY() - i - 1);
 	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV_TORRE; i++)
-		torre.movimientos_posibles[i].setXY(9, 9); //9 como s�mbolo de que est� vac�o
+		torre.coordenadas_disponibles[i].setXY(9, 9); //9 como s�mbolo de que est� vac�o
 }
 
 void Interacciones::movimientos(Rey& rey) {
@@ -401,13 +401,13 @@ void Interacciones::movimientos(Rey& rey) {
 	//falta añadir algun tipo de restriccion en el movimiento en los casos de jaque.
 
 	for (int i = 0; i < var1; i++) { //Movimientos hacia delante
-		rey.movimientos_disponibles[i].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() + 1);
+		rey.coordenadas_disponibles[i].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() + 1);
 	 }
 	for (int i = 0; i < var2; i++) { //Movimientos hacia atras
-		rey.movimientos_disponibles[i + var1].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() - 1);
+		rey.coordenadas_disponibles[i + var1].setXY(rey.coordenadas.getX(), rey.coordenadas.getY() - 1);
 	}
 	for (int i = 0; i < var3; i++) {
-		rey.movimientos_disponibles[i + var1 + var2].setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY());
+		rey.coordenadas_disponibles[i + var1 + var2].setXY(rey.coordenadas.getX() + 1, rey.coordenadas.getY());
 	}
 
 

@@ -35,7 +35,7 @@ public:
 class Torre:public Pieza {
 	friend class Interacciones;
 public:
-	Coords movimientos_posibles[MAX_MOV_TORRE];
+	Coords coordenadas_disponibles[MAX_MOV_TORRE];
 	//Sets y gets
 };
 
@@ -68,7 +68,7 @@ class Dama:public Pieza {
 class Rey:public Pieza {
 	friend class Interacciones;
 public:
-	Coords movimientos_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
+	Coords coordenadas_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
 };
 
 class Peon:public Pieza {
