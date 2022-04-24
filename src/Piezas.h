@@ -18,73 +18,60 @@
 #define MAX_MOV_REY 8 //No se incluye la posibilidad del enroque porque en ese caso hay máximo 7 movimientos
 #define MAX_MOV_DAMA 27 //Alfil + torre
 
-class Torre {
-	friend class Interacciones;
-private:
+class Pieza {
+protected:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
 public:
-	Coords movimientos_posibles[MAX_MOV_TORRE];
-	//Sets y gets
-	
+
 	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
 	void setCoordenadas(Coords a) { coordenadas = a; }
 	void setColor(bool _color) { color = _color; }
+
+};
+
+class Torre:public Pieza {
+	friend class Interacciones;
+public:
+	Coords movimientos_posibles[MAX_MOV_TORRE];
+	//Sets y gets
 };
 
 
-class Caballo {
+class Caballo:public Pieza {
 	friend class Interacciones;
 private:
-	Coords coordenadas;
 	int valor = 3;
-	bool color; //True=blancas, flase = negras
 public:
 	//Sets y gets
-	Coords coordenadas_disponibles[8];//8 son el numero maximo de movimientos disponibles que va a tener el caballo
-	Coords getCoordenadas() { return coordenadas; }
-	bool getColor() { return color; }
-	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
-	void setCoordenadas(Coords a) { coordenadas = a; }
-	void setColor(bool _color) { color = _color; };
+	Coords coordenadas_disponibles[MAX_MOV_CABALLO];//8 son el numero maximo de movimientos disponibles que va a tener el caballo
+
 };
 
-class Alfil {
+class Alfil:public Pieza {
 	friend class Interacciones;
 private:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
 public:
 	//Sets y gets
-	Coords coordenadas_disponibles[13];//13 son el numero maximo de movimientos disponibles que va a tener el alfil
-	Coords getCoordenadas() { return coordenadas; }
-	bool getColor() { return color; }
-	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
-	void setCoordenadas(Coords a) { coordenadas = a; }
-	void setColor(bool _color) { color = _color; };
+	Coords coordenadas_disponibles[MAX_MOV_ALFIL];//13 son el numero maximo de movimientos disponibles que va a tener el alfil
 };
 
-class Dama {
-	Coords coordenadas;
-	bool color;
+class Dama:public Pieza {
+
+
 };
 
-class Rey {
+class Rey:public Pieza {
 	friend class Interacciones;
-private:
-	Coords coordenadas;
-	bool color;//True=blancas y False=negras
 public:
-	Coords movimientos_disponibles[8]; //El rey tendra 8 movimientos como maximo. 
-	Coords getCoordenadas() { return coordenadas; }
-	bool getColor() { return color; }
-	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
-	void setCoordenadas(Coords a) { coordenadas = a; }
+	Coords movimientos_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
 };
 
-class Peon {
-	Coords coordenadas;
-	bool color;
+class Peon:public Pieza {
+
+
 };
