@@ -15,8 +15,7 @@
 
 class Interacciones {
 public:
-	bool consultaBlancas(Coords& const coordenada); //Informa de si una casilla está ocupada o no
-	bool consultaNegras(Coords& const coordenada);
+	
 	void movimientos(Torre& torre);//error de sintaxis: identificador torre no sé por que 
 	void movimientos(Rey& rey);
 	void movimientos(Alfil& alfil);
@@ -25,6 +24,8 @@ public:
 private:
 	Coords casillas_ocupadas_blancas[16];
 	Coords casillas_ocupadas_negras[16];
+	bool consultaBlancas(Coords& const coordenada); //Informa de si una casilla está ocupada o no
+	bool consultaNegras(Coords& const coordenada);
 	void tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordenadas_inservibles, Caballo& caballo, int i);
 	//Falta por pensar dos cosas: qué hacer cunado una pieza desaparezca y cómo mantener actualizada la lista
 };
