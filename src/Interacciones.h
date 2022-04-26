@@ -20,6 +20,7 @@ public:
 	void movimientos(Torre& torre);//error de sintaxis: identificador torre no sé por que 
 	void movimientos(Rey& const rey);
 	void movimientos(Alfil& const alfil);
+	void movimientos(Peon& peon);
 private:
 	Coords casillas_ocupadas_blancas[16];
 	Coords casillas_ocupadas_negras[16];
