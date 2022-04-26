@@ -20,6 +20,7 @@ public:
 	void movimientos(Rey& rey);
 	void movimientos(Alfil& alfil);
 	void movimientos(Caballo& caballo);
+	void movimientos(Peon& peon);
 	
 private:
 	Coords casillas_ocupadas_blancas[16];

@@ -71,7 +71,19 @@ public:
 	Coords coordenadas_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
 };
 
-class Peon:public Pieza {
+class Peon {
+	friend class Interacciones;
+private:
+	Coords coordenadas;
+	bool color;
 
-
+public:
+	bool primer_movimiento;
+	Coords movimientos_posibles[MAX_MOV_PEON];
+	//Sets y gets
+	Coords getCoordenadas() { return coordenadas; }
+	bool getColor() { return color; }
+	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
+	void setCoordenadas(Coords a) { coordenadas = a; }
+	void setColor(bool _color) { color = _color; }
 };

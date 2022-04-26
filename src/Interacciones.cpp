@@ -712,3 +712,95 @@ void Interacciones::tuPetitInteraccion(Coords coordenadas_de_consulta,Coords coo
 	}
 
 }
+void Interacciones::movimientos(Peon& peon)
+{
+	for (int i = 0; i < MAX_MOV_PEON; i++)
+	{
+		peon.movimientos_posibles[i] = { 0,0 };
+	}
+	int mov1 = 0;// 3 direecciones posibles para el peon
+	Coords coordenas_de_consulta;
+	//movimiento hacia delante
+	if (peon.primer_movimiento)
+	{
+		if (peon.color)
+		{
+			coordenas_de_consulta.setXY(peon.coordenadas.getX(), peon.coordenadas.getY() + 2);
+			if (!consultaBlancas(coordenas_de_consulta) && !consultaNegras(coordenas_de_consulta))
+			{
+				peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX(), peon.coordenadas.getY() + 2);//adelante
+				mov1++;
+			}
+		}
+		else if (!peon.color)
+		{
+			coordenas_de_consulta.setXY(peon.coordenadas.getX(), peon.coordenadas.getY() - 2);
+			if (!consultaBlancas(coordenas_de_consulta) && !consultaNegras(coordenas_de_consulta))
+			{
+				peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX(), peon.coordenadas.getY() - 2);//adelante
+				mov1++;
+			}
+		}
+	}
+	if (peon.color == true)
+	{
+
+		coordenas_de_consulta.setXY(peon.coordenadas.getX(), peon.coordenadas.getY() + 1);
+		if (!consultaBlancas(coordenas_de_consulta) && !consultaNegras(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX(), peon.coordenadas.getY() + 1);//adelante
+			mov1++;
+		}
+	}
+	else if (peon.color == false)
+	{
+		coordenas_de_consulta.setXY(peon.coordenadas.getX(), peon.coordenadas.getY() - 1);
+		if (!consultaBlancas(coordenas_de_consulta) && !consultaNegras(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX(), peon.coordenadas.getY() - 1);
+			mov1++;
+		}
+
+	}
+
+	//movimiento diagonal derecha
+	if (peon.color == true)
+	{
+		coordenas_de_consulta.setXY(peon.coordenadas.getX() + 1, peon.coordenadas.getY() + 1);
+		if (consultaNegras(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX() + 1, peon.coordenadas.getY() + 1);
+			mov1++;
+		}
+	}
+	if (peon.color == false)
+	{
+		coordenas_de_consulta.setXY(peon.coordenadas.getX() - 1, peon.coordenadas.getY() - 1);
+		if (consultaBlancas(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX() - 1, peon.coordenadas.getY() - 1);
+			mov1++;
+		}
+	}
+	//Movimiento diagonal izq
+	if (peon.color == true)
+	{
+		coordenas_de_consulta.setXY(peon.coordenadas.getX() - 1, peon.coordenadas.getY() + 1);
+		if (consultaNegras(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX() - 1, peon.coordenadas.getY() + 1);
+			mov1++;
+		}
+	}
+	if (peon.color == false)
+	{
+		coordenas_de_consulta.setXY(peon.coordenadas.getX() + 1, peon.coordenadas.getY() - 1);
+		if (consultaBlancas(coordenas_de_consulta))
+		{
+			peon.movimientos_posibles[mov1].setXY(peon.coordenadas.getX() + 1, peon.coordenadas.getY() - 1);
+			mov1++;
+		}
+	}
+
+
+}
