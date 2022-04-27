@@ -2,20 +2,20 @@
 
 /*
 * En este archivo se crean las clases de cada una de las piezas.
-* Previsiblemente se crear· una clase pieza que haciendo uso de hererncia
-* agrupar· los aspectos comunes a todas las piezas.
+* Previsiblemente se crear√° una clase pieza que haciendo uso de hererncia
+* agrupar√° los aspectos comunes a todas las piezas.
 */
 
 #include "Posicionamiento.h" //Incluye la clase para el uso del sistema de coordenadas
 //#include "Interacciones.h" //Para declarla como amiga de todas las piezas
 
-//M·ximo de movimientos posibles de cada pieza
-#define MAX_MOV_TORRE 14 //No se suman dos para el enroque porque es imposible que tenga m·s de 10
-//posibles movimientos en el mejor de los casos si el enroque todavÌa es posible
+//M√°ximo de movimientos posibles de cada pieza
+#define MAX_MOV_TORRE 14 //No se suman dos para el enroque porque es imposible que tenga m√°s de 10
+//posibles movimientos en el mejor de los casos si el enroque todav√≠a es posible
 #define MAX_MOV_CABALLO 8
 #define MAX_MOV_ALFIL 13
 #define MAX_MOV_PEON 4
-#define MAX_MOV_REY 8 //No se incluye la posibilidad del enroque porque en ese caso hay m·ximo 7 movimientos
+#define MAX_MOV_REY 8 //No se incluye la posibilidad del enroque porque en ese caso hay m√°ximo 7 movimientos
 #define MAX_MOV_DAMA 27 //Alfil + torre
 
 class Pieza {
@@ -71,19 +71,9 @@ public:
 	Coords coordenadas_disponibles[MAX_MOV_REY]; //El rey tendra 8 movimientos como maximo. 
 };
 
-class Peon {
+class Peon:public pieza {
 	friend class Interacciones;
-private:
-	Coords coordenadas;
-	bool color;
-
 public:
 	bool primer_movimiento;
 	Coords movimientos_posibles[MAX_MOV_PEON];
-	//Sets y gets
-	Coords getCoordenadas() { return coordenadas; }
-	bool getColor() { return color; }
-	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
-	void setCoordenadas(Coords a) { coordenadas = a; }
-	void setColor(bool _color) { color = _color; }
 };
