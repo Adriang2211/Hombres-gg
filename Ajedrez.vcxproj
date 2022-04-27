@@ -151,11 +151,13 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Piezas.cpp" />
     <ClCompile Include="src\Posicionamiento.cpp" />
+    <ClCompile Include="src\Tablero.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Interacciones.h" />
     <ClInclude Include="src\Piezas.h" />
     <ClInclude Include="src\Posicionamiento.h" />
+    <ClInclude Include="src\Tablero.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
