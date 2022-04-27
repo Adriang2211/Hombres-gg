@@ -1,13 +1,6 @@
 #pragma once
 
-/*
-* En este archivo se crean las clases de cada una de las piezas.
-* Previsiblemente se creará una clase pieza que haciendo uso de hererncia
-* agrupará los aspectos comunes a todas las piezas.
-*/
-
 #include "Posicionamiento.h" //Incluye la clase para el uso del sistema de coordenadas
-//#include "Interacciones.h" //Para declarla como amiga de todas las piezas
 
 //Máximo de movimientos posibles de cada pieza
 #define MAX_MOV_TORRE 14 //No se suman dos para el enroque porque es imposible que tenga más de 10
@@ -21,12 +14,14 @@
 //Solo debe quedar esta constante
 #define MAX_MOV 27 //Máximo de movimientos
 
+class Tablero;
+
 class Pieza {
 protected:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
+	Tablero* tab; //Tablero al que pertenece la pieza, de esta forma se evita tener que pasar la referencia del tablero.
 public:
-
 	Coords getCoordenadas() { return coordenadas; }
 	bool getColor() { return color; }
 	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
@@ -36,42 +31,47 @@ public:
 
 };
 
+
 class Torre:public Pieza {
-	friend class Interacciones;
 public:
 	void movimientos();
+	static const int valor = 5;
 };
 
 
 class Caballo:public Pieza {
-	friend class Interacciones;
 private:
-	int valor = 3;
+	void tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordenadas_inservibles, int i);
 public:
-	
+	static const int valor = 3;
+	void movimientos(); //Sin implementar
+
 };
 
 class Alfil:public Pieza {
-	friend class Interacciones;
-private:
-	Coords coordenadas;
-	bool color; //True=blancas, flase = negras
 public:
-	
+	static const int valor = 3;
+	//Posible alternativa: valor 3.5, para diferenciarlo de la torre y que el programa sea más propenso a
+	//conservar los alfiles en lugar de los caballos.
+	void movimientos(); //Sin implementar
 };
 
 class Dama:public Pieza {
-
-
+public:
+	static const int valor = 9;
+	void movimientos(); //Sin implementar
 };
 
 class Rey:public Pieza {
-	friend class Interacciones;
 public:
-	
+	//El rey no tiene valor
+	void movimientos(); //Sin implementar
 };
 
 class Peon:public Pieza {
-
+public:
+	bool primer_movimiento;
+	static const int valor = 1;
+	void movimientos(); //Sin implementar
 
 };
