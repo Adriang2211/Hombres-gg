@@ -1,5 +1,9 @@
-﻿  Piezas.cpp
+﻿  Alfil.cpp
   Caballo.cpp
+  Dama.cpp
+  Peon.cpp
+  Piezas.cpp
+  Rey.cpp
   Tablero.cpp
   Torre.cpp
   Generando código...

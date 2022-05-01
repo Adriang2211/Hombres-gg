@@ -22,42 +22,14 @@ protected:
 	bool color; //True=blancas, flase = negras
 	Tablero* tab; //Tablero al que pertenece la pieza, de esta forma se evita tener que pasar la referencia del tablero.
 public:
-	Coords getCoordenadas() { return coordenadas; }
-	bool getColor() { return color; }
-	void setCoordenadas(int x, int y) { coordenadas.setXY(x, y); }
-	void setCoordenadas(Coords a) { coordenadas = a; }
-	void setColor(bool _color) { color = _color; }
+	Coords getCoordenadas();
+	bool getColor();
+	void setCoordenadas(int x, int y);
+	void setCoordenadas(Coords a);
+	void setColor(bool _color);
 	Coords coordenadas_disponibles[27]; //Máximos movimientos de la dama, que es la pieza que más movimientos posibles puede tener.
 
 };
 
 
 
-
-class Alfil:public Pieza {
-public:
-	static const int valor = 3;
-	//Posible alternativa: valor 3.5, para diferenciarlo de la torre y que el programa sea más propenso a
-	//conservar los alfiles en lugar de los caballos.
-	void movimientos(); //Sin implementar
-};
-
-class Dama:public Pieza {
-public:
-	static const int valor = 9;
-	void movimientos(); //Sin implementar
-};
-
-class Rey:public Pieza {
-public:
-	//El rey no tiene valor
-	void movimientos(); //Sin implementar
-};
-
-class Peon:public Pieza {
-public:
-	bool primer_movimiento;
-	static const int valor = 1;
-	void movimientos(); //Sin implementar
-
-};
