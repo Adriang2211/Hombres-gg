@@ -32,21 +32,7 @@ public:
 };
 
 
-class Torre:public Pieza {
-public:
-	void movimientos();
-	static const int valor = 5;
-};
 
-
-class Caballo:public Pieza {
-private:
-	void tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordenadas_inservibles, int i);
-public:
-	static const int valor = 3;
-	void movimientos(); //Sin implementar
-
-};
 
 class Alfil:public Pieza {
 public:

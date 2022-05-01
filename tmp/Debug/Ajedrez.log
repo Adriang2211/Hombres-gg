@@ -1,12 +1,6 @@
 ﻿  Piezas.cpp
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.h(17,54): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.h(18,53): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
+  Caballo.cpp
   Tablero.cpp
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.h(17,54): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.h(18,53): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.cpp(5,55): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
-C:\Users\adris\Documents\GitHub\Hombres-gg\src\Tablero.cpp(14,54): warning C4227: se ha utilizado un anacronismo: se omiten los calificadores de la referencia
+  Torre.cpp
   Generando código...
-Tablero.obj : error LNK2001: símbolo externo "public: static class Coords * Tablero::casillas_ocupadas_blancas" (?casillas_ocupadas_blancas@Tablero@@2PAVCoords@@A) sin resolver
-Tablero.obj : error LNK2001: símbolo externo "public: static class Coords * Tablero::casillas_ocupadas_negras" (?casillas_ocupadas_negras@Tablero@@2PAVCoords@@A) sin resolver
-C:\Users\adris\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe : fatal error LNK1120: 2 externos sin resolver
+  Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe
