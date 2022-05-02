@@ -123,3 +123,13 @@ void Caballo::tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordena
 	}
 
 }
+
+bool Caballo::mover(Coords destino) {
+	for (int i = 0; i < MAX_MOV; i++) {
+		if (destino == coordenadas_disponibles[i]) {
+			coordenadas = destino;
+			return true;
+		}
+	}
+	return false;
+}

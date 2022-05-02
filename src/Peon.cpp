@@ -2,7 +2,6 @@
 #include "Tablero.h"
 
 
-
 void Peon::movimientos()
 {
 	for (int i = 0; i < MAX_MOV_PEON; i++)
@@ -94,4 +93,15 @@ void Peon::movimientos()
 	}
 
 
+}
+
+
+bool Peon::mover(Coords destino) {
+	for (int i = 0; i < MAX_MOV; i++) {
+		if (destino == coordenadas_disponibles[i]) {
+			coordenadas = destino;
+			return true;
+		}
+	}
+	return false;
 }

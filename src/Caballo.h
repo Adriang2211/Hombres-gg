@@ -7,5 +7,5 @@ private:
 public:
 	static const int valor = 3;
 	virtual void movimientos();
-
+	virtual bool mover(Coords destino);
 };

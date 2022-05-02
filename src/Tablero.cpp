@@ -1,5 +1,19 @@
 #include "Posicionamiento.h"
 #include "Tablero.h"
+#include "Piezas.h"
+#include "Torre.h"
+#include "Caballo.h"
+#include "Alfil.h"
+#include "Dama.h"
+#include "Rey.h"
+#include "Peon.h"
+
+
+
+void Tablero::inicializa() {
+	
+}
+
 
 
 bool Tablero::consultaBlancas(Coords coordenada){
@@ -18,4 +32,9 @@ bool Tablero::consultaNegras(Coords coordenada) {
 			return true;
 	}
 	return false;
+}
+
+
+Tablero::~Tablero() {
+	delete[] piezas;
 }

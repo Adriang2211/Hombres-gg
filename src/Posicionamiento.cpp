@@ -74,3 +74,10 @@ ostream& operator << (ostream& os, const Coords& coordenadas) {
 	os << "]";
 	return os;
 }
+
+bool operator == (const Coords& coordenada1, const Coords& coordenada2) {
+	if (coordenada1.x == coordenada2.x && coordenada1.y == coordenada2.y)
+		return true;
+	else
+		return false;
+}
