@@ -34,6 +34,7 @@ int main(int argc, char* argv[])
 	//Inicializar los objetos
 	Tablero tablero1;
 	tablero1.inicializa();
+	tablero1.actualizarCasillasOcupadas();
 	std::cout << tablero1;
 
 

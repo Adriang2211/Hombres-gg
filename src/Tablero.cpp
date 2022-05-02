@@ -47,6 +47,8 @@ void Tablero::inicializa() {
 	//Crear reyes
 	piezas[30] = new Rey(true, e, 1, this);
 	piezas[31] = new Rey(true, e, 8, this);
+
+	numero = 32; //Se empieza siempre con 32 piezas.
 }
 
 
@@ -81,7 +83,7 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	os << "Numero de jugada: " << tab.jugada << endl;
 	os << "Piezas y sus posiciones:" << endl;
 	os << "_______________________________________________________________________________________" << endl;
-	for (int i = 0; i < 32; i++) {
+	for (int i = 0; i < tab.numero; i++) {
 		if (*(tab.piezas + i) != NULL) {
 			switch (tab.piezas[i]->id) {
 			case 1:
@@ -116,7 +118,35 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 				os << "\tColor: negro" << endl;
 			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas();
 			os << endl << "________________________________" << endl;
+
 		}
 	}
+	os << endl << "Casillas ocupadas blancas:" << endl;
+	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
+		os << tab.casillas_ocupadas_blancas[i] << endl;
+	os << "___________________________________" << endl;
+	os << endl << "Casillas ocupadas negras:" << endl;
+	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
+		os << tab.casillas_ocupadas_negras[i] << endl;
 	return os;
+}
+
+void Tablero::cambiarTurno() {
+	if (turno)
+		turno = false;
+	else
+		turno = true;
+}
+
+void Tablero::actualizarCasillasOcupadas() {
+	for (int i = 0, j =0, k=0; i < numero; i++) {
+		if (piezas[i]->getColor()) {
+			casillas_ocupadas_blancas[j] = piezas[i]->getCoordenadas();
+			j++;
+		}
+		else {
+			casillas_ocupadas_negras[k] = piezas[i]->getCoordenadas();
+			k++;
+		}
+	}
 }
