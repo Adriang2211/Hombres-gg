@@ -1,6 +1,6 @@
 #include "freeglut.h"
 #include <iostream>
-
+#include "ETSIDI.h"
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(900, 900);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("MiJuego");
 	
@@ -46,15 +46,15 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0, 30, 30,  // posicion del ojo
+	gluLookAt(0, 00, 30,  // posicion del ojo
 		0.0, 0, 0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
 	//aqui es donde hay que poner el código de dibujo
-
-
 	
-
+	
+	
+	
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
