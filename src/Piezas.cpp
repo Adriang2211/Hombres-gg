@@ -11,10 +11,12 @@ Coords Pieza::getCoordenadas()
 {
 	return coordenadas;
 };
+
 void Pieza::setCoordenadas(int x, int y)
 {
 	coordenadas.setXY(x, y);
 };
+
 void Pieza::setCoordenadas(Coords a) { coordenadas = a; }
 void Pieza::setColor(bool _color) { color = _color; }
 

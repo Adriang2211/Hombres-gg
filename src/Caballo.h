@@ -6,6 +6,6 @@ private:
 	void tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordenadas_inservibles, int i);
 public:
 	static const int valor = 3;
-	void movimientos(); //Sin implementar
-
+	virtual void movimientos();
+	virtual bool mover(Coords destino);
 };

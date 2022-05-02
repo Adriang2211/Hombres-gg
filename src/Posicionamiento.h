@@ -21,5 +21,6 @@ public:
 	int getY() const;
 	Coords getXY() const;
 	friend std::ostream& operator << (std::ostream& os, const Coords& coordenada);
+	friend bool operator == (const Coords& coordenada1, const Coords& coordenada2);
 
 };
