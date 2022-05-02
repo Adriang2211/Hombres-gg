@@ -9,7 +9,7 @@ public: //por ahora todo el público
 	bool turno;
 	int jugada = 0;
 
-	Pieza* piezas;
+	Pieza* piezas [32];
 
 	Coords casillas_ocupadas_blancas[16];
 	Coords casillas_ocupadas_negras[16];

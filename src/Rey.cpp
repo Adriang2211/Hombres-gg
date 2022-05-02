@@ -1,7 +1,13 @@
 #include "Rey.h"
 #include "Tablero.h"
 
-
+Rey::Rey(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+	primer_movimiento = true;
+}
 
 void Rey::movimientos() {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey

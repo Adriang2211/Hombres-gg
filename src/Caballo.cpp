@@ -1,6 +1,14 @@
 #include "Caballo.h"
 #include "Tablero.h"
 
+Caballo::Caballo(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+}
+
+
 void Caballo::movimientos() {
 
 	Coords coordenadas_de_consulta;

@@ -2,7 +2,12 @@
 #include "Tablero.h"
 
 
-
+Dama::Dama(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+}
 
 
 

@@ -1,6 +1,16 @@
 #include "Torre.h"
 #include "Tablero.h"
 
+
+Torre::Torre(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+	primer_movimiento = true;
+}
+
+
 void Torre::movimientos() {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0; //Se definen tantas variables como direcciones de movimiento
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.

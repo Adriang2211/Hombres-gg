@@ -1,6 +1,14 @@
 #include "Peon.h"
 #include "Tablero.h"
 
+Peon::Peon(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+	primer_movimiento = true;
+}
+
 
 void Peon::movimientos()
 {
