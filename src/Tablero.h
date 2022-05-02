@@ -22,8 +22,8 @@ public: //por ahora todo el público
 	bool consultaNegras(Coords coordenada);
 
 
-	//Función de prueba
-	void MostrarTodo();
+	//Función de prueba para mostrar en la consola la situación
+	friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
 
 	//Destructor
 	~Tablero();

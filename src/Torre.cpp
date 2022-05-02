@@ -8,6 +8,7 @@ Torre::Torre(bool color, int x, int y, Tablero* t) {
 	coordenadas.setY(y);
 	tab = t;
 	primer_movimiento = true;
+	id = 1;
 }
 
 
