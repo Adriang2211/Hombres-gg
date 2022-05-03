@@ -7,7 +7,7 @@
 #include "Dama.h"
 #include "Rey.h"
 #include "Peon.h"
-
+#include "freeglut.h"
 
 
 void Tablero::inicializa() {
@@ -37,4 +37,28 @@ bool Tablero::consultaNegras(Coords coordenada) {
 
 Tablero::~Tablero() {
 	delete[] piezas;
+}
+
+void Tablero::dibuja() {
+	int N = 8;
+	for (int j = 0; j < N; j++) {
+		for (int i = 0; i < N; i++) {
+			if ((i + j) % 2 != 0) {
+				glColor3ub(255, 255, 255);
+				glBegin(GL_QUADS);
+				glVertex3f(i, j, 0);
+				glVertex3f(i, j + 1, 0);
+				glVertex3f(i + 1, j + 1, 0);
+				glVertex3f(i + 1, j, 0);
+			}
+			else {
+				glColor3ub(255, 0, 0);
+				glBegin(GL_QUADS);
+				glVertex3f(i, j, 0);
+				glVertex3f(i, j + 1, 0);
+				glVertex3f(i + 1, j + 1, 0);
+				glVertex3f(i + 1, j, 0);
+			}
+		}
+	}
 }
