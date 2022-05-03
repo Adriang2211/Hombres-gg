@@ -9,5 +9,6 @@ public:
 	static const int valor = 1;
 	virtual void movimientos();
 	virtual bool mover(Coords destino);
+	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 };
 

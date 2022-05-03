@@ -35,6 +35,7 @@ int main(int argc, char* argv[])
 	Tablero tablero1;
 	tablero1.inicializa();
 	tablero1.actualizarCasillasOcupadas();
+	tablero1.enroque_largo_blancas();
 	std::cout << tablero1;
 
 

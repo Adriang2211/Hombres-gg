@@ -22,7 +22,8 @@ public:
 	void setColor(bool _color);
 	Coords coordenadas_disponibles[27]; //Maximos movimientos de la dama, que es la pieza que mas movimientos posibles puede tener.
 
-	//virtual void movimientos(); //Define la obligatoriedad de definir en todas las clases hijas la función de movimientos.
+	virtual bool getPrimerMovimiento() { return false; };
+	virtual void movimientos() {}; //Define la obligatoriedad de definir en todas las clases hijas la función de movimientos.
 };
 
 

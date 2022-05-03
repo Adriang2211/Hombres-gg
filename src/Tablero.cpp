@@ -7,6 +7,7 @@
 #include "Dama.h"
 #include "Rey.h"
 #include "Peon.h"
+#include <iostream>
 
 
 
@@ -149,4 +150,32 @@ void Tablero::actualizarCasillasOcupadas() {
 			k++;
 		}
 	}
+}
+
+void Tablero::enroque_largo_blancas() {
+	Coords coordenada_torre = { a, 1 };
+	Coords coordenada_rey = { e, 1 };
+	int index_t; //Posición del vector en la que se encuentra la torre blanca
+	int index_r; //Posición del vector en la que se encuentra el rey
+
+	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() && piezas[i]->id==1 &&\
+			piezas[i]->getCoordenadas() == coordenada_torre)
+			index_t = i;
+	}
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() && piezas[i]->id == 5 && \
+			piezas[i]->getCoordenadas() == coordenada_rey)
+			index_r = i;
+	}
+	if (!consultaBlancas({ b, 1 }) && !consultaBlancas({ c, 1 }) && !consultaBlancas({ d, 1 })\
+		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento())
+		std::cout << "Enroque largo blancas es posible" << endl; //Prueba
+	else
+		std::cout << "Enroque imposible" << endl; //Prueba
+
+	//Hay que comprobar que no esté en jaque
+
+	//Guardar la posición en el vector
 }

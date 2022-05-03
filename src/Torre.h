@@ -8,5 +8,6 @@ public:
 	bool primer_movimiento; //Para el enroque, la torre no se puede haber movido.
 	virtual bool mover(Coords destino);
 	Torre(bool color, int x, int y, Tablero* t);
+	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 };
 

@@ -15,7 +15,7 @@ public: //por ahora todo el público
 	Pieza* piezas [NUMERO_DE_PIEZAS];
 
 	void dibuja(); //Sin implementar
-	void inicializa(); //Sin implementar
+	void inicializa();
 	void actualizarMovimientosPosibles(); //Sin implemetar
 	bool consultaBlancas(Coords coordenada);
 	bool consultaNegras(Coords coordenada);
@@ -31,7 +31,10 @@ public: //por ahora todo el público
 
 
 	//Enroques
-
+	void enroque_largo_blancas();
+	void enroque_largo_negras();
+	void enroque_corto_blancas();
+	void enroque_corto_negras();
 
 
 	//Función de prueba para mostrar en la consola la situación

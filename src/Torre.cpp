@@ -142,6 +142,7 @@ void Torre::movimientos() {
 		coordenadas_disponibles[i + var1 + var2 + var3].setXY(coordenadas.getX(), coordenadas.getY() - i - 1);
 	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV; i++)
 		coordenadas_disponibles[i].setXY(9, 9); //9 como simbolo de que esta vacio
+
 }
 
 
