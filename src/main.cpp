@@ -8,7 +8,8 @@ void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
-Tablero tablero1; //Pruebas
+Tablero tablero1; //Pruebas - posición inicial de la partida
+Tablero tablero2; //Pruebas - posición 2
 
 int main(int argc, char* argv[])
 {
@@ -36,10 +37,17 @@ int main(int argc, char* argv[])
 
 
 	//Pruebas
-	tablero1.inicializa();
-	tablero1.actualizarCasillasOcupadas();
-	tablero1.actualizarMovimientosPosibles();
-	std::cout << tablero1;
+	//tablero1.inicializa();
+	//tablero1.actualizarCasillasOcupadas();
+	//tablero1.actualizarMovimientosPosibles();
+	//std::cout << tablero1;
+	
+	std::cout << "Prueba movimientos posibles con una partida empezada:" << std::endl << "TABLERO 2:";
+	std::cout << std::endl << "_________________" << std::endl;
+	tablero2.generarTest();
+	tablero2.actualizarCasillasOcupadas();
+	tablero2.actualizarMovimientosPosibles();
+	std::cout << tablero2;
 
 
 	//pasarle el control a GLUT,que llamara a los callbacks

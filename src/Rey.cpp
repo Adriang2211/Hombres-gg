@@ -271,6 +271,28 @@ void Rey::movimientos() {
 	for (int i = 0; i < var3; i++) {
 		coordenadas_disponibles[i + var1 + var2].setXY(coordenadas.getX() + 1, coordenadas.getY());
 	}
+
+	//Enroques
+	if (color) {
+		if (tab->enroque_corto_blancas()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { g, 1 };
+		}
+		if (tab->enroque_largo_blancas()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { c, 1 };
+		}
+	}
+	else if (!color) {
+		if (tab->enroque_corto_negras()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { g, 8 };
+		}
+		if (tab->enroque_largo_negras()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { c, 8 };
+		}
+	}
 }
 
 

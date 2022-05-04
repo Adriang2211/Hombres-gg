@@ -152,7 +152,7 @@ void Torre::movimientos() {
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { d, 1 };
 		}
 	}
-	else{
+	else if (!color) {
 		if (tab->enroque_corto_negras()) {
 			var4++;
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { f, 8 };

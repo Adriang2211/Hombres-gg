@@ -43,4 +43,9 @@ public: //por ahora todo el público
 
 	//Destructor
 	~Tablero();
+
+
+	//Test
+	void generarTest(); //Genera una situación de test correspondiente a una partida recién comenzada.
+
 };

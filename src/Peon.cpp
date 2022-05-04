@@ -16,7 +16,7 @@ void Peon::movimientos()
 	for (int i = 0; i < MAX_MOV; i++)
 		coordenadas_disponibles[i] = { 9, 9 };
 	int mov1 = 0;// 3 direecciones posibles para el peon
-	Coords coordenas_de_consulta;
+	Coords coordenas_de_consulta, coordenadas_de_consulta2;
 	
 	//Avanzar dos casillas
 	if (primer_movimiento)
@@ -24,7 +24,8 @@ void Peon::movimientos()
 		if (color)
 		{
 			coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() + 2);
-			if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+			coordenadas_de_consulta2.setXY(coordenadas.getX(), coordenadas.getY() + 1);
+			if (!tab->consultaCasilla(coordenas_de_consulta) && !tab->consultaCasilla(coordenadas_de_consulta2))
 			{
 				coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() + 2);//adelante
 				mov1++;
@@ -33,7 +34,8 @@ void Peon::movimientos()
 		else if (!color)
 		{
 			coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() - 2);
-			if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+			coordenadas_de_consulta2.setXY(coordenadas.getX(), coordenadas.getY() - 1);
+			if (!tab->consultaCasilla(coordenas_de_consulta) && !tab->consultaCasilla(coordenadas_de_consulta2))
 			{
 				coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() - 2);//adelante
 				mov1++;
@@ -46,7 +48,7 @@ void Peon::movimientos()
 	{
 
 		coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() + 1);
-		if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+		if (!tab->consultaCasilla(coordenas_de_consulta))
 		{
 			coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() + 1);//adelante
 			mov1++;
