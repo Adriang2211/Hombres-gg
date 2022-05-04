@@ -1,6 +1,17 @@
 #include "Torre.h"
 #include "Tablero.h"
 
+
+Torre::Torre(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+	primer_movimiento = true;
+	id = 1;
+}
+
+
 void Torre::movimientos() {
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0; //Se definen tantas variables como direcciones de movimiento
 	//posibles haya para la pieza. En el caso de la torre son 4 direcciones posibles.
@@ -131,6 +142,7 @@ void Torre::movimientos() {
 		coordenadas_disponibles[i + var1 + var2 + var3].setXY(coordenadas.getX(), coordenadas.getY() - i - 1);
 	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV; i++)
 		coordenadas_disponibles[i].setXY(9, 9); //9 como simbolo de que esta vacio
+
 }
 
 
@@ -142,5 +154,8 @@ bool Torre::mover(Coords destino) {
 			return true;
 		}
 	}
+	if (primer_movimiento)
+		primer_movimiento = false;
+	tab->cambiarTurno();
 	return false;
 }

@@ -1,29 +1,44 @@
 #pragma once
 #include "Posicionamiento.h"
 #include "Piezas.h"
+#define NUMERO_DE_PIEZAS 32
 
 class Tablero {
 public: //por ahora todo el público
-	//jugador blancas
-	//jugador negras
+
+	Tablero() { numero = 0; }
+
 	bool turno;
 	int jugada = 0;
 
-	Pieza* piezas;
+	int numero; //Numero de piezas que hay en cada momento
+	Pieza* piezas [NUMERO_DE_PIEZAS];
 
-	Coords casillas_ocupadas_blancas[16];
-	Coords casillas_ocupadas_negras[16];
-
-	void dibuja(); //Sin implementar
-	void inicializa(); //Sin implementar
-	bool mover(Pieza& p, Coords coordenada); //Sin implementar
-	void actualizarMovimientosPosibles(); //Sin implemetar
+	void dibuja();
+	void inicializa();
+	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords coordenada);
 	bool consultaNegras(Coords coordenada);
 
+	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
+	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];
 
-	//Función de prueba
-	void MostrarTodo();
+	//Cambio de turno
+	void cambiarTurno();
+
+	//Actualizar vectores de casillas ocupadas
+	void actualizarCasillasOcupadas();
+
+
+	//Enroques
+	bool enroque_largo_blancas();
+	bool enroque_largo_negras();
+	bool enroque_corto_blancas();
+	bool enroque_corto_negras();
+
+
+	//Función de prueba para mostrar en la consola la situación
+	friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
 
 	//Destructor
 	~Tablero();

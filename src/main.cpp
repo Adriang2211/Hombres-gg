@@ -1,10 +1,14 @@
 #include "freeglut.h"
 #include <iostream>
 #include "ETSIDI.h"
+#include "Tablero.h"
+#include "Piezas.h"
+
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
+Tablero tablero1; //Pruebas
 
 int main(int argc, char* argv[])
 {
@@ -31,6 +35,15 @@ int main(int argc, char* argv[])
 	//Inicializar los objetos
 
 
+	//Pruebas
+	tablero1.inicializa();
+	tablero1.actualizarCasillasOcupadas();
+	tablero1.enroque_largo_blancas();
+	tablero1.enroque_largo_negras();
+	tablero1.enroque_corto_blancas();
+	tablero1.enroque_corto_negras();
+	std::cout << tablero1;
+
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -51,7 +64,8 @@ void OnDraw(void)
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
 	//aqui es donde hay que poner el código de dibujo
-	
+
+	tablero1.dibuja(); //Prueba
 	
 	
 	

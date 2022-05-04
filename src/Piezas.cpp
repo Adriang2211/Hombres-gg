@@ -19,8 +19,3 @@ void Pieza::setCoordenadas(int x, int y)
 
 void Pieza::setCoordenadas(Coords a) { coordenadas = a; }
 void Pieza::setColor(bool _color) { color = _color; }
-
-
-
-
-

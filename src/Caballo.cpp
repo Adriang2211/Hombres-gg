@@ -1,6 +1,15 @@
 #include "Caballo.h"
 #include "Tablero.h"
 
+Caballo::Caballo(bool color, int x, int y, Tablero* t) {
+	this->color = color;
+	coordenadas.setX(x);
+	coordenadas.setY(y);
+	tab = t;
+	id = 2;
+}
+
+
 void Caballo::movimientos() {
 
 	Coords coordenadas_de_consulta;
@@ -131,5 +140,6 @@ bool Caballo::mover(Coords destino) {
 			return true;
 		}
 	}
+	tab->cambiarTurno();
 	return false;
 }
