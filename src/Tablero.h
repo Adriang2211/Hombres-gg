@@ -31,10 +31,10 @@ public: //por ahora todo el público
 
 
 	//Enroques
-	void enroque_largo_blancas();
-	void enroque_largo_negras();
-	void enroque_corto_blancas();
-	void enroque_corto_negras();
+	bool enroque_largo_blancas();
+	bool enroque_largo_negras();
+	bool enroque_corto_blancas();
+	bool enroque_corto_negras();
 
 
 	//Función de prueba para mostrar en la consola la situación

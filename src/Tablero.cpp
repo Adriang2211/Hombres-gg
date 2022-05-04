@@ -152,30 +152,121 @@ void Tablero::actualizarCasillasOcupadas() {
 	}
 }
 
-void Tablero::enroque_largo_blancas() {
+bool Tablero::enroque_largo_blancas() {
 	Coords coordenada_torre = { a, 1 };
+	Coords coordenada_rey = { e, 1 };
+	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
+	int index_r=0; //Posición del vector en la que se encuentra el rey
+
+	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre)
+			index_t = i;
+	}
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey)
+			index_r = i;
+	}
+	if (!consultaBlancas({ b, 1 }) && !consultaBlancas({ c, 1 }) && !consultaBlancas({ d, 1 }) && piezas[index_t]->id == 1\
+		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_r]->id == 5) {
+		std::cout << "Enroque largo blancas es posible" << endl; //Prueba
+		return true;
+	}
+	else {
+		std::cout << "Enroque largo blancas imposible" << endl; //Prueba
+		return false;
+	}
+
+	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
+	//ataque no se puede hacer el enroque.
+}
+
+
+bool Tablero::enroque_largo_negras() {
+	Coords coordenada_torre = { a, 8 };
+	Coords coordenada_rey = { e, 8 };
+	int index_t; //Posición del vector en la que se encuentra la torre blanca
+	int index_r; //Posición del vector en la que se encuentra el rey
+
+	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	for (int i = 0; i < numero; i++) {
+		if (!piezas[i]->getColor()&&piezas[i]->getCoordenadas() == coordenada_torre)
+			index_t = i;
+	}
+	for (int i = 0; i < numero; i++) {
+		if (!piezas[i]->getColor()&&piezas[i]->getCoordenadas() == coordenada_rey)
+			index_r = i;
+	}
+	if (!consultaBlancas({ b, 8 }) && !consultaBlancas({c , 8 }) && !consultaBlancas({ d, 8 }) && piezas[index_t]->id == 1\
+		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_r]->id == 5) {
+		std::cout << "Enroque largo negras es posible" << endl; //Prueba
+		return true;
+	}
+	else {
+		std::cout << "Enroque largo negras imposible" << endl; //Prueba
+		return false;
+	}
+
+	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
+	//ataque no se puede hacer el enroque.
+}
+
+
+
+bool Tablero::enroque_corto_blancas() {
+	Coords coordenada_torre = { h, 1 };
 	Coords coordenada_rey = { e, 1 };
 	int index_t; //Posición del vector en la que se encuentra la torre blanca
 	int index_r; //Posición del vector en la que se encuentra el rey
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->id==1 &&\
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre)
+			index_t = i;
+	}
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey)
+			index_r = i;
+	}
+	if (!consultaBlancas({ g, 1 }) && !consultaBlancas({ f, 1 }) && piezas[index_t]->id == 1\
+		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_r]->id == 5) {
+		std::cout << "Enroque corto blancas es posible" << endl; //Prueba
+		return true;
+	}
+	else {
+		std::cout << "Enroque corto blancas imposible" << endl; //Prueba
+		return false;
+	}
+}
+
+//SEGUIR CAMBIANDO ESTÁ FUNCIÓN
+bool Tablero::enroque_corto_negras() {
+	Coords coordenada_torre = { h, 8 };
+	Coords coordenada_rey = { e, 8 };
+	int index_t; //Posición del vector en la que se encuentra la torre blanca
+	int index_r; //Posición del vector en la que se encuentra el rey
+
+	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	for (int i = 0; i < numero; i++) {
+		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
 			piezas[i]->getCoordenadas() == coordenada_torre)
 			index_t = i;
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->id == 5 && \
+		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
 			piezas[i]->getCoordenadas() == coordenada_rey)
 			index_r = i;
 	}
-	if (!consultaBlancas({ b, 1 }) && !consultaBlancas({ c, 1 }) && !consultaBlancas({ d, 1 })\
-		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento())
+	if (!consultaBlancas({ f, 8 }) && !consultaBlancas({ g , 8 })\
+		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
 		std::cout << "Enroque largo blancas es posible" << endl; //Prueba
-	else
+		return true;
+	}
+	else {
 		std::cout << "Enroque imposible" << endl; //Prueba
+		return false;
+	}
 
-	//Hay que comprobar que no esté en jaque
-
-	//Guardar la posición en el vector
+	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
+	//ataque no se puede hacer el enroque.
 }
