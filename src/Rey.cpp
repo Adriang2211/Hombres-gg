@@ -11,6 +11,9 @@ Rey::Rey(bool color, int x, int y, Tablero* t) {
 }
 
 void Rey::movimientos() {
+	//Limpieza del vector
+	for (int i = 0; i < MAX_MOV; i++)
+		coordenadas_disponibles[i] = { 9,9 };
 	int var1 = 0, var2 = 0, var3 = 0, var4 = 0, var5 = 0, var6 = 0, var7 = 0, var8 = 0; //cada una de estas variables se usará para cada direccion en la que puede moverse el rey
 	bool encontrado = false;
 	Coords coordenadas_de_consulta;
@@ -267,6 +270,28 @@ void Rey::movimientos() {
 	}
 	for (int i = 0; i < var3; i++) {
 		coordenadas_disponibles[i + var1 + var2].setXY(coordenadas.getX() + 1, coordenadas.getY());
+	}
+
+	//Enroques
+	if (color) {
+		if (tab->enroque_corto_blancas()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { g, 1 };
+		}
+		if (tab->enroque_largo_blancas()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { c, 1 };
+		}
+	}
+	else if (!color) {
+		if (tab->enroque_corto_negras()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { g, 8 };
+		}
+		if (tab->enroque_largo_negras()) {
+			var4++;
+			coordenadas_disponibles[var1 + var2 + var3 + var4] = { c, 8 };
+		}
 	}
 }
 

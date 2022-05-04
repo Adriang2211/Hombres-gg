@@ -81,3 +81,10 @@ bool operator == (const Coords& coordenada1, const Coords& coordenada2) {
 	else
 		return false;
 }
+
+bool operator != (const Coords& coordenada1, const Coords& coordenada2) {
+	if (coordenada1.x == coordenada2.x && coordenada1.y == coordenada2.y)
+		return false;
+	else
+		return true;
+}

@@ -42,7 +42,7 @@ void Tablero::inicializa() {
 	piezas[29] = new Dama(false, d, 8, this);
 	//Crear reyes
 	piezas[30] = new Rey(true, e, 1, this);
-	piezas[31] = new Rey(true, e, 8, this);
+	piezas[31] = new Rey(false, e, 8, this);
 	numero = 32; //Se empieza siempre con 32 piezas.
 }
 
@@ -64,6 +64,14 @@ bool Tablero::consultaNegras(Coords coordenada) {
 			return true;
 	}
 	return false;
+}
+
+bool Tablero::consultaCasilla(Coords coordenada) {
+	if (consultaBlancas(coordenada) || consultaNegras(coordenada)){
+		return true;
+	}
+	else
+		return false;
 }
 
 
@@ -104,7 +112,6 @@ void Tablero::cambiarTurno() {
 		turno = true;
 }
 
-
 void Tablero::actualizarCasillasOcupadas() {
 	for (int i = 0, j = 0, k = 0; i < numero; i++) {
 		if (piezas[i]->getColor()) {
@@ -122,25 +129,36 @@ void Tablero::actualizarCasillasOcupadas() {
 bool Tablero::enroque_largo_blancas() {
 	Coords coordenada_torre = { a, 1 };
 	Coords coordenada_rey = { e, 1 };
+
 	int index_t = 0; //Posición del vector en la que se encuentra la torre blanca
 	int index_r = 0; //Posición del vector en la que se encuentra el rey
 
+	bool rey_encontrado = false;
+	bool torre_encontrada = false;
+
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1)
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
 			index_t = i;
+			torre_encontrada = true;
+		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5)
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
 			index_r = i;
+			rey_encontrado = true;
+		}
 	}
-	if (!consultaBlancas({ b, 1 }) && !consultaBlancas({ c, 1 }) && !consultaBlancas({ d, 1 })\
-		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-		std::cout << "Enroque largo blancas es posible" << std::endl; //Prueba
-		return true;
+	if (torre_encontrada && rey_encontrado) {
+		if (!consultaCasilla({ b, 1 }) && !consultaCasilla({ c, 1 }) && !consultaCasilla({ d, 1 })\
+			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
-		std::cout << "Enroque largo blancas imposible" << std::endl; //Prueba
 		return false;
 	}
 
@@ -152,25 +170,37 @@ bool Tablero::enroque_largo_blancas() {
 bool Tablero::enroque_largo_negras() {
 	Coords coordenada_torre = { a, 8 };
 	Coords coordenada_rey = { e, 8 };
+
 	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
 	int index_r=0; //Posición del vector en la que se encuentra el rey
 
+	bool rey_encontrado = false;
+	bool torre_encontrada = false;
+
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre)
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
 			index_t = i;
+			torre_encontrada = true;
+		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey)
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
 			index_r = i;
+			rey_encontrado = true;
+		}
 	}
-	if (!consultaBlancas({ b, 8 }) && !consultaBlancas({ c , 8 }) && !consultaBlancas({ d, 8 }) && piezas[index_t]->id == 1\
-		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_r]->id == 5) {
-		std::cout << "Enroque largo negras es posible" << std::endl; //Prueba
-		return true;
+
+	if (rey_encontrado && torre_encontrada) {
+		if (!consultaCasilla({ b, 8 }) && !consultaCasilla({ c , 8 }) && !consultaCasilla({ d, 8 })\
+			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
-		std::cout << "Enroque largo negras imposible" << std::endl; //Prueba
 		return false;
 	}
 
@@ -183,25 +213,36 @@ bool Tablero::enroque_largo_negras() {
 bool Tablero::enroque_corto_blancas() {
 	Coords coordenada_torre = { h, 1 };
 	Coords coordenada_rey = { e, 1 };
+
 	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
 	int index_r=0; //Posición del vector en la que se encuentra el rey
 
+	bool rey_encontrado = false;
+	bool torre_encontrada = false;
+
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre)
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==1) {
 			index_t = i;
+			torre_encontrada = true;
+		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey)
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
 			index_r = i;
+			rey_encontrado = true;
+		}
 	}
-	if (!consultaBlancas({ g, 1 }) && !consultaBlancas({ f, 1 }) && piezas[index_t]->id == 1\
-		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_r]->id == 5) {
-		std::cout << "Enroque corto blancas es posible" << std::endl; //Prueba
-		return true;
+	if (rey_encontrado && torre_encontrada) {
+		if (!consultaCasilla({ g, 1 }) && !consultaCasilla({ f, 1 })\
+			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
-		std::cout << "Enroque corto blancas imposible" << std::endl; //Prueba
 		return false;
 	}
 }
@@ -209,26 +250,38 @@ bool Tablero::enroque_corto_blancas() {
 bool Tablero::enroque_corto_negras() {
 	Coords coordenada_torre = { h, 8 };
 	Coords coordenada_rey = { e, 8 };
+
 	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
 	int index_r=0; //Posición del vector en la que se encuentra el rey
 
+	bool rey_encontrado = false;
+	bool torre_encontrada = false;
+
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
-			piezas[i]->getCoordenadas() == coordenada_torre)
+			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
 			index_t = i;
+			torre_encontrada = true;
+		}
 	}
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
-			piezas[i]->getCoordenadas() == coordenada_rey)
+			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
 			index_r = i;
+			rey_encontrado = true;
+		}
 	}
-	if (!consultaBlancas({ f, 8 }) && !consultaBlancas({ g , 8 }) && piezas[index_r]->id == 5\
-		&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento() && piezas[index_t]->id==5) {
-		std::cout << "Enroque negras corto es posible" << std::endl; //Prueba
-		return true;
+
+	if (rey_encontrado && torre_encontrada) {
+		if (!consultaCasilla({ f, 8 }) && !consultaCasilla({ g , 8 })
+			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
-		std::cout << "Enroque negras corto imposible" << std::endl; //Prueba
 		return false;
 	}
 }
@@ -264,11 +317,22 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 			default:
 				os << "Ooops. Se ha producido un error." << endl;
 			}
+			//Color de la pieza
 			if (tab.piezas[i]->getColor())
 				os << "\tColor: blanco" << endl;
 			else
 				os << "\tColor: negro" << endl;
-			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas();
+
+			//Coordenadas de la pieza
+			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas() << endl;
+
+			//Movimientos posibles de la pieza
+			os << "\tLista de casillas a las que puede ir la pieza: " << endl << "\t";
+			Coords coordenadas_vacias = { 9,9 };
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (tab.piezas[i]->coordenadas_disponibles[j] != coordenadas_vacias)
+					os << tab.piezas[i]->coordenadas_disponibles[j];
+			}
 			os << endl << "________________________________" << endl;
 		}
 	}
@@ -280,4 +344,51 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
 		os << tab.casillas_ocupadas_negras[i] << endl;
 	return os;
+}
+
+void Tablero::actualizarMovimientosPosibles() {
+	for (int i = 0; i < numero; i++) {
+		piezas[i]->movimientos();
+	}
+}
+
+
+void Tablero::generarTest() {
+	//Función de pruebas, no es parte del programa definitivo
+	//Situación basada en posición 2 de test pero sin el enroque
+	//información sobre esto no disponible en github todavía.
+	piezas[0] = new Torre(true, a, 1, this);
+	piezas[1] = new Caballo(true, b, 1, this);
+	piezas[2] = new Alfil(true, c, 1, this);
+	piezas[3] = new Dama(true, d, 1, this);
+	piezas[4] = new Rey(true, e, 1, this);
+	piezas[5] = new Torre(true, h, 1, this);
+	piezas[6] = new Peon(true, a, 2, this);
+	piezas[7] = new Peon(true, b, 2, this);
+	piezas[8] = new Peon(true, c, 2, this);
+	piezas[9] = new Peon(true, d, 2, this);
+	piezas[10] = new Peon(true, f, 2, this);
+	piezas[11] = new Peon(true, g, 2, this);
+	piezas[12] = new Peon(true, h, 2, this);
+	piezas[13] = new Peon(true, e, 4, this);
+	piezas[14] = new Caballo(true, f, 3, this);
+	piezas[15] = new Alfil(true, c, 4, this);
+
+	piezas[16] = new Torre(false, a, 8, this);
+	piezas[17] = new Alfil(false, c, 8, this);
+	piezas[18] = new Dama(false, d, 8, this);
+	piezas[19] = new Rey(false, e, 8, this);
+	piezas[20] = new Caballo(false, g, 8, this);
+	piezas[21] = new Torre(false, h, 8, this);
+	piezas[22] = new Peon(false, b, 7, this);
+	piezas[23] = new Peon(false, c, 7, this);
+	piezas[24] = new Peon(false, d, 7, this);
+	piezas[25] = new Peon(false, f, 7, this);
+	piezas[26] = new Peon(false, g, 7, this);
+	piezas[27] = new Peon(false, h, 7, this);
+	piezas[28] = new Peon(false, a, 6, this);
+	piezas[29] = new Caballo(false, c, 6, this);
+	piezas[30] = new Alfil(false, c, 5, this);
+	piezas[31] = new Peon(false, e, 5, this);
+	numero = 32;
 }

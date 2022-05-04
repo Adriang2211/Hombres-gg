@@ -13,19 +13,19 @@ Peon::Peon(bool color, int x, int y, Tablero* t) {
 
 void Peon::movimientos()
 {
-	for (int i = 0; i < MAX_MOV_PEON; i++)
-	{
-		coordenadas_disponibles[i] = { 0,0 };
-	}
+	for (int i = 0; i < MAX_MOV; i++)
+		coordenadas_disponibles[i] = { 9, 9 };
 	int mov1 = 0;// 3 direecciones posibles para el peon
-	Coords coordenas_de_consulta;
-	//movimiento hacia delante
+	Coords coordenas_de_consulta, coordenadas_de_consulta2;
+	
+	//Avanzar dos casillas
 	if (primer_movimiento)
 	{
 		if (color)
 		{
 			coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() + 2);
-			if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+			coordenadas_de_consulta2.setXY(coordenadas.getX(), coordenadas.getY() + 1);
+			if (!tab->consultaCasilla(coordenas_de_consulta) && !tab->consultaCasilla(coordenadas_de_consulta2))
 			{
 				coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() + 2);//adelante
 				mov1++;
@@ -34,23 +34,27 @@ void Peon::movimientos()
 		else if (!color)
 		{
 			coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() - 2);
-			if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+			coordenadas_de_consulta2.setXY(coordenadas.getX(), coordenadas.getY() - 1);
+			if (!tab->consultaCasilla(coordenas_de_consulta) && !tab->consultaCasilla(coordenadas_de_consulta2))
 			{
 				coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() - 2);//adelante
 				mov1++;
 			}
 		}
 	}
+
+	//Avanzar una casilla
 	if (color == true)
 	{
 
 		coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() + 1);
-		if (!tab->consultaBlancas(coordenas_de_consulta) && !tab->consultaNegras(coordenas_de_consulta))
+		if (!tab->consultaCasilla(coordenas_de_consulta))
 		{
 			coordenadas_disponibles[mov1].setXY(coordenadas.getX(), coordenadas.getY() + 1);//adelante
 			mov1++;
 		}
 	}
+
 	else if (color == false)
 	{
 		coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() - 1);
@@ -81,6 +85,7 @@ void Peon::movimientos()
 			mov1++;
 		}
 	}
+
 	//Movimiento diagonal izq
 	if (color == true)
 	{
