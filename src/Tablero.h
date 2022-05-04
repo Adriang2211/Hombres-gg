@@ -14,9 +14,9 @@ public: //por ahora todo el público
 	int numero; //Numero de piezas que hay en cada momento
 	Pieza* piezas [NUMERO_DE_PIEZAS];
 
-	void dibuja(); //Sin implementar
+	void dibuja();
 	void inicializa();
-	void actualizarMovimientosPosibles(); //Sin implemetar
+	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords coordenada);
 	bool consultaNegras(Coords coordenada);
 

@@ -8,6 +8,7 @@ void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
+Tablero tablero1; //Pruebas
 
 int main(int argc, char* argv[])
 {
@@ -32,7 +33,9 @@ int main(int argc, char* argv[])
 	glutKeyboardFunc(OnKeyboardDown);//Eventos de teclado. Cuando pulsamos una tecla pues se "activa" esta funcion.
 
 	//Inicializar los objetos
-	Tablero tablero1;
+
+
+	//Pruebas
 	tablero1.inicializa();
 	tablero1.actualizarCasillasOcupadas();
 	tablero1.enroque_largo_blancas();
@@ -61,7 +64,8 @@ void OnDraw(void)
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
 	//aqui es donde hay que poner el código de dibujo
-	
+
+	tablero1.dibuja(); //Prueba
 	
 	
 	
