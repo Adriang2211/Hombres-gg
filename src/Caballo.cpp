@@ -11,9 +11,11 @@ Caballo::Caballo(bool color, int x, int y, Tablero* t) {
 
 
 void Caballo::movimientos() {
-
+	//Limpieza del vector
+	for (int i = 0; i < MAX_MOV; i++)
+		coordenadas_disponibles[i] = { 9,9 };
 	Coords coordenadas_de_consulta;
-	Coords coordenadas_inservibles = { 10, 10 };
+	Coords coordenadas_inservibles = { 9, 9 };
 	//Se recomienda ver la imagen del modelo para entender la estuctura de la funcion
 	//arriba
 	coordenadas_de_consulta.setY(coordenadas.getY() + 2);  //Sube dos posiciones

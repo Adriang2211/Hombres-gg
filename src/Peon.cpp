@@ -13,13 +13,12 @@ Peon::Peon(bool color, int x, int y, Tablero* t) {
 
 void Peon::movimientos()
 {
-	for (int i = 0; i < MAX_MOV_PEON; i++)
-	{
-		coordenadas_disponibles[i] = { 0,0 };
-	}
+	for (int i = 0; i < MAX_MOV; i++)
+		coordenadas_disponibles[i] = { 9, 9 };
 	int mov1 = 0;// 3 direecciones posibles para el peon
 	Coords coordenas_de_consulta;
-	//movimiento hacia delante
+	
+	//Avanzar dos casillas
 	if (primer_movimiento)
 	{
 		if (color)
@@ -41,6 +40,8 @@ void Peon::movimientos()
 			}
 		}
 	}
+
+	//Avanzar una casilla
 	if (color == true)
 	{
 
@@ -51,6 +52,7 @@ void Peon::movimientos()
 			mov1++;
 		}
 	}
+
 	else if (color == false)
 	{
 		coordenas_de_consulta.setXY(coordenadas.getX(), coordenadas.getY() - 1);
@@ -81,6 +83,7 @@ void Peon::movimientos()
 			mov1++;
 		}
 	}
+
 	//Movimiento diagonal izq
 	if (color == true)
 	{

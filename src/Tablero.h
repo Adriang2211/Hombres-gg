@@ -19,6 +19,7 @@ public: //por ahora todo el público
 	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords coordenada);
 	bool consultaNegras(Coords coordenada);
+	bool consultaCasilla(Coords coordenada); //Devuelve true si la casilla está ocupada
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];

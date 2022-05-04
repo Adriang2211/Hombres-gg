@@ -42,7 +42,7 @@ void Tablero::inicializa() {
 	piezas[29] = new Dama(false, d, 8, this);
 	//Crear reyes
 	piezas[30] = new Rey(true, e, 1, this);
-	piezas[31] = new Rey(true, e, 8, this);
+	piezas[31] = new Rey(false, e, 8, this);
 	numero = 32; //Se empieza siempre con 32 piezas.
 }
 
@@ -64,6 +64,13 @@ bool Tablero::consultaNegras(Coords coordenada) {
 			return true;
 	}
 	return false;
+}
+
+bool Tablero::consultaCasilla(Coords coordenada) {
+	if (consultaBlancas(coordenada) || consultaNegras(coordenada))
+		return true;
+	else
+		return false;
 }
 
 
@@ -103,7 +110,6 @@ void Tablero::cambiarTurno() {
 	else
 		turno = true;
 }
-
 
 void Tablero::actualizarCasillasOcupadas() {
 	for (int i = 0, j = 0, k = 0; i < numero; i++) {
@@ -264,11 +270,22 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 			default:
 				os << "Ooops. Se ha producido un error." << endl;
 			}
+			//Color de la pieza
 			if (tab.piezas[i]->getColor())
 				os << "\tColor: blanco" << endl;
 			else
 				os << "\tColor: negro" << endl;
-			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas();
+
+			//Coordenadas de la pieza
+			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas() << endl;
+
+			//Movimientos posibles de la pieza
+			os << "\tLista de casillas a las que puede ir la pieza: " << endl << "\t";
+			Coords coordenadas_vacias = { 9,9 };
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (tab.piezas[i]->coordenadas_disponibles[j] != coordenadas_vacias)
+					os << tab.piezas[i]->coordenadas_disponibles[j];
+			}
 			os << endl << "________________________________" << endl;
 		}
 	}
@@ -280,4 +297,10 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
 		os << tab.casillas_ocupadas_negras[i] << endl;
 	return os;
+}
+
+void Tablero::actualizarMovimientosPosibles() {
+	for (int i = 0; i < numero; i++) {
+		piezas[i]->movimientos();
+	}
 }

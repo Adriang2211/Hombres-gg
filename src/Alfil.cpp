@@ -184,6 +184,8 @@ void Alfil::movimientos() {
 		coordenadas_disponibles[var1 + var2 + var3 + i].setX(coordenadas.getX() + i + 1);
 		coordenadas_disponibles[var1 + var2 + var3 + i].setY(coordenadas.getY() - i - 1);
 	};
+	for (int i = (var1 + var2 + var3 + var4); i < MAX_MOV; i++)
+		coordenadas_disponibles[i] = { 9,9 };
 
 }
 

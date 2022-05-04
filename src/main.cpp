@@ -38,10 +38,7 @@ int main(int argc, char* argv[])
 	//Pruebas
 	tablero1.inicializa();
 	tablero1.actualizarCasillasOcupadas();
-	tablero1.enroque_largo_blancas();
-	tablero1.enroque_largo_negras();
-	tablero1.enroque_corto_blancas();
-	tablero1.enroque_corto_negras();
+	tablero1.actualizarMovimientosPosibles();
 	std::cout << tablero1;
 
 
