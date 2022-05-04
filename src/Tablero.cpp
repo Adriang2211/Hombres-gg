@@ -50,6 +50,7 @@ void Tablero::dibuja() {
 				glVertex3f(i, j + 1, 0);
 				glVertex3f(i + 1, j + 1, 0);
 				glVertex3f(i + 1, j, 0);
+				glEnd();
 			}
 			else {
 				glColor3ub(255, 0, 0);
@@ -58,6 +59,7 @@ void Tablero::dibuja() {
 				glVertex3f(i, j + 1, 0);
 				glVertex3f(i + 1, j + 1, 0);
 				glVertex3f(i + 1, j, 0);
+				glEnd();
 			}
 		}
 	}
