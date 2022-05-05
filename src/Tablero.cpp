@@ -113,16 +113,24 @@ void Tablero::cambiarTurno() {
 }
 
 void Tablero::actualizarCasillasOcupadas() {
-	for (int i = 0, j = 0, k = 0; i < numero; i++) {
-		if (piezas[i]->getColor()) {
+	int j = 0, k = 0; //Índices para la escritura en los vectores
+	//Leer las posiciones de las piezas existentes
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor()) { //Para las blancas
 			casillas_ocupadas_blancas[j] = piezas[i]->getCoordenadas();
 			j++;
 		}
-		else {
+		else { //Para las negras
 			casillas_ocupadas_negras[k] = piezas[i]->getCoordenadas();
 			k++;
 		}
 	}
+
+	//Poner posiciones vacías en el resto de los vectores.
+	for (int i = j; j < NUMERO_DE_PIEZAS / 2; j++)
+		casillas_ocupadas_blancas[j] = { 9,9 };
+	for (int i = k; k < NUMERO_DE_PIEZAS / 2; k++)
+		casillas_ocupadas_negras[k] = { 9, 9 };	
 }
 
 
