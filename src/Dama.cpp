@@ -43,12 +43,8 @@ void Dama::movimientos()
 		}
 		if (!encontrado) //Si no encuentra ninguna pieza es el número de casillas hasta el borde
 		{
-			if (coordenadas.getX() == 8 && coordenadas.getY() == 1)
-				var1 = 0;
-			else if (coordenadas.getY() == 1)
-				var1 = 8 - coordenadas.getX();
-			else if (coordenadas.getY() == 8)
-				var1 = 0;
+			if ((8 - coordenadas.getX()) <= (8 - coordenadas.getY())) var1 = (8 - coordenadas.getX());
+			else var1 = (8 - coordenadas.getY());
 		}
 
 		encontrado = false; //Se prepara para la siguiente búsqueda
@@ -81,12 +77,8 @@ void Dama::movimientos()
 		}
 		if (!encontrado)
 		{
-			if (coordenadas.getX() == 1 && coordenadas.getY() == 1)
-				var2 = 0;
-			else if (coordenadas.getY() == 1)
-				var2 = coordenadas.getX() - 1;
-			else if (coordenadas.getY() == 8)
-				var2 = 0;
+			if ((coordenadas.getX()) <= (8 - coordenadas.getY())) var2 = (coordenadas.getX()) - 1;
+			else var2 = (8 - coordenadas.getY());
 		}
 
 		encontrado = false; //Se prepara para la siguiente búsqueda

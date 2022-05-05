@@ -1,21 +1,2 @@
 ﻿  Dama.cpp
-  Tablero.cpp
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(79,17): warning C4154: eliminación de una expresión de matriz; suministrada una conversión a puntero
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(89,19): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(89,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(90,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(90,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(91,25): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(91,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(92,23): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(92,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(98,19): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(98,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(99,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(99,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(100,25): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(100,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(101,23): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Tablero.cpp(101,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
-  Generando código...
   Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe
