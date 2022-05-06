@@ -74,6 +74,15 @@ bool Tablero::consultaCasilla(Coords const coordenada) {
 		return false;
 }
 
+Pieza* Tablero::getPiezaEn(Coords const coordenada)
+{
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getCoordenadas() == coordenada)
+			return piezas[i]; //devuelve puntero a la pieza
+	}
+	return nullptr; //No devuelve nada si en esa casilla no hay ninguna pieza.
+}
+
 
 Tablero::~Tablero() {
 	delete[] piezas;
@@ -146,13 +155,13 @@ bool Tablero::enroque_largo_blancas() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -188,13 +197,13 @@ bool Tablero::enroque_largo_negras() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -232,13 +241,13 @@ bool Tablero::enroque_corto_blancas() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -270,14 +279,14 @@ bool Tablero::enroque_corto_negras() {
 
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
-			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
-			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}

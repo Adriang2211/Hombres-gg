@@ -6,7 +6,7 @@ Caballo::Caballo(bool color, int x, int y, Tablero* t) {
 	coordenadas.setX(x);
 	coordenadas.setY(y);
 	tab = t;
-	id = 2;
+	id = CABALLO;
 }
 
 

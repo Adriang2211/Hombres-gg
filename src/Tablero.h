@@ -32,6 +32,7 @@ public: //por ahora todo el público
 	bool consultaBlancas(Coords const coordenada);
 	bool consultaNegras(Coords const coordenada);
 	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla está ocupada
+	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];
