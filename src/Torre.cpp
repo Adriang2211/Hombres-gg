@@ -141,28 +141,34 @@ void Torre::movimientos() {
 	for (int i = 0; i < var4; i++) //Semieje vertical negativo
 		coordenadas_disponibles[i + var1 + var2 + var3].setXY(coordenadas.getX(), coordenadas.getY() - i - 1);
 
+
 	//Comprobación de los enroques
 	if (color) {
-		if (tab->enroque_corto_blancas()) {
-			var4++;
+		Coords torre_enroque_corto_blancas = { h, 1 };
+		Coords torre_enroque_largo_blancas = { a, 1 };
+
+		if (tab->enroque_corto_blancas() && getCoordenadas()==torre_enroque_corto_blancas) {
+			//Si el enroque de las blancas es posible y si la torre cuyos movimientos se están calculando es la de ese enroque...
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { f, 1 };
-		}
-		if (tab->enroque_largo_blancas()) {
 			var4++;
+		}
+		if (tab->enroque_largo_blancas() && getCoordenadas() == torre_enroque_largo_blancas) {
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { d, 1 };
+			var4++;
 		}
 	}
 	else if (!color) {
-		if (tab->enroque_corto_negras()) {
-			var4++;
+		Coords torre_enroque_corto_negras = { h, 8 };
+		Coords torre_enroque_largo_negras = { a, 8 };
+		if (tab->enroque_corto_negras() && getCoordenadas() == torre_enroque_corto_negras) {
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { f, 8 };
-		}
-		if (tab->enroque_largo_negras()) {
 			var4++;
+		}
+		if (tab->enroque_largo_negras() && getCoordenadas() == torre_enroque_largo_negras) {
 			coordenadas_disponibles[var1 + var2 + var3 + var4] = { d, 8 };
+			var4++;
 		}
 	}
-
 
 	for (int i = var1 + var2 + var3 + var4; i < MAX_MOV; i++)
 		coordenadas_disponibles[i].setXY(9, 9); //9 como simbolo de que esta vacio
