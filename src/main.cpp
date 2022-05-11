@@ -47,15 +47,20 @@ int main(int argc, char* argv[])
 	tablero2.generarTest();
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
+	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posición
+	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
+	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
+	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
 	std::cout << tablero2;
 	//Test unitarios con la función de casillas atacadas
 	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla d3 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ d, 3 }, false) << std::endl;
+	std::cout << std::endl << std::endl << "La casilla g1 esta atacada por las negras?" << std::endl;
+	std::cout << tablero2.casillaAtacada({ g, 1 }, false) << std::endl;
 	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las blancas?" << std::endl;
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-
+	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
+	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
