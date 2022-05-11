@@ -2,8 +2,20 @@
 #include "Posicionamiento.h"
 #include "Piezas.h"
 #define NUMERO_DE_PIEZAS 32
+#include "Torre.h"
+#include "Rey.h"
 
 class Tablero {
+private:
+	//Enroques
+	bool enroque_largo_blancas();
+	bool enroque_largo_negras();
+	bool enroque_corto_blancas();
+	bool enroque_corto_negras();
+	//Declaración de amistad para que puedan acceder a los métodos privados de enroque
+	friend void Torre::movimientos();
+	friend void Rey::movimientos();
+
 public: //por ahora todo el público
 
 	Tablero() { numero = 0; }
@@ -17,9 +29,10 @@ public: //por ahora todo el público
 	void dibuja();
 	void inicializa();
 	void actualizarMovimientosPosibles();
-	bool consultaBlancas(Coords coordenada);
-	bool consultaNegras(Coords coordenada);
-	bool consultaCasilla(Coords coordenada); //Devuelve true si la casilla está ocupada
+	bool consultaBlancas(Coords const coordenada);
+	bool consultaNegras(Coords const coordenada);
+	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla está ocupada
+	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];
@@ -31,11 +44,7 @@ public: //por ahora todo el público
 	void actualizarCasillasOcupadas();
 
 
-	//Enroques
-	bool enroque_largo_blancas();
-	bool enroque_largo_negras();
-	bool enroque_corto_blancas();
-	bool enroque_corto_negras();
+	
 
 
 	//Función de prueba para mostrar en la consola la situación

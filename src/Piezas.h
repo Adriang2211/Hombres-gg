@@ -5,6 +5,9 @@
 //Maximo de movimientos posibles de una pieza cualquiera
 #define MAX_MOV 27
 #define MAX_MOV_PEON 4 //Se utiliza en movimientos peon
+
+enum enum_piezas { TORRE = 1, CABALLO = 2, ALFIL = 3, DAMA = 4, REY = 5, PEON = 6};
+
 class Tablero;
 
 class Pieza {

@@ -48,7 +48,7 @@ void Tablero::inicializa() {
 
 
 
-bool Tablero::consultaBlancas(Coords coordenada){
+bool Tablero::consultaBlancas(Coords const coordenada){
 	for (int i = 0; i < 16; i++) {
 		//Busca la coordenada que se ha pasado en el vector de las piezas blancas
 		if (casillas_ocupadas_blancas[i].getX() == coordenada.getX() && casillas_ocupadas_blancas[i].getY() == coordenada.getY())
@@ -57,7 +57,7 @@ bool Tablero::consultaBlancas(Coords coordenada){
 	return false;		//devuelve flase si no hay una pieza blanca en la casilla
 }
 
-bool Tablero::consultaNegras(Coords coordenada) {
+bool Tablero::consultaNegras(Coords const coordenada) {
 	for (int i = 0; i < 16; i++) {
 		//Busca la coordenada que se ha pasado en el vector de las piezas negras
 		if (casillas_ocupadas_negras[i].getX() == coordenada.getX() && casillas_ocupadas_negras[i].getY() == coordenada.getY())
@@ -66,12 +66,21 @@ bool Tablero::consultaNegras(Coords coordenada) {
 	return false;
 }
 
-bool Tablero::consultaCasilla(Coords coordenada) {
+bool Tablero::consultaCasilla(Coords const coordenada) {
 	if (consultaBlancas(coordenada) || consultaNegras(coordenada)){
 		return true;
 	}
 	else
 		return false;
+}
+
+Pieza* Tablero::getPiezaEn(Coords const coordenada)
+{
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getCoordenadas() == coordenada)
+			return piezas[i]; //devuelve puntero a la pieza
+	}
+	return nullptr; //No devuelve nada si en esa casilla no hay ninguna pieza.
 }
 
 
@@ -113,16 +122,24 @@ void Tablero::cambiarTurno() {
 }
 
 void Tablero::actualizarCasillasOcupadas() {
-	for (int i = 0, j = 0, k = 0; i < numero; i++) {
-		if (piezas[i]->getColor()) {
+	int j = 0, k = 0; //Índices para la escritura en los vectores
+	//Leer las posiciones de las piezas existentes
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor()) { //Para las blancas
 			casillas_ocupadas_blancas[j] = piezas[i]->getCoordenadas();
 			j++;
 		}
-		else {
+		else { //Para las negras
 			casillas_ocupadas_negras[k] = piezas[i]->getCoordenadas();
 			k++;
 		}
 	}
+
+	//Poner posiciones vacías en el resto de los vectores.
+	for (int i = j; j < NUMERO_DE_PIEZAS / 2; j++)
+		casillas_ocupadas_blancas[j] = { 9,9 };
+	for (int i = k; k < NUMERO_DE_PIEZAS / 2; k++)
+		casillas_ocupadas_negras[k] = { 9, 9 };	
 }
 
 
@@ -138,13 +155,13 @@ bool Tablero::enroque_largo_blancas() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -152,6 +169,7 @@ bool Tablero::enroque_largo_blancas() {
 	if (torre_encontrada && rey_encontrado) {
 		if (!consultaCasilla({ b, 1 }) && !consultaCasilla({ c, 1 }) && !consultaCasilla({ d, 1 })\
 			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			std::cout << "Enroque largo blancas es posible" << std::endl;
 			return true;
 		}
 		else {
@@ -179,13 +197,13 @@ bool Tablero::enroque_largo_negras() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -194,6 +212,7 @@ bool Tablero::enroque_largo_negras() {
 	if (rey_encontrado && torre_encontrada) {
 		if (!consultaCasilla({ b, 8 }) && !consultaCasilla({ c , 8 }) && !consultaCasilla({ d, 8 })\
 			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			std::cout << "Enroque largo negras posible" << std::endl;
 			return true;
 		}
 		else {
@@ -222,13 +241,13 @@ bool Tablero::enroque_corto_blancas() {
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -236,6 +255,7 @@ bool Tablero::enroque_corto_blancas() {
 	if (rey_encontrado && torre_encontrada) {
 		if (!consultaCasilla({ g, 1 }) && !consultaCasilla({ f, 1 })\
 			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			std::cout << "Enroque corto blancas es posible" << std::endl;
 			return true;
 		}
 		else {
@@ -259,14 +279,14 @@ bool Tablero::enroque_corto_negras() {
 
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
-			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
-			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -275,6 +295,7 @@ bool Tablero::enroque_corto_negras() {
 	if (rey_encontrado && torre_encontrada) {
 		if (!consultaCasilla({ f, 8 }) && !consultaCasilla({ g , 8 })
 			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
+			std::cout << "Enroque corto negras posible" << std::endl;
 			return true;
 		}
 		else {
