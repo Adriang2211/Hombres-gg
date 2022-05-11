@@ -413,3 +413,17 @@ void Tablero::generarTest() {
 	piezas[31] = new Peon(false, e, 5, this);
 	numero = 32;
 }
+
+
+bool Tablero::casillaAtacada(Coords const coordenada, bool color) {
+	//Color hace referencia a la pieza atacante
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color) { //Comprueba que el color sea el elegido
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (piezas[i]->coordenadas_disponibles[j] == coordenada)
+					return true;
+			}
+		}
+	}
+	return false;
+}

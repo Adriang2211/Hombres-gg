@@ -48,7 +48,13 @@ int main(int argc, char* argv[])
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
 	std::cout << tablero2;
-
+	//Test unitarios con la función de casillas atacadas
+	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
+	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
+	std::cout << std::endl << std::endl << "La casilla d3 esta atacada por las negras?" << std::endl;
+	std::cout << tablero2.casillaAtacada({ d, 3 }, false) << std::endl;
+	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las blancas?" << std::endl;
+	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
