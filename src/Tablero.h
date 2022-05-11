@@ -5,6 +5,12 @@
 #include "Torre.h"
 #include "Rey.h"
 
+/* SOBRE TABLERO
+* Tablero es una clase que gestiona el dibujo del tablero y que gestiona
+
+
+
+*/
 class Tablero {
 private:
 	//Enroques
@@ -33,6 +39,10 @@ public: //por ahora todo el público
 	bool consultaNegras(Coords const coordenada);
 	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla está ocupada
 	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
+	bool casillaAtacada(Coords const coordenada, bool color); //Comprueba si una casilla está atacada por las piezas de un determinado
+	//color en base a los movimientos posibles de las piezas de ese color que deben haber sido calculados previamente con el método
+	//correspondiente.
+	bool jaqueAlRey(bool color); //Detecta si el rey del color especificado está en jaque
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];

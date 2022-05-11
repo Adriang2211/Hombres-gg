@@ -167,21 +167,20 @@ bool Tablero::enroque_largo_blancas() {
 		}
 	}
 	if (torre_encontrada && rey_encontrado) {
-		if (!consultaCasilla({ b, 1 }) && !consultaCasilla({ c, 1 }) && !consultaCasilla({ d, 1 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			std::cout << "Enroque largo blancas es posible" << std::endl;
-			return true;
-		}
-		else {
+		if (consultaCasilla({ b, 1 }) || consultaCasilla({ c, 1 }) || consultaCasilla({ d, 1 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
 
-	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
-	//ataque no se puede hacer el enroque.
+	//Si las condiciones anteriores no se han cumplido, esta parte del programa no se ejecutará gracias a los return false
+	//Aquí se comprueba que ninguna de las casillas del enroque esté bajo ataque.
+	if (casillaAtacada({ b, 1 }, false) || casillaAtacada({ c, 1 }, false) || casillaAtacada({ d, 1 }, false) || casillaAtacada({ e, 1 }, false))
+		return false;
+	else
+		return true; 
 }
 
 
@@ -210,21 +209,19 @@ bool Tablero::enroque_largo_negras() {
 	}
 
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ b, 8 }) && !consultaCasilla({ c , 8 }) && !consultaCasilla({ d, 8 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			std::cout << "Enroque largo negras posible" << std::endl;
-			return true;
-		}
-		else {
+		if (consultaCasilla({ b, 8 }) || consultaCasilla({ c , 8 }) || consultaCasilla({ d, 8 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
 
-	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
-	//ataque no se puede hacer el enroque.
+	//Comprobación de que las casillas del enroque no se encuentren bajo ataque.
+	if (casillaAtacada({ b, 8 }, true) || casillaAtacada({ c, 8 }, true) || casillaAtacada({ d, 8 }, true) || casillaAtacada({ e, 8 }, true))
+		return false;
+	else
+		return true;
 }
 
 
@@ -244,27 +241,29 @@ bool Tablero::enroque_corto_blancas() {
 		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
 			index_t = i;
 			torre_encontrada = true;
+			break;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
 		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
+			break;
 		}
 	}
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ g, 1 }) && !consultaCasilla({ f, 1 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			std::cout << "Enroque corto blancas es posible" << std::endl;
-			return true;
-		}
-		else {
+		if (consultaCasilla({ g, 1 }) || consultaCasilla({ f, 1 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
+
+	if (!casillaAtacada({ g, 1 }, false) && !casillaAtacada({ f, 1 }, false) && !casillaAtacada({ e, 1 }, false))
+		return true;
+	else
+		return false;
 }
 
 bool Tablero::enroque_corto_negras() {
@@ -293,18 +292,17 @@ bool Tablero::enroque_corto_negras() {
 	}
 
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ f, 8 }) && !consultaCasilla({ g , 8 })
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			std::cout << "Enroque corto negras posible" << std::endl;
-			return true;
-		}
-		else {
+		if (consultaCasilla({ f, 8 }) || consultaCasilla({ g , 8 })
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
+
+	//Comprobar que ninguna de las casillas del enroque se encuentra bajo ataque.
+	if (casillaAtacada({ g, 8 }, true) || casillaAtacada({ f, 8 }, true) || casillaAtacada({ e, 8 }, true))
+		return false;
 }
 
 using namespace std;
@@ -412,4 +410,25 @@ void Tablero::generarTest() {
 	piezas[30] = new Alfil(false, c, 5, this);
 	piezas[31] = new Peon(false, e, 5, this);
 	numero = 32;
+}
+
+
+bool Tablero::casillaAtacada(Coords const coordenada, bool color) {
+	//Color hace referencia a la pieza atacante
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color) { //Comprueba que el color sea el elegido
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (piezas[i]->coordenadas_disponibles[j] == coordenada)
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Tablero::jaqueAlRey(bool color) {
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color && piezas[i]->id == REY)
+			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
+	}
 }
