@@ -5,6 +5,7 @@
 Coordinador::Coordinador() {
 
 	estado = INICIO;
+	raton = PEDIR_COORDS;
 	muevete = false;
 }
 
@@ -45,7 +46,14 @@ void Coordinador::dibuja() {
 		ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
-		//METODO DIBUJA CORRESPONDIENTE DEL TALBERO
+		if (raton == COORDS_RECIBIDAS) {
+			//METODO PARA DIBUJAR LAS CASILLAS DISPONIBLES EN UN COLOR DIFERENTE
+		}
+		else if (raton == PEDIR_COORDS) {
+			//METODO DE DIBUJAR LA PARTIDA POR DEFECTO
+
+		}
+		
 	}
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
@@ -237,6 +245,7 @@ void Coordinador::tu_raton() {
 	}
 	else if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
 		//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
+		bool verificador = true;//Sirve para que si pulsas fuera de las casillas disponibles, vuelvas al estado anterior de PEDIR_COORDS
 
 		Coords aux = tab.mouseButton(); //obtengo coordenadas de raton
 		mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
@@ -248,7 +257,11 @@ void Coordinador::tu_raton() {
 				muevete = true; //autorizamos a que la pieza se mueva
 				raton = PEDIR_COORDS; //cambiamos de estado del ratón a standby
 				tab.cambiarTurno(); //cambiamos el turno
+				verificador = false;
 			}
+		}
+		if (verificador) {
+			raton = PEDIR_COORDS;//si no se pulsó alguna de las casillas disponibles, volvemos al estado de standby
 		}
 		
 
