@@ -216,7 +216,7 @@ void Coordinador::tu_raton() {
 			//solo es válido obtener una pieza blanca
 			Coords aux = tab.mouseButton(); //obtengo coordenadas
 			for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
-				if (tab.casillas_ocupadas_blancas[i] == aux) { //si la en la casilla seleccionada hay pieza blanca
+				if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
 					mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
 					raton = COORDS_RECIBIDAS;
 				}
@@ -224,7 +224,14 @@ void Coordinador::tu_raton() {
 
 		}
 		else {//turno negras
-
+			//solo es válido obtener una pieza negra
+			Coords aux = tab.mouseButton(); //obtengo coordenadas
+			for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
+				if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
+					mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
+					raton = COORDS_RECIBIDAS;
+				}
+			}
 		}
 		
 	}
