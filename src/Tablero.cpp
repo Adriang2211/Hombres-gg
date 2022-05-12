@@ -443,54 +443,12 @@ bool Tablero::jaqueAlRey(bool color) {
 			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
 	}
 }
-	
-void Tablero::Tu_Bucle() {
 
-	while (juego_Terminado) {
-		actualizarCasillasOcupadas();
-
-		if (turno) {//turno blancas
-			int n;
-			Coords coordenada1 = Pieza_A_Mover(); //a traves del ratón nos dan unas coordenadas válidas
-			Pieza* user1 = getPiezaEn(coordenada1);// indentificamos esas coordenadas con una pieza
-			for (int i = 0; i < NUMERO_DE_PIEZAS; i++) {//identificamos el puntero con una posicion del vector piezas
-				if (piezas[i] == user1) {
-					n = i; //la posicion de la pieza que nos da el ratón
-				}
-			}
-			
-			switch (user1->id) {
-				case 1://es una Torre
-					//FUNCION QUE PINTE DE DIFERENTE COLOR LAS CASILLAS DISPONIBLES
-					Coords coordenada2 = Casilla_Objetivo(); //devuelve la casilla valida a donde llevar la pieza
-					piezas[n]->mover(coordenada2);
-					user1->mover(coordenada2);
-
-				case 2://es un caballo
-
-				case 3://es un alfil
-
-				case 4://es una Dama
-
-				case 5://es el Rey
-
-				case 6://es un Peon
-
-
-
-			}
-
-			//finalizar el turno
-			cambiarTurno();
-		}
-		else {//turno negras
-
-
-			//finalizar turno
-			cambiarTurno();
-		}
-
-
-			
-	}
+Coords Tablero::getMov_siguiente() {
+	return mov_siguiente;
 }
+
+void Tablero::setMov_siguiente(Coords coord) {
+	mov_siguiente = coord;
+}
+

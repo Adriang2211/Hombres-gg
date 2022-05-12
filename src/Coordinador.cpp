@@ -5,6 +5,7 @@
 Coordinador::Coordinador() {
 
 	estado = INICIO;
+	muevete = false;
 }
 
 void Coordinador::dibuja() {
@@ -206,4 +207,50 @@ void Coordinador::tecla(unsigned char tecla) {
 		exit(1);
 	}
 
+}
+
+void Coordinador::tu_raton() {
+
+	if (raton == PEDIR_COORDS) {
+		if (tab.turno) {//turno blancas
+			//solo es válido obtener una pieza blanca
+			Coords aux = tab.mouseButton(); //obtengo coordenadas
+			for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
+				if (tab.casillas_ocupadas_blancas[i] == aux) { //si la en la casilla seleccionada hay pieza blanca
+					mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
+					raton = COORDS_RECIBIDAS;
+				}
+			}
+
+		}
+		else {//turno negras
+
+		}
+		
+	}
+	else if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
+		//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
+
+		Coords aux = tab.mouseButton(); //obtengo coordenadas de raton
+		mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
+		for (int i = 0; i < 27; i++) {//recorrer el vectcor de coordenadas disponibles
+			if (mov->coordenadas_disponibles[i] == aux) {//si las Coords del raton concuerdan con alguna de las
+				//coordenadas disponibles de la pieza apuntada por el puntero mov
+				//Indicar que se puede y debe realizar el movimiento
+				tab.setMov_siguiente(aux); //auctualizamos la casilla a la que se debe mover
+				muevete = true; //autorizamos a que la pieza se mueva
+				raton = PEDIR_COORDS; //cambiamos de estado del ratón a standby
+				tab.cambiarTurno(); //cambiamos el turno
+			}
+		}
+		
+
+	}
+}
+
+void Coordinador::te_mueves() {
+	//tab.actualizarMovimientosPosibles();
+	if ((estado == BATALLA && muevete) || (estado == MAQUINA && muevete)) {
+		mov->mover(tab.getMov_siguiente()); 
+	}
 }

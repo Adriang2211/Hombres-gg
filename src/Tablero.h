@@ -23,6 +23,8 @@ private:
 	friend void Rey::movimientos();
 	bool juego_Terminado;
 
+	Coords mov_siguiente;
+
 public: //por ahora todo el público
 
 	Tablero();
@@ -53,12 +55,10 @@ public: //por ahora todo el público
 	void cambiarTurno();
 
 	//Actualizar vectores de casillas ocupadas
-	void actualizarCasillasOcupadas();
+	void actualizarCasillasOcupadas();////////////////////////////////////////////////////////////////////////////////////////DONDE SE LLAMA A ESTA FUNCION
 
-	void Tu_Bucle();
-
-	Coords Pieza_A_Mover();
-	Coords Casilla_Objetivo();
+	Coords getMov_siguiente();
+	void setMov_siguiente(Coords coord);
 
 
 	

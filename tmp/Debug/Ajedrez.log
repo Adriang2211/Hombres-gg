@@ -1,2 +1,45 @@
 ﻿  Coordinador.cpp
-  Ajedrez.vcxproj -> C:\Users\eloyi\Documents\Github\Hombres-gg\bin\Ajedrez.exe
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.h(9,14): error C2365: 'Coordinador::PEDIR_COORDS': nueva definición; la definición anterior era 'enumerador'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.h(7): message : vea la declaración de 'Coordinador::PEDIR_COORDS'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(217,21): error C2039: "mouseButton": no es un miembro de "Tablero"
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(14): message : vea la declaración de 'Tablero'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(234,20): error C2039: "mouseButton": no es un miembro de "Tablero"
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(14): message : vea la declaración de 'Tablero'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(242,25): error C2440: '=': no se puede realizar la conversión de 'Coordinador::Estado' a 'Coordinador::Raton'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(242,13): message : La conversión a tipo de enumeración requiere una conversión explícita (static_cast, conversión de estilo de C o conversión de estilo de función)
+  main.cpp
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.h(9,14): error C2365: 'Coordinador::PEDIR_COORDS': nueva definición; la definición anterior era 'enumerador'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.h(7): message : vea la declaración de 'Coordinador::PEDIR_COORDS'
+  Piezas.cpp
+  Tablero.cpp
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(99,17): warning C4154: eliminación de una expresión de matriz; suministrada una conversión a puntero
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(109,19): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(109,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(110,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(110,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(111,25): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(111,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(112,23): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(112,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(118,19): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(118,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(119,21): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(119,16): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(120,25): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(120,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(121,23): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(121,18): warning C4244: 'argumento': conversión de 'int' a 'GLfloat'; posible pérdida de datos
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(490,4): error C2059: error de sintaxis: '}'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(478,5): error C2360: la inicialización de 'coordenada2' se omite en la etiqueta 'case'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(474): message : vea la declaración de 'coordenada2'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(480,5): error C2360: la inicialización de 'coordenada2' se omite en la etiqueta 'case'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(474): message : vea la declaración de 'coordenada2'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(482,5): error C2360: la inicialización de 'coordenada2' se omite en la etiqueta 'case'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(474): message : vea la declaración de 'coordenada2'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(484,5): error C2360: la inicialización de 'coordenada2' se omite en la etiqueta 'case'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(474): message : vea la declaración de 'coordenada2'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(486,5): error C2360: la inicialización de 'coordenada2' se omite en la etiqueta 'case'
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.cpp(474): message : vea la declaración de 'coordenada2'
+  Torre.cpp
+  Generando código...
+C:\Users\eloyi\Documents\Github\Hombres-gg\src\Piezas.cpp(25): error C4716: 'Pieza::mover': debe devolver un valor

@@ -7,7 +7,7 @@ public:
 	Peon(bool color, int x, int y, Tablero* t);
 	bool primer_movimiento;
 	static const int valor = 1;
-	virtual void movimientos();
+	void movimientos();
 	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 };
