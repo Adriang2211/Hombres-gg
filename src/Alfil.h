@@ -9,9 +9,11 @@ class Alfil :public Pieza {
 public:
 	Alfil(bool color, int x, int y, Tablero* t);
 	static const int valor = 3;
-	//Posible alternativa: valor 3.5, para diferenciarlo de la torre y que el programa sea m·s propenso a
+	//Posible alternativa: valor 3.5, para diferenciarlo de la torre y que el programa sea m√°s propenso a
 	//conservar los alfiles en lugar de los caballos.
-	virtual void movimientos();
-	virtual bool mover(Coords destino);
-	virtual void dibuja();
+
+	void movimientos();
+	bool mover(Coords destino);
+ void dibuja();
+
 };

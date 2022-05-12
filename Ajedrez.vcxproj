@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Alfil.cpp" />
+    <ClCompile Include="src\Coordinador.cpp" />
     <ClCompile Include="src\Dama.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Peon.cpp" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="src\Alfil.h" />
     <ClInclude Include="src\Caballo.h" />
+    <ClInclude Include="src\Coordinador.h" />
     <ClInclude Include="src\Dama.h" />
     <ClInclude Include="src\Peon.h" />
     <ClInclude Include="src\Piezas.h" />

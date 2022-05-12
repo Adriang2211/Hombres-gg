@@ -10,7 +10,8 @@ private:
 public:
 	Caballo(bool color, int x, int y, Tablero* t);
 	static const int valor = 3;
-	virtual void movimientos();
-	virtual bool mover(Coords destino);
-	virtual void dibuja();
+	void movimientos();
+	bool mover(Coords destino);
+	 void dibuja();
+
 };

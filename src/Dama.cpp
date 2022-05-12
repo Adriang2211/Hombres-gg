@@ -310,7 +310,6 @@ bool Dama::mover(Coords destino) {
 			return true;
 		}
 	}
-	tab->cambiarTurno();
 	return false;
 }
 

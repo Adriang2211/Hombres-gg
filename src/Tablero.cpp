@@ -10,43 +10,53 @@
 #include "freeglut.h"
 
 
-void Tablero::inicializa() {
-	//Genera la situación inicial de una partida de ajedrez convencional.
-//Para ajedrez960 sería necesaria una nueva función
-//Crear la hilera de peones blancos
-	for (int i = 0; i < 8; i++)
-		*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la dirección del tablero en el que se crean las piezas
 
-	//Crear la hilera de peones negros
-	for (int i = 8; i < 16; i++)
-		*(piezas + i) = new Peon(false, i - 7, 7, this);
+Tablero::Tablero() {
+	numero = 0;
+	juego_Terminado = false;
+	turno = true; //empiezan las blancas
+}
 
-	//Crear las torres
-	piezas[16] = new Torre(true, a, 1, this);
-	piezas[17] = new Torre(true, h, 1, this);
-	piezas[18] = new Torre(false, a, 8, this);
-	piezas[19] = new Torre(false, h, 8, this);
+void Tablero::inicializa(bool guardado) {
+	if (guardado == false) {
+		//Genera la situaciÃ³n inicial de una partida de ajedrez convencional.
+		//Para ajedrez960 serÃ­a necesaria una nueva funciÃ³n
+		//Crear la hilera de peones blancos
+		for (int i = 0; i < 8; i++)
+			*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la direcciÃ³n del tablero en el que se crean las piezas
 
-	//Crear caballos
-	piezas[20] = new Caballo(true, b, 1, this);
-	piezas[21] = new Caballo(true, g, 1, this);
-	piezas[22] = new Caballo(false, b, 8, this);
-	piezas[23] = new Caballo(false, g, 8, this);
-	//Crear alfiles
-	piezas[24] = new Alfil(true, c, 1, this);
-	piezas[25] = new Alfil(true, f, 1, this);
-	piezas[26] = new Alfil(false, c, 8, this);
-	piezas[27] = new Alfil(false, f, 8, this);
-	//Crear damas
-	piezas[28] = new Dama(true, d, 1, this);
-	piezas[29] = new Dama(false, d, 8, this);
-	//Crear reyes
-	piezas[30] = new Rey(true, e, 1, this);
-	piezas[31] = new Rey(false, e, 8, this);
-	numero = 32; //Se empieza siempre con 32 piezas.
-	
-	
-	
+		//Crear la hilera de peones negros
+		for (int i = 8; i < 16; i++)
+			*(piezas + i) = new Peon(false, i - 7, 7, this);
+
+		//Crear las torres
+		piezas[16] = new Torre(true, a, 1, this);
+		piezas[17] = new Torre(true, h, 1, this);
+		piezas[18] = new Torre(false, a, 8, this);
+		piezas[19] = new Torre(false, h, 8, this);
+
+		//Crear caballos
+		piezas[20] = new Caballo(true, b, 1, this);
+		piezas[21] = new Caballo(true, g, 1, this);
+		piezas[22] = new Caballo(false, b, 8, this);
+		piezas[23] = new Caballo(false, g, 8, this);
+		//Crear alfiles
+		piezas[24] = new Alfil(true, c, 1, this);
+		piezas[25] = new Alfil(true, f, 1, this);
+		piezas[26] = new Alfil(false, c, 8, this);
+		piezas[27] = new Alfil(false, f, 8, this);
+		//Crear damas
+		piezas[28] = new Dama(true, d, 1, this);
+		piezas[29] = new Dama(false, d, 8, this);
+		//Crear reyes
+		piezas[30] = new Rey(true, e, 1, this);
+		piezas[31] = new Rey(false, e, 8, this);
+		numero = 32; //Se empieza siempre con 32 piezas.
+	}
+	else {//HAY que inicializar lo que estÃ© guardado en el fichero
+
+	}
+
 }
 
 
@@ -130,7 +140,7 @@ void Tablero::cambiarTurno() {
 }
 
 void Tablero::actualizarCasillasOcupadas() {
-	int j = 0, k = 0; //Índices para la escritura en los vectores
+	int j = 0, k = 0; //Ãndices para la escritura en los vectores
 	//Leer las posiciones de las piezas existentes
 	for (int i = 0; i < numero; i++) {
 		if (piezas[i]->getColor()) { //Para las blancas
@@ -143,7 +153,7 @@ void Tablero::actualizarCasillasOcupadas() {
 		}
 	}
 
-	//Poner posiciones vacías en el resto de los vectores.
+	//Poner posiciones vacÃ­as en el resto de los vectores.
 	for (int i = j; j < NUMERO_DE_PIEZAS / 2; j++)
 		casillas_ocupadas_blancas[j] = { 9,9 };
 	for (int i = k; k < NUMERO_DE_PIEZAS / 2; k++)
@@ -155,13 +165,13 @@ bool Tablero::enroque_largo_blancas() {
 	Coords coordenada_torre = { a, 1 };
 	Coords coordenada_rey = { e, 1 };
 
-	int index_t = 0; //Posición del vector en la que se encuentra la torre blanca
-	int index_r = 0; //Posición del vector en la que se encuentra el rey
+	int index_t = 0; //PosiciÃ³n del vector en la que se encuentra la torre blanca
+	int index_r = 0; //PosiciÃ³n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	//En teorÃ­a es redundante comprobar las coordenadas y el nÃºmero el pieza.
 	for (int i = 0; i < numero; i++) {
 		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
@@ -183,8 +193,8 @@ bool Tablero::enroque_largo_blancas() {
 		return false;
 	}
 
-	//Si las condiciones anteriores no se han cumplido, esta parte del programa no se ejecutará gracias a los return false
-	//Aquí se comprueba que ninguna de las casillas del enroque esté bajo ataque.
+	//Si las condiciones anteriores no se han cumplido, esta parte del programa no se ejecutarÃ¡ gracias a los return false
+	//AquÃ­ se comprueba que ninguna de las casillas del enroque estÃ© bajo ataque.
 	if (casillaAtacada({ b, 1 }, false) || casillaAtacada({ c, 1 }, false) || casillaAtacada({ d, 1 }, false) || casillaAtacada({ e, 1 }, false))
 		return false;
 	else
@@ -196,13 +206,13 @@ bool Tablero::enroque_largo_negras() {
 	Coords coordenada_torre = { a, 8 };
 	Coords coordenada_rey = { e, 8 };
 
-	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posición del vector en la que se encuentra el rey
+	int index_t=0; //PosiciÃ³n del vector en la que se encuentra la torre blanca
+	int index_r=0; //PosiciÃ³n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	//En teorÃ­a es redundante comprobar las coordenadas y el nÃºmero el pieza.
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
@@ -225,7 +235,7 @@ bool Tablero::enroque_largo_negras() {
 		return false;
 	}
 
-	//Comprobación de que las casillas del enroque no se encuentren bajo ataque.
+	//ComprobaciÃ³n de que las casillas del enroque no se encuentren bajo ataque.
 	if (casillaAtacada({ b, 8 }, true) || casillaAtacada({ c, 8 }, true) || casillaAtacada({ d, 8 }, true) || casillaAtacada({ e, 8 }, true))
 		return false;
 	else
@@ -238,13 +248,13 @@ bool Tablero::enroque_corto_blancas() {
 	Coords coordenada_torre = { h, 1 };
 	Coords coordenada_rey = { e, 1 };
 
-	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posición del vector en la que se encuentra el rey
+	int index_t=0; //PosiciÃ³n del vector en la que se encuentra la torre blanca
+	int index_r=0; //PosiciÃ³n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teoría es redundante comprobar las coordenadas y el número el pieza.
+	//En teorÃ­a es redundante comprobar las coordenadas y el nÃºmero el pieza.
 	for (int i = 0; i < numero; i++) {
 		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
 			index_t = i;
@@ -278,8 +288,8 @@ bool Tablero::enroque_corto_negras() {
 	Coords coordenada_torre = { h, 8 };
 	Coords coordenada_rey = { e, 8 };
 
-	int index_t=0; //Posición del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posición del vector en la que se encuentra el rey
+	int index_t=0; //PosiciÃ³n del vector en la que se encuentra la torre blanca
+	int index_r=0; //PosiciÃ³n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
@@ -381,9 +391,9 @@ void Tablero::actualizarMovimientosPosibles() {
 
 
 void Tablero::generarTest() {
-	//Función de pruebas, no es parte del programa definitivo
-	//Situación basada en posición 2 de test pero sin el enroque
-	//información sobre esto no disponible en github todavía.
+	//FunciÃ³n de pruebas, no es parte del programa definitivo
+	//SituaciÃ³n basada en posiciÃ³n 2 de test pero sin el enroque
+	//informaciÃ³n sobre esto no disponible en github todavÃ­a.
 	piezas[0] = new Torre(true, a, 1, this);
 	piezas[1] = new Caballo(true, b, 1, this);
 	piezas[2] = new Alfil(true, c, 1, this);
@@ -440,3 +450,12 @@ bool Tablero::jaqueAlRey(bool color) {
 			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
 	}
 }
+
+Coords Tablero::getMov_siguiente() {
+	return mov_siguiente;
+}
+
+void Tablero::setMov_siguiente(Coords coord) {
+	mov_siguiente = coord;
+}
+
