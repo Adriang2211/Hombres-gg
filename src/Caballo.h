@@ -12,6 +12,6 @@ public:
 	static const int valor = 3;
 	void movimientos();
 	bool mover(Coords destino);
-	 void dibuja();
+	void dibuja();
 
 };

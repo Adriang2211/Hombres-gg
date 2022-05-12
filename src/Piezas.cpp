@@ -22,7 +22,7 @@ void Pieza::setCoordenadas(Coords a) { coordenadas = a; }
 void Pieza::setColor(bool _color) { color = _color; }
 
 
-bool Pieza::mover(Coords destino) {
+bool Pieza::mover(Coords destino) { return 0; }
 
 
 void Pieza::dibuja() {

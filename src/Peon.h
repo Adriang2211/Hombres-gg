@@ -12,6 +12,6 @@ public:
 	void movimientos();
 	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
-	virtual void dibuja();
+	void dibuja();
 };
 

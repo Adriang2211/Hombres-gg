@@ -14,6 +14,6 @@ public:
 
 	void movimientos();
 	bool mover(Coords destino);
- void dibuja();
+    void dibuja();
 
 };
