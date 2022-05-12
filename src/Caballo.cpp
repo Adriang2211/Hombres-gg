@@ -7,8 +7,9 @@ Caballo::Caballo(bool color, int x, int y, Tablero* t) {
 	coordenadas.setY(y);
 	tab = t;
 	id = CABALLO;
+	caballoBlancas.setCenter(x, y);
+	caballoNegras.setCenter(x, y);
 }
-
 
 void Caballo::movimientos() {
 	//Limpieza del vector
@@ -143,4 +144,17 @@ bool Caballo::mover(Coords destino) {
 		}
 	}
 	return false;
+}
+
+void Caballo::dibuja() {
+	if (color == true) {
+		caballoBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		caballoBlancas.setSize(1, 1);
+		caballoBlancas.draw();
+	}
+	else {
+		caballoNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		caballoNegras.setSize(1, 1);
+		caballoNegras.draw();
+	}
 }

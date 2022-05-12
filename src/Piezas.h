@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Posicionamiento.h" //Incluye la clase para el uso del sistema de coordenadas
+#include "ETSIDI.h" //La incluimos aqui para no tener que ir poniendolo en cada archivo destinado a las clases hijas
 
 //Maximo de movimientos posibles de una pieza cualquiera
 #define MAX_MOV 27
@@ -28,6 +29,7 @@ public:
 	virtual bool getPrimerMovimiento() { return false; };
 	virtual bool mover(Coords destino);
 	virtual void movimientos() {}; //Define la obligatoriedad de definir en todas las clases hijas la función de movimientos.
+	virtual void dibuja(); //Metodo que hace que se dibujen las piezas.
 };
 
 

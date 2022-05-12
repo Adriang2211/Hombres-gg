@@ -9,8 +9,8 @@ void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
-//Tablero tablero1; //Pruebas - posici髇 inicial de la partida
-// tablero2; //Pruebas - posici髇 2
+//Tablero tablero1; //Pruebas - posici贸n inicial de la partida
+// tablero2; //Pruebas - posici贸n 2
 
 Coordinador master;
 
@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_COLOR_MATERIAL);
 	glMatrixMode(GL_PROJECTION);
-	gluPerspective(40.0, 800 / 600.0f, 0.1, 150);
+	gluPerspective(40.0, 900.0f / 900.0f, 0.1, 150);
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -50,12 +50,12 @@ int main(int argc, char* argv[])
 	tablero2.generarTest();
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posici髇
-	//inicial hay que ejecutar dos veces la funci髇 para que actualice todos los elementos para que se comprueben bien
-	//los jaques y los enroques. De lo contrario, puede no haberse calculado todav韆 el movimiento de una pieza
+	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posici贸n
+	//inicial hay que ejecutar dos veces la funci贸n para que actualice todos los elementos para que se comprueben bien
+	//los jaques y los enroques. De lo contrario, puede no haberse calculado todav铆a el movimiento de una pieza
 	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
 	std::cout << tablero2;
-	//Test unitarios con la funci髇 de casillas atacadas
+	//Test unitarios con la funci贸n de casillas atacadas
 	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
 	std::cout << std::endl << std::endl << "La casilla g1 esta atacada por las negras?" << std::endl;
@@ -80,13 +80,18 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(4.0, 4.0, 30,  // posicion del ojo
+	gluLookAt(4.0, 4.0, 22,  // posicion del ojo
 		4.0, 4.0, 0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
-	//aqui es donde hay que poner el c骴igo de dibujo
+	//aqui es donde hay que poner el c贸digo de dibujo
+
 
 	//tablero1.dibuja(); //Prueba
+
+	//tablero2.dibuja(); //Prueba
+	
+
 	
 	master.dibuja();
 	

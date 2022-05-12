@@ -308,3 +308,16 @@ bool Rey::mover(Coords destino) {
 		primer_movimiento = false;
 	return false;
 }
+
+void Rey::dibuja() {
+	if (color == true) {
+		reyBlancas.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyBlancas.setSize(1, 1);
+		reyBlancas.draw();
+	}
+	else {
+		reyNegras.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyNegras.setSize(1, 1);
+		reyNegras.draw();
+	}
+}

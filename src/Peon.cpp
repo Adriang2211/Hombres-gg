@@ -121,3 +121,16 @@ bool Peon::mover(Coords destino) {
 		primer_movimiento = false;
 	return false;
 }
+
+void Peon::dibuja() {
+	if (color == true) {
+		peonBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		peonBlancas.setSize(1, 1);
+		peonBlancas.draw();
+	}
+	else {
+		peonNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		peonNegras.setSize(1, 1);
+		peonNegras.draw();
+	}
+}

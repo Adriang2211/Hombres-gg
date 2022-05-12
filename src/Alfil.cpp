@@ -194,3 +194,16 @@ bool Alfil::mover(Coords destino) {
 	}
 	return false;
 }
+
+void Alfil::dibuja() {
+	if (color == true) {
+		alfilBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		alfilBlancas.setSize(1, 1);
+		alfilBlancas.draw();
+	}
+	else {
+		alfilNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		alfilNegras.setSize(1, 1);
+		alfilNegras.draw();
+	}
+}

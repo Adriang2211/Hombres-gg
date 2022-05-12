@@ -312,3 +312,16 @@ bool Dama::mover(Coords destino) {
 	}
 	return false;
 }
+
+void Dama::dibuja() {
+	if (color == true) {
+		damaBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		damaBlancas.setSize(1, 1);
+		damaBlancas.draw();
+	}
+	else {
+		damaNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		damaNegras.setSize(1, 1);
+		damaNegras.draw();
+	}
+}
