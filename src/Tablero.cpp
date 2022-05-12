@@ -105,7 +105,7 @@ void Tablero::dibuja() {
 				glEnd();
 			}
 			else {
-				glColor3ub(255, 0, 0);
+				glColor3ub(128, 64, 0);
 				glBegin(GL_QUADS);
 				glVertex3f(i, j, -0.1);
 				glVertex3f(i, j + 1, -0.1);
