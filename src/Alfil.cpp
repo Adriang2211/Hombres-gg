@@ -192,6 +192,5 @@ bool Alfil::mover(Coords destino) {
 			return true;
 		}
 	}
-	tab->cambiarTurno();
 	return false;
 }

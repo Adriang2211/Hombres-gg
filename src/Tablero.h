@@ -21,19 +21,21 @@ private:
 	//Declaración de amistad para que puedan acceder a los métodos privados de enroque
 	friend void Torre::movimientos();
 	friend void Rey::movimientos();
+	bool juego_Terminado;
 
 public: //por ahora todo el público
 
-	Tablero() { numero = 0; }
+	Tablero();
 
 	bool turno;
 	int jugada = 0;
+
 
 	int numero; //Numero de piezas que hay en cada momento
 	Pieza* piezas [NUMERO_DE_PIEZAS];
 
 	void dibuja();
-	void inicializa();
+	void inicializa(bool guardado = false);
 	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords const coordenada);
 	bool consultaNegras(Coords const coordenada);
@@ -52,6 +54,11 @@ public: //por ahora todo el público
 
 	//Actualizar vectores de casillas ocupadas
 	void actualizarCasillasOcupadas();
+
+	void Tu_Bucle();
+
+	Coords Pieza_A_Mover();
+	Coords Casilla_Objetivo();
 
 
 	

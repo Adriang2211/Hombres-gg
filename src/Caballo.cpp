@@ -142,6 +142,5 @@ bool Caballo::mover(Coords destino) {
 			return true;
 		}
 	}
-	tab->cambiarTurno();
 	return false;
 }

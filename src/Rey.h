@@ -8,6 +8,6 @@ public:
 	//El rey no tiene valor numérico
 	virtual void movimientos();
 	bool primer_movimiento; //Para el enroque, el rey no se puede haber movido.
-	virtual bool mover(Coords destino);
+	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 };

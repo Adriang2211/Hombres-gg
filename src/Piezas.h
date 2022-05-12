@@ -26,6 +26,7 @@ public:
 	Coords coordenadas_disponibles[27]; //Maximos movimientos de la dama, que es la pieza que mas movimientos posibles puede tener.
 
 	virtual bool getPrimerMovimiento() { return false; };
+	virtual bool mover(Coords destino);
 	virtual void movimientos() {}; //Define la obligatoriedad de definir en todas las clases hijas la función de movimientos.
 };
 

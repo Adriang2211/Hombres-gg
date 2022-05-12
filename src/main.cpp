@@ -1,15 +1,18 @@
 #include "freeglut.h"
 #include <iostream>
 #include "ETSIDI.h"
-#include "Tablero.h"
+//#include "Tablero.h"
 #include "Piezas.h"
+#include "Coordinador.h"
 
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
-Tablero tablero1; //Pruebas - posición inicial de la partida
-Tablero tablero2; //Pruebas - posición 2
+//Tablero tablero1; //Pruebas - posición inicial de la partida
+// tablero2; //Pruebas - posición 2
+
+Coordinador master;
 
 int main(int argc, char* argv[])
 {
@@ -35,7 +38,7 @@ int main(int argc, char* argv[])
 
 	//Inicializar los objetos
 
-
+	/*
 	//Pruebas
 	//tablero1.inicializa();
 	//tablero1.actualizarCasillasOcupadas();
@@ -61,6 +64,8 @@ int main(int argc, char* argv[])
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
 	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
 	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
+	*/
+
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
@@ -81,9 +86,9 @@ void OnDraw(void)
 
 	//aqui es donde hay que poner el código de dibujo
 
-	tablero1.dibuja(); //Prueba
+	//tablero1.dibuja(); //Prueba
 	
-	
+	master.dibuja();
 	
 
 	//no borrar esta linea ni poner nada despues
@@ -92,7 +97,7 @@ void OnDraw(void)
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	
-
+	master.tecla(key);
 	//ultima linea, siempre que hay que ponerla:
 	glutPostRedisplay();
 }

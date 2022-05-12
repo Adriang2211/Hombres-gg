@@ -306,6 +306,5 @@ bool Rey::mover(Coords destino) {
 	}
 	if (primer_movimiento)
 		primer_movimiento = false;
-	tab->cambiarTurno();
 	return false;
 }

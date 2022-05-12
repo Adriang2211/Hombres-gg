@@ -10,40 +10,51 @@
 #include "freeglut.h"
 
 
-void Tablero::inicializa() {
-	//Genera la situación inicial de una partida de ajedrez convencional.
-//Para ajedrez960 sería necesaria una nueva función
-//Crear la hilera de peones blancos
-	for (int i = 0; i < 8; i++)
-		*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la dirección del tablero en el que se crean las piezas
+Tablero::Tablero() {
+	numero = 0;
+	juego_Terminado = false;
+	turno = true; //empiezan las blancas
+}
 
-	//Crear la hilera de peones negros
-	for (int i = 8; i < 16; i++)
-		*(piezas + i) = new Peon(false, i - 7, 7, this);
+void Tablero::inicializa(bool guardado) {
+	if (guardado == false) {
+		//Genera la situación inicial de una partida de ajedrez convencional.
+		//Para ajedrez960 sería necesaria una nueva función
+		//Crear la hilera de peones blancos
+		for (int i = 0; i < 8; i++)
+			*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la dirección del tablero en el que se crean las piezas
 
-	//Crear las torres
-	piezas[16] = new Torre(true, a, 1, this);
-	piezas[17] = new Torre(true, h, 1, this);
-	piezas[18] = new Torre(false, a, 8, this);
-	piezas[19] = new Torre(false, h, 8, this);
+		//Crear la hilera de peones negros
+		for (int i = 8; i < 16; i++)
+			*(piezas + i) = new Peon(false, i - 7, 7, this);
 
-	//Crear caballos
-	piezas[20] = new Caballo(true, b, 1, this);
-	piezas[21] = new Caballo(true, g, 1, this);
-	piezas[22] = new Caballo(false, b, 8, this);
-	piezas[23] = new Caballo(false, g, 8, this);
-	//Crear alfiles
-	piezas[24] = new Alfil(true, c, 1, this);
-	piezas[25] = new Alfil(true, f, 1, this);
-	piezas[26] = new Alfil(false, c, 8, this);
-	piezas[27] = new Alfil(false, f, 8, this);
-	//Crear damas
-	piezas[28] = new Dama(true, d, 1, this);
-	piezas[29] = new Dama(false, d, 8, this);
-	//Crear reyes
-	piezas[30] = new Rey(true, e, 1, this);
-	piezas[31] = new Rey(false, e, 8, this);
-	numero = 32; //Se empieza siempre con 32 piezas.
+		//Crear las torres
+		piezas[16] = new Torre(true, a, 1, this);
+		piezas[17] = new Torre(true, h, 1, this);
+		piezas[18] = new Torre(false, a, 8, this);
+		piezas[19] = new Torre(false, h, 8, this);
+
+		//Crear caballos
+		piezas[20] = new Caballo(true, b, 1, this);
+		piezas[21] = new Caballo(true, g, 1, this);
+		piezas[22] = new Caballo(false, b, 8, this);
+		piezas[23] = new Caballo(false, g, 8, this);
+		//Crear alfiles
+		piezas[24] = new Alfil(true, c, 1, this);
+		piezas[25] = new Alfil(true, f, 1, this);
+		piezas[26] = new Alfil(false, c, 8, this);
+		piezas[27] = new Alfil(false, f, 8, this);
+		//Crear damas
+		piezas[28] = new Dama(true, d, 1, this);
+		piezas[29] = new Dama(false, d, 8, this);
+		//Crear reyes
+		piezas[30] = new Rey(true, e, 1, this);
+		piezas[31] = new Rey(false, e, 8, this);
+		numero = 32; //Se empieza siempre con 32 piezas.
+	}
+	else {//HAY que inicializar lo que esté guardado en el fichero
+
+	}
 }
 
 
@@ -430,5 +441,56 @@ bool Tablero::jaqueAlRey(bool color) {
 	for (int i = 0; i < numero; i++) {
 		if (piezas[i]->getColor() == color && piezas[i]->id == REY)
 			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
+	}
+}
+	
+void Tablero::Tu_Bucle() {
+
+	while (juego_Terminado) {
+		actualizarCasillasOcupadas();
+
+		if (turno) {//turno blancas
+			int n;
+			Coords coordenada1 = Pieza_A_Mover(); //a traves del ratón nos dan unas coordenadas válidas
+			Pieza* user1 = getPiezaEn(coordenada1);// indentificamos esas coordenadas con una pieza
+			for (int i = 0; i < NUMERO_DE_PIEZAS; i++) {//identificamos el puntero con una posicion del vector piezas
+				if (piezas[i] == user1) {
+					n = i; //la posicion de la pieza que nos da el ratón
+				}
+			}
+			
+			switch (user1->id) {
+				case 1://es una Torre
+					//FUNCION QUE PINTE DE DIFERENTE COLOR LAS CASILLAS DISPONIBLES
+					Coords coordenada2 = Casilla_Objetivo(); //devuelve la casilla valida a donde llevar la pieza
+					piezas[n]->mover(coordenada2);
+					user1->mover(coordenada2);
+
+				case 2://es un caballo
+
+				case 3://es un alfil
+
+				case 4://es una Dama
+
+				case 5://es el Rey
+
+				case 6://es un Peon
+
+
+
+			}
+
+			//finalizar el turno
+			cambiarTurno();
+		}
+		else {//turno negras
+
+
+			//finalizar turno
+			cambiarTurno();
+		}
+
+
+			
 	}
 }
