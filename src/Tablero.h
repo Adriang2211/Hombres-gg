@@ -4,6 +4,8 @@
 #define NUMERO_DE_PIEZAS 32
 #include "Torre.h"
 #include "Rey.h"
+#include "Caballo.h"
+
 
 /* SOBRE TABLERO
 * Tablero es una clase que gestiona el dibujo del tablero y que gestiona
@@ -31,6 +33,7 @@ public: //por ahora todo el público
 
 	int numero; //Numero de piezas que hay en cada momento
 	Pieza* piezas [NUMERO_DE_PIEZAS];
+	//Caballo caballoPrueba;
 
 	void dibuja();
 	void inicializa();

@@ -1,7 +1,10 @@
 #pragma once
 #include "Piezas.h"
+using ETSIDI::Sprite;
 
 class Torre :public Pieza {
+	Sprite torreBlancas{ "imagenes/torreBlanca.png" };
+	Sprite torreNegras{ "imagenes/torreNegra.png" };
 public:
 	virtual void movimientos();
 	static const int valor = 5;
@@ -9,5 +12,6 @@ public:
 	virtual bool mover(Coords destino);
 	Torre(bool color, int x, int y, Tablero* t);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
+	virtual void dibuja();
 };
 

@@ -44,6 +44,9 @@ void Tablero::inicializa() {
 	piezas[30] = new Rey(true, e, 1, this);
 	piezas[31] = new Rey(false, e, 8, this);
 	numero = 32; //Se empieza siempre con 32 piezas.
+	
+	
+	
 }
 
 
@@ -95,22 +98,27 @@ void Tablero::dibuja() {
 			if ((i + j) % 2 != 0) {
 				glColor3ub(255, 255, 255);
 				glBegin(GL_QUADS);
-				glVertex3f(i, j, 0);
-				glVertex3f(i, j + 1, 0);
-				glVertex3f(i + 1, j + 1, 0);
-				glVertex3f(i + 1, j, 0);
+				glVertex3f(i, j, -0.1);
+				glVertex3f(i, j + 1, -0.1);
+				glVertex3f(i + 1, j + 1, -0.1);
+				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
 			else {
 				glColor3ub(255, 0, 0);
 				glBegin(GL_QUADS);
-				glVertex3f(i, j, 0);
-				glVertex3f(i, j + 1, 0);
-				glVertex3f(i + 1, j + 1, 0);
-				glVertex3f(i + 1, j, 0);
+				glVertex3f(i, j, -0.1);
+				glVertex3f(i, j + 1, -0.1);
+				glVertex3f(i + 1, j + 1,- 0.1);
+				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
 		}
+	}
+	
+	//caballoPrueba.dibuja();
+	for (int i = 0; i < numero; i++) {
+		piezas[i]->dibuja();
 	}
 }
 
