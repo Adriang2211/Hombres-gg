@@ -3,8 +3,8 @@
 using ETSIDI::Sprite;
 
 class Rey :public Pieza {
-	Sprite reyBlancas{ "imagenes/reyNegro.png" };
-	Sprite reyNegras{ "imagenes/reyBlanco.png" };
+	Sprite reyBlancas{ "imagenes/reyBlanco.png" };
+	Sprite reyNegras{ "imagenes/reyNegro.png" };
 public:
 	Rey(bool color, int x, int y, Tablero* t);
 	//El rey no tiene valor numérico

@@ -8,7 +8,14 @@ Coordinador::Coordinador() {
 	raton = PEDIR_COORDS;
 	muevete = false;
 }
-
+void Coordinador::sacarcelda(int x, int y)
+{
+	cell.setX((int)(((x - 189) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
+	cell.setY((int)(((588 - y) / 53) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
+	if (cell.getX() < 1 || cell.getY() > 8 || cell.getX() > 8 || cell.getY() < 1)
+		cell.setXY(-1, -1);//por si selecciona fuera de lacelda
+	//cout << "(" << cell.getX() << "," << cell.getY() << ")" << endl; //test realizado para comprobar por consola que la celda seleccionada es la correcta
+}
 void Coordinador::dibuja() {
 
 	if (estado == INICIO) {

@@ -60,7 +60,7 @@ void Tablero::inicializa(bool guardado) {
 	else {//HAY que inicializar lo que esté guardado en el fichero
 
 	}
-
+	
 }
 
 
@@ -130,7 +130,7 @@ void Tablero::dibuja() {
 		}
 	}
 	
-	//caballoPrueba.dibuja();
+	
 	for (int i = 0; i < numero; i++) {
 		piezas[i]->dibuja();
 	}
