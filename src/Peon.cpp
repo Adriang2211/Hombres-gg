@@ -111,14 +111,22 @@ void Peon::movimientos()
 
 
 bool Peon::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
-	}
+	if (!Pieza::mover(destino))
+		return false;
 	if (primer_movimiento)
 		primer_movimiento = false;
-	tab->cambiarTurno();
 	return false;
+}
+
+void Peon::dibuja() {
+	if (color == true) {
+		peonBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		peonBlancas.setSize(1, 1);
+		peonBlancas.draw();
+	}
+	else {
+		peonNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		peonNegras.setSize(1, 1);
+		peonNegras.draw();
+	}
 }

@@ -178,14 +178,22 @@ void Torre::movimientos() {
 
 
 bool Torre::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
-	}
+	if (!Pieza::mover(destino))
+		return false;
 	if (primer_movimiento)
 		primer_movimiento = false;
-	tab->cambiarTurno();
 	return false;
+}
+
+void Torre::dibuja() {
+	if (color == true) {
+		torreBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+		torreBlancas.setSize(1, 1);
+		torreBlancas.draw();
+	}
+	else {
+		torreNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+		torreNegras.setSize(1, 1);
+		torreNegras.draw();
+	}
 }

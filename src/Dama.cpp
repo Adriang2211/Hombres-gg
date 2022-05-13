@@ -303,13 +303,16 @@ void Dama::movimientos()
 			coordenadas_disponibles[i] = { 9,9 };
 }
 
-bool Dama::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
+
+void Dama::dibuja() {
+	if (color == true) {
+		damaBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		damaBlancas.setSize(1, 1);
+		damaBlancas.draw();
 	}
-	tab->cambiarTurno();
-	return false;
+	else {
+		damaNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		damaNegras.setSize(1, 1);
+		damaNegras.draw();
+	}
 }
