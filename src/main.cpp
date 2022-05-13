@@ -56,7 +56,12 @@ int main(int argc, char* argv[])
 	tablero2.getPieza(3)->mover({e, 2}); //Prueba para mover la dama a una de las casillas permitidas
 	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
 	tablero2.actualizarMovimientosPosibles();
-	std::cout << tablero2;
+	tablero2.getPieza(30)->mover({ f, 2 });
+	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.actualizarMovimientosPosibles();
+
+	std::cout << tablero2; //Se muestra solo el final del test
+
 	//Test unitarios con la función de casillas atacadas
 	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;

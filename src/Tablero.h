@@ -45,6 +45,8 @@ public:
 	void eliminarPieza(int index);
 	int getNumeroPiezas() { return numero; };
 	Pieza* getPieza(int i) { return piezas[i]; };
+	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
+	int getIndexPiezaEn(Coords const coordenada); //Devuelve la posición en el array que ocupa una pieza dada.
 
 
 	void dibuja();
@@ -53,7 +55,6 @@ public:
 	bool consultaBlancas(Coords const coordenada);
 	bool consultaNegras(Coords const coordenada);
 	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla está ocupada
-	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
 	bool casillaAtacada(Coords const coordenada, bool color); //Comprueba si una casilla está atacada por las piezas de un determinado
 	//color en base a los movimientos posibles de las piezas de ese color que deben haber sido calculados previamente con el método
 	//correspondiente.

@@ -25,7 +25,10 @@ void Pieza::setColor(bool _color) { color = _color; }
 bool Pieza::mover(Coords destino) {
 	for (int i = 0; i < MAX_MOV; i++) {
 		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
+			coordenadas = destino; //Actualiza la posición de la pieza
+			if (tab->consultaCasilla(destino)) { //Comprueba si hay una pieza para comerla (eliminarla)
+				tab->eliminarPieza(tab->getIndexPiezaEn(destino));
+			}
 			return true;
 		}
 	}
@@ -35,5 +38,4 @@ bool Pieza::mover(Coords destino) {
 
 void Pieza::dibuja() {
 	;
-
 }

@@ -482,3 +482,11 @@ void Tablero::eliminarPieza(int index) {
 	}
 	numero--;
 }
+
+int Tablero::getIndexPiezaEn(Coords const coordenada) {
+		for (int i = 0; i < numero; i++) {
+			if (piezas[i]->getCoordenadas() == coordenada)
+				return i; //devuelve puntero a la pieza
+		}
+		return NULL; //No devuelve nada si en esa casilla no hay ninguna pieza.
+}
