@@ -8,11 +8,11 @@
 
 
 /* SOBRE TABLERO
-* Tablero es una clase que gestiona el dibujo del tablero y que gestiona
-
-
-
+* Tablero es una clase que gestiona el dibujo del tablero y que contiene las piezas en juego
+* Las piezas no son est√°ticas, es decir, puede haber m√∫ltiples tableros con m√∫ltiples piezas
+* Esto √∫ltimo es √∫til si se quieren calcular posibles escenarios.
 */
+
 class Tablero {
 private:
 	//Enroques
@@ -20,36 +20,47 @@ private:
 	bool enroque_largo_negras();
 	bool enroque_corto_blancas();
 	bool enroque_corto_negras();
-	//DeclaraciÛn de amistad para que puedan acceder a los mÈtodos privados de enroque
+
+	//Declaraci√≥n de amistad para que puedan acceder a los m√©todos privados de enroque
 	friend void Torre::movimientos();
 	friend void Rey::movimientos();
 	bool juego_Terminado;
 
 	Coords mov_siguiente;
 
-public: //por ahora todo el p˙blico
+public: //Por ahora de forma temporal muchas cosas son publicas
 
 	Tablero();
 
 	bool turno;
 	int jugada = 0;
 
-
+private: //Las piezas son privadas
 	int numero; //Numero de piezas que hay en cada momento
-	Pieza* piezas [NUMERO_DE_PIEZAS];
-	
+
+	Pieza* piezas[NUMERO_DE_PIEZAS];
+
+public:
+	//Para el acceso a miembro privados de la clase
+	bool agregarPieza(Pieza* p);
+	void eliminarPieza(int index);
+	int getNumeroPiezas() { return numero; };
+	Pieza* getPieza(int i) { return piezas[i]; };
+	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
+	int getIndexPiezaEn(Coords const coordenada); //Devuelve la posici√≥n en el array que ocupa una pieza dada.
+
+
 
 	void dibuja();
 	void inicializa(bool guardado = false);
 	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords const coordenada);
 	bool consultaNegras(Coords const coordenada);
-	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla est· ocupada
-	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
-	bool casillaAtacada(Coords const coordenada, bool color); //Comprueba si una casilla est· atacada por las piezas de un determinado
-	//color en base a los movimientos posibles de las piezas de ese color que deben haber sido calculados previamente con el mÈtodo
+	bool consultaCasilla(Coords const coordenada); //Devuelve true si la casilla est√° ocupada
+	bool casillaAtacada(Coords const coordenada, bool color); //Comprueba si una casilla est√° atacada por las piezas de un determinado
+	//color en base a los movimientos posibles de las piezas de ese color que deben haber sido calculados previamente con el m√©todo
 	//correspondiente.
-	bool jaqueAlRey(bool color); //Detecta si el rey del color especificado est· en jaque
+	bool jaqueAlRey(bool color); //Detecta si el rey del color especificado est√° en jaque
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];
@@ -58,7 +69,7 @@ public: //por ahora todo el p˙blico
 	void cambiarTurno();
 
 	//Actualizar vectores de casillas ocupadas
-	void actualizarCasillasOcupadas();////////////////////////////////////////////////////////////////////////////////////////DONDE SE LLAMA A ESTA FUNCION
+	void actualizarCasillasOcupadas();
 
 	Coords getMov_siguiente();
 	void setMov_siguiente(Coords coord);
@@ -67,7 +78,7 @@ public: //por ahora todo el p˙blico
 	
 
 
-	//FunciÛn de prueba para mostrar en la consola la situaciÛn
+	//Funci√≥n de prueba para mostrar en la consola la situaci√≥n
 	friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
 
 	//Destructor
@@ -75,6 +86,6 @@ public: //por ahora todo el p˙blico
 
 
 	//Test
-	void generarTest(); //Genera una situaciÛn de test correspondiente a una partida reciÈn comenzada.
+	void generarTest(); //Genera una situaci√≥n de test correspondiente a una partida reci√©n comenzada.
 
 };
