@@ -7,7 +7,7 @@ Alfil::Alfil(bool color, int x, int y, Tablero* t) {
 	coordenadas.setX(x);
 	coordenadas.setY(y);
 	tab = t;
-	id = 3;
+	id = ALFIL;
 }
 
 
@@ -184,14 +184,15 @@ void Alfil::movimientos() {
 }
 
 
-
-bool Alfil::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
+void Alfil::dibuja() {
+	if (color == true) {
+		alfilBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		alfilBlancas.setSize(1, 1);
+		alfilBlancas.draw();
 	}
-	tab->cambiarTurno();
-	return false;
+	else {
+		alfilNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
+		alfilNegras.setSize(1, 1);
+		alfilNegras.draw();
+	}
 }

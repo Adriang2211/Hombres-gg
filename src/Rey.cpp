@@ -7,7 +7,7 @@ Rey::Rey(bool color, int x, int y, Tablero* t) {
 	coordenadas.setY(y);
 	tab = t;
 	primer_movimiento = true;
-	id = 5;
+	id = REY;
 }
 
 void Rey::movimientos() {
@@ -298,14 +298,22 @@ void Rey::movimientos() {
 
 
 bool Rey::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
-	}
+	if (!Pieza::mover(destino))
+		return false;
 	if (primer_movimiento)
 		primer_movimiento = false;
-	tab->cambiarTurno();
 	return false;
+}
+
+void Rey::dibuja() {
+	if (color == true) {
+		reyBlancas.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyBlancas.setSize(1, 1);
+		reyBlancas.draw();
+	}
+	else {
+		reyNegras.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyNegras.setSize(1, 1);
+		reyNegras.draw();
+	}
 }

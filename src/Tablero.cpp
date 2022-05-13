@@ -10,45 +10,58 @@
 #include "freeglut.h"
 
 
-void Tablero::inicializa() {
-	//Genera la situaci髇 inicial de una partida de ajedrez convencional.
-//Para ajedrez960 ser韆 necesaria una nueva funci髇
-//Crear la hilera de peones blancos
-	for (int i = 0; i < 8; i++)
-		*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la direcci髇 del tablero en el que se crean las piezas
 
-	//Crear la hilera de peones negros
-	for (int i = 8; i < 16; i++)
-		*(piezas + i) = new Peon(false, i - 7, 7, this);
+Tablero::Tablero() {
+	numero = 0;
+	juego_Terminado = false;
+	turno = true; //empiezan las blancas
+}
 
-	//Crear las torres
-	piezas[16] = new Torre(true, a, 1, this);
-	piezas[17] = new Torre(true, h, 1, this);
-	piezas[18] = new Torre(false, a, 8, this);
-	piezas[19] = new Torre(false, h, 8, this);
+void Tablero::inicializa(bool guardado) {
+	if (guardado == false) {
+		//Genera la situaci贸n inicial de una partida de ajedrez convencional.
+		//Para ajedrez960 ser铆a necesaria una nueva funci贸n
+		//Crear la hilera de peones blancos
+		for (int i = 0; i < 8; i++)
+			*(piezas + i) = new Peon(true, i + 1, 2, this); //This hace referencia a la direcci贸n del tablero en el que se crean las piezas
 
-	//Crear caballos
-	piezas[20] = new Caballo(true, b, 1, this);
-	piezas[21] = new Caballo(true, g, 1, this);
-	piezas[22] = new Caballo(false, b, 8, this);
-	piezas[23] = new Caballo(false, g, 8, this);
-	//Crear alfiles
-	piezas[24] = new Alfil(true, c, 1, this);
-	piezas[25] = new Alfil(true, f, 1, this);
-	piezas[26] = new Alfil(false, c, 8, this);
-	piezas[27] = new Alfil(false, f, 8, this);
-	//Crear damas
-	piezas[28] = new Dama(true, d, 1, this);
-	piezas[29] = new Dama(false, d, 8, this);
-	//Crear reyes
-	piezas[30] = new Rey(true, e, 1, this);
-	piezas[31] = new Rey(false, e, 8, this);
-	numero = 32; //Se empieza siempre con 32 piezas.
+		//Crear la hilera de peones negros
+		for (int i = 8; i < 16; i++)
+			*(piezas + i) = new Peon(false, i - 7, 7, this);
+
+		//Crear las torres
+		piezas[16] = new Torre(true, a, 1, this);
+		piezas[17] = new Torre(true, h, 1, this);
+		piezas[18] = new Torre(false, a, 8, this);
+		piezas[19] = new Torre(false, h, 8, this);
+
+		//Crear caballos
+		piezas[20] = new Caballo(true, b, 1, this);
+		piezas[21] = new Caballo(true, g, 1, this);
+		piezas[22] = new Caballo(false, b, 8, this);
+		piezas[23] = new Caballo(false, g, 8, this);
+		//Crear alfiles
+		piezas[24] = new Alfil(true, c, 1, this);
+		piezas[25] = new Alfil(true, f, 1, this);
+		piezas[26] = new Alfil(false, c, 8, this);
+		piezas[27] = new Alfil(false, f, 8, this);
+		//Crear damas
+		piezas[28] = new Dama(true, d, 1, this);
+		piezas[29] = new Dama(false, d, 8, this);
+		//Crear reyes
+		piezas[30] = new Rey(true, e, 1, this);
+		piezas[31] = new Rey(false, e, 8, this);
+		numero = 32; //Se empieza siempre con 32 piezas.
+	}
+	else {//HAY que inicializar lo que est茅 guardado en el fichero
+
+	}
+
 }
 
 
 
-bool Tablero::consultaBlancas(Coords coordenada){
+bool Tablero::consultaBlancas(Coords const coordenada){
 	for (int i = 0; i < 16; i++) {
 		//Busca la coordenada que se ha pasado en el vector de las piezas blancas
 		if (casillas_ocupadas_blancas[i].getX() == coordenada.getX() && casillas_ocupadas_blancas[i].getY() == coordenada.getY())
@@ -57,7 +70,7 @@ bool Tablero::consultaBlancas(Coords coordenada){
 	return false;		//devuelve flase si no hay una pieza blanca en la casilla
 }
 
-bool Tablero::consultaNegras(Coords coordenada) {
+bool Tablero::consultaNegras(Coords const coordenada) {
 	for (int i = 0; i < 16; i++) {
 		//Busca la coordenada que se ha pasado en el vector de las piezas negras
 		if (casillas_ocupadas_negras[i].getX() == coordenada.getX() && casillas_ocupadas_negras[i].getY() == coordenada.getY())
@@ -66,12 +79,21 @@ bool Tablero::consultaNegras(Coords coordenada) {
 	return false;
 }
 
-bool Tablero::consultaCasilla(Coords coordenada) {
+bool Tablero::consultaCasilla(Coords const coordenada) {
 	if (consultaBlancas(coordenada) || consultaNegras(coordenada)){
 		return true;
 	}
 	else
 		return false;
+}
+
+Pieza* Tablero::getPiezaEn(Coords const coordenada)
+{
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getCoordenadas() == coordenada)
+			return piezas[i]; //devuelve puntero a la pieza
+	}
+	return nullptr; //No devuelve nada si en esa casilla no hay ninguna pieza.
 }
 
 
@@ -86,22 +108,27 @@ void Tablero::dibuja() {
 			if ((i + j) % 2 != 0) {
 				glColor3ub(255, 255, 255);
 				glBegin(GL_QUADS);
-				glVertex3f(i, j, 0);
-				glVertex3f(i, j + 1, 0);
-				glVertex3f(i + 1, j + 1, 0);
-				glVertex3f(i + 1, j, 0);
+				glVertex3f(i, j, -0.1);
+				glVertex3f(i, j + 1, -0.1);
+				glVertex3f(i + 1, j + 1, -0.1);
+				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
 			else {
-				glColor3ub(255, 0, 0);
+				glColor3ub(128, 64, 0);
 				glBegin(GL_QUADS);
-				glVertex3f(i, j, 0);
-				glVertex3f(i, j + 1, 0);
-				glVertex3f(i + 1, j + 1, 0);
-				glVertex3f(i + 1, j, 0);
+				glVertex3f(i, j, -0.1);
+				glVertex3f(i, j + 1, -0.1);
+				glVertex3f(i + 1, j + 1,- 0.1);
+				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
 		}
+	}
+	
+	//caballoPrueba.dibuja();
+	for (int i = 0; i < numero; i++) {
+		piezas[i]->dibuja();
 	}
 }
 
@@ -113,16 +140,24 @@ void Tablero::cambiarTurno() {
 }
 
 void Tablero::actualizarCasillasOcupadas() {
-	for (int i = 0, j = 0, k = 0; i < numero; i++) {
-		if (piezas[i]->getColor()) {
+	int j = 0, k = 0; //脥ndices para la escritura en los vectores
+	//Leer las posiciones de las piezas existentes
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor()) { //Para las blancas
 			casillas_ocupadas_blancas[j] = piezas[i]->getCoordenadas();
 			j++;
 		}
-		else {
+		else { //Para las negras
 			casillas_ocupadas_negras[k] = piezas[i]->getCoordenadas();
 			k++;
 		}
 	}
+
+	//Poner posiciones vac铆as en el resto de los vectores.
+	for (int i = j; j < NUMERO_DE_PIEZAS / 2; j++)
+		casillas_ocupadas_blancas[j] = { 9,9 };
+	for (int i = k; k < NUMERO_DE_PIEZAS / 2; k++)
+		casillas_ocupadas_negras[k] = { 9, 9 };	
 }
 
 
@@ -130,40 +165,40 @@ bool Tablero::enroque_largo_blancas() {
 	Coords coordenada_torre = { a, 1 };
 	Coords coordenada_rey = { e, 1 };
 
-	int index_t = 0; //Posici髇 del vector en la que se encuentra la torre blanca
-	int index_r = 0; //Posici髇 del vector en la que se encuentra el rey
+	int index_t = 0; //Posici贸n del vector en la que se encuentra la torre blanca
+	int index_r = 0; //Posici贸n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teor韆 es redundante comprobar las coordenadas y el n鷐ero el pieza.
+	//En teor铆a es redundante comprobar las coordenadas y el n煤mero el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
 	}
 	if (torre_encontrada && rey_encontrado) {
-		if (!consultaCasilla({ b, 1 }) && !consultaCasilla({ c, 1 }) && !consultaCasilla({ d, 1 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			return true;
-		}
-		else {
+		if (consultaCasilla({ b, 1 }) || consultaCasilla({ c, 1 }) || consultaCasilla({ d, 1 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
 
-	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
-	//ataque no se puede hacer el enroque.
+	//Si las condiciones anteriores no se han cumplido, esta parte del programa no se ejecutar谩 gracias a los return false
+	//Aqu铆 se comprueba que ninguna de las casillas del enroque est茅 bajo ataque.
+	if (casillaAtacada({ b, 1 }, false) || casillaAtacada({ c, 1 }, false) || casillaAtacada({ d, 1 }, false) || casillaAtacada({ e, 1 }, false))
+		return false;
+	else
+		return true; 
 }
 
 
@@ -171,41 +206,40 @@ bool Tablero::enroque_largo_negras() {
 	Coords coordenada_torre = { a, 8 };
 	Coords coordenada_rey = { e, 8 };
 
-	int index_t=0; //Posici髇 del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posici髇 del vector en la que se encuentra el rey
+	int index_t=0; //Posici贸n del vector en la que se encuentra la torre blanca
+	int index_r=0; //Posici贸n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teor韆 es redundante comprobar las coordenadas y el n鷐ero el pieza.
+	//En teor铆a es redundante comprobar las coordenadas y el n煤mero el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
 	}
 
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ b, 8 }) && !consultaCasilla({ c , 8 }) && !consultaCasilla({ d, 8 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			return true;
-		}
-		else {
+		if (consultaCasilla({ b, 8 }) || consultaCasilla({ c , 8 }) || consultaCasilla({ d, 8 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
 
-	//Falta comprobar la legaliadad de la jugada. (Si alguna de las casillas del enroque esta bajo
-	//ataque no se puede hacer el enroque.
+	//Comprobaci贸n de que las casillas del enroque no se encuentren bajo ataque.
+	if (casillaAtacada({ b, 8 }, true) || casillaAtacada({ c, 8 }, true) || casillaAtacada({ d, 8 }, true) || casillaAtacada({ e, 8 }, true))
+		return false;
+	else
+		return true;
 }
 
 
@@ -214,76 +248,79 @@ bool Tablero::enroque_corto_blancas() {
 	Coords coordenada_torre = { h, 1 };
 	Coords coordenada_rey = { e, 1 };
 
-	int index_t=0; //Posici髇 del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posici髇 del vector en la que se encuentra el rey
+	int index_t=0; //Posici贸n del vector en la que se encuentra la torre blanca
+	int index_r=0; //Posici贸n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	//En teor韆 es redundante comprobar las coordenadas y el n鷐ero el pieza.
+	//En teor铆a es redundante comprobar las coordenadas y el n煤mero el pieza.
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==1) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
 			index_t = i;
 			torre_encontrada = true;
+			break;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
+			break;
 		}
 	}
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ g, 1 }) && !consultaCasilla({ f, 1 })\
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			return true;
-		}
-		else {
+		if (consultaCasilla({ g, 1 }) || consultaCasilla({ f, 1 })\
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
+
+	if (!casillaAtacada({ g, 1 }, false) && !casillaAtacada({ f, 1 }, false) && !casillaAtacada({ e, 1 }, false))
+		return true;
+	else
+		return false;
 }
 
 bool Tablero::enroque_corto_negras() {
 	Coords coordenada_torre = { h, 8 };
 	Coords coordenada_rey = { e, 8 };
 
-	int index_t=0; //Posici髇 del vector en la que se encuentra la torre blanca
-	int index_r=0; //Posici髇 del vector en la que se encuentra el rey
+	int index_t=0; //Posici贸n del vector en la que se encuentra la torre blanca
+	int index_r=0; //Posici贸n del vector en la que se encuentra el rey
 
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
-			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == 1) {
+			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
 	for (int i = 0; i < numero; i++) {
 		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
-			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == 5) {
+			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
 	}
 
 	if (rey_encontrado && torre_encontrada) {
-		if (!consultaCasilla({ f, 8 }) && !consultaCasilla({ g , 8 })
-			&& piezas[index_t]->getPrimerMovimiento() && piezas[index_r]->getPrimerMovimiento()) {
-			return true;
-		}
-		else {
+		if (consultaCasilla({ f, 8 }) || consultaCasilla({ g , 8 })
+			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
 			return false;
-		}
 	}
 	else {
 		return false;
 	}
+
+	//Comprobar que ninguna de las casillas del enroque se encuentra bajo ataque.
+	if (casillaAtacada({ g, 8 }, true) || casillaAtacada({ f, 8 }, true) || casillaAtacada({ e, 8 }, true))
+		return false;
 }
 
 using namespace std;
@@ -354,9 +391,9 @@ void Tablero::actualizarMovimientosPosibles() {
 
 
 void Tablero::generarTest() {
-	//Funci髇 de pruebas, no es parte del programa definitivo
-	//Situaci髇 basada en posici髇 2 de test pero sin el enroque
-	//informaci髇 sobre esto no disponible en github todav韆.
+	//Funci贸n de pruebas, no es parte del programa definitivo
+	//Situaci贸n basada en posici贸n 2 de test pero sin el enroque
+	//informaci贸n sobre esto no disponible en github todav铆a.
 	piezas[0] = new Torre(true, a, 1, this);
 	piezas[1] = new Caballo(true, b, 1, this);
 	piezas[2] = new Alfil(true, c, 1, this);
@@ -392,3 +429,33 @@ void Tablero::generarTest() {
 	piezas[31] = new Peon(false, e, 5, this);
 	numero = 32;
 }
+
+
+bool Tablero::casillaAtacada(Coords const coordenada, bool color) {
+	//Color hace referencia a la pieza atacante
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color) { //Comprueba que el color sea el elegido
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (piezas[i]->coordenadas_disponibles[j] == coordenada)
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
+bool Tablero::jaqueAlRey(bool color) {
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color && piezas[i]->id == REY)
+			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
+	}
+}
+
+Coords Tablero::getMov_siguiente() {
+	return mov_siguiente;
+}
+
+void Tablero::setMov_siguiente(Coords coord) {
+	mov_siguiente = coord;
+}
+
