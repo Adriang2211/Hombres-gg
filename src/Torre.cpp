@@ -178,12 +178,8 @@ void Torre::movimientos() {
 
 
 bool Torre::mover(Coords destino) {
-	for (int i = 0; i < MAX_MOV; i++) {
-		if (destino == coordenadas_disponibles[i]) {
-			coordenadas = destino;
-			return true;
-		}
-	}
+	if (!Pieza::mover(destino))
+		return false;
 	if (primer_movimiento)
 		primer_movimiento = false;
 	return false;

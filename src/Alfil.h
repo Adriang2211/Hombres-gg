@@ -13,7 +13,6 @@ public:
 	//conservar los alfiles en lugar de los caballos.
 
 	void movimientos();
-	bool mover(Coords destino);
     void dibuja();
 
 };

@@ -16,7 +16,7 @@ public:
 	Coordinador();
 	void dibuja();
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
-	void tu_raton();
+	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
 	void te_mueves();
 
 };

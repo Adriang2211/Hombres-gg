@@ -10,7 +10,7 @@ void OnTimer(int value); //esta funcion sera llamada cuando transcurra una tempo
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
 
 //Tablero tablero1; //Pruebas - posición inicial de la partida
-// tablero2; //Pruebas - posición 2
+Tablero tablero2; //Pruebas - posición 2
 
 Coordinador master;
 
@@ -38,7 +38,6 @@ int main(int argc, char* argv[])
 
 	//Inicializar los objetos
 
-	/*
 	//Pruebas
 	//tablero1.inicializa();
 	//tablero1.actualizarCasillasOcupadas();
@@ -54,6 +53,9 @@ int main(int argc, char* argv[])
 	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
 	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
 	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
+	tablero2.piezas[3]->mover({ e, 2 }); //Prueba para mover la dama a una de las casillas permitidas
+	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.actualizarMovimientosPosibles();
 	std::cout << tablero2;
 	//Test unitarios con la función de casillas atacadas
 	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
@@ -64,7 +66,6 @@ int main(int argc, char* argv[])
 	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
 	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
 	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
-	*/
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
@@ -89,11 +90,13 @@ void OnDraw(void)
 
 	//tablero1.dibuja(); //Prueba
 
-	//tablero2.dibuja(); //Prueba
+
 	
 
 	
 	master.dibuja();
+
+	tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
 	
 
 	//no borrar esta linea ni poner nada despues

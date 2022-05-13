@@ -217,6 +217,9 @@ void Coordinador::tecla(unsigned char tecla) {
 
 }
 
+//ANULADO TEMPORALMENTE HASTA QUE ESTÉ PROGRAMADA LA FUNCIÓN DEL RATÓN
+//para que mientras tanto el programa siga compilando.
+/*
 void Coordinador::tu_raton() {
 
 	if (raton == PEDIR_COORDS) {
@@ -267,6 +270,7 @@ void Coordinador::tu_raton() {
 
 	}
 }
+*/
 
 void Coordinador::te_mueves() {
 	//tab.actualizarMovimientosPosibles();
