@@ -10,6 +10,7 @@ Rey::Rey(bool color, int x, int y, Tablero* t) {
 	id = REY;
 }
 
+
 void Rey::movimientos() {
 	//Limpieza del vector
 	for (int i = 0; i < MAX_MOV; i++)
@@ -307,13 +308,14 @@ bool Rey::mover(Coords destino) {
 
 void Rey::dibuja() {
 	if (color == true) {
-		reyBlancas.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
 		reyBlancas.setSize(1, 1);
 		reyBlancas.draw();
 	}
 	else {
-		reyNegras.setCenter(-coordenadas.getX() + 1, coordenadas.getY() + 1);
+		reyNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
 		reyNegras.setSize(1, 1);
 		reyNegras.draw();
 	}
+	
 }
