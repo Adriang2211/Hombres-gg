@@ -37,7 +37,7 @@ public: //por ahora todo el público
 
 	int numero; //Numero de piezas que hay en cada momento
 	Pieza* piezas [NUMERO_DE_PIEZAS];
-	//Caballo caballoPrueba;
+	
 
 	void dibuja();
 	void inicializa(bool guardado = false);
