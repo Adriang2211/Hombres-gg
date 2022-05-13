@@ -1,14 +1,2 @@
-﻿  Coordinador.cpp
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(225,21): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(236,21): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(250,20): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-  Piezas.cpp
-  Torre.cpp
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(194,71): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(194,46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(199,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(199,45): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Generando código...
+﻿  main.cpp
+  Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe

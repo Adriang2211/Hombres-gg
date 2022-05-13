@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(900, 900);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("MiJuego");
 	
@@ -53,49 +53,6 @@ int main(int argc, char* argv[])
 	glutMouseFunc(MouseButton);
 	//Inicializar los objetos
 
-	//Pruebas
-	//tablero1.inicializa();
-	//tablero1.actualizarCasillasOcupadas();
-	//tablero1.actualizarMovimientosPosibles();
-	//std::cout << tablero1;
-	/*
-	std::cout << "Prueba movimientos posibles con una partida empezada:" << std::endl << "TABLERO 2:";
-	std::cout << std::endl << "_________________" << std::endl;
-	tablero2.generarTest();
-	tablero2.actualizarCasillasOcupadas();
-	tablero2.actualizarMovimientosPosibles();
-	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posición
-	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
-	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
-	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
-	tablero2.getPieza(3)->mover({e, 2}); //Prueba para mover la dama a una de las casillas permitidas
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
-	tablero2.actualizarMovimientosPosibles();
-
-	std::cout << tablero2;
-
-	*/
-	/*
-
-	tablero2.getPieza(30)->mover({ f, 2 });
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
-	tablero2.actualizarMovimientosPosibles();
-
-	std::cout << tablero2; //Se muestra solo el final del test
-
-	//Test unitarios con la función de casillas atacadas
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla g1 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ g, 1 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las blancas?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
-	*/
-
-
-	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
 	return 0;
@@ -112,8 +69,6 @@ void OnDraw(void)
 
 	gluLookAt(4, 4, 12,  // posicion del ojo
 		4.0,4, 0.0,      // hacia que punto mira  (0,0,0) 
-
-
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
 	//aqui es donde hay que poner el código de dibujo
@@ -121,8 +76,6 @@ void OnDraw(void)
 
 	//tablero1.dibuja(); //Prueba
 
-
-	
 
 	
 	master.dibuja();
@@ -136,10 +89,6 @@ void OnDraw(void)
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 
-
-
-
-	
 	master.tecla(key);
 
 	//ultima linea, siempre que hay que ponerla:
@@ -149,8 +98,8 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void sacarcelda(int x, int y, int& cell_x, int& cell_y) {
 	//world coordinates to cell
-	cell_x = (int)(((x-124) / 70)+1);
-	cell_y = (int)(((600-y) / 70)+1);
+	cell_x = (int)(((x-36) / 90)+1);
+	cell_y = (int)(((600-y) / 90)+1);
 }
 
 void MouseButton(int button, int down, int x, int y) {
