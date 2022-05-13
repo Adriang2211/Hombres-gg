@@ -1,14 +1,12 @@
 ﻿  Coordinador.cpp
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(225,21): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(236,21): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Coordinador.cpp(250,20): error C2039: "mouseButton": no es un miembro de "Tablero"
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Tablero.h(16): message : vea la declaración de 'Tablero'
-  Piezas.cpp
-  Torre.cpp
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(194,71): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(194,46): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(199,70): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\eloyi\Documents\Github\Hombres-gg\src\Torre.cpp(199,45): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-  Generando código...
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(28,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(35,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(45,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(68,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(77,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(86,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(114,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(118,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(136,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(140,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
+  Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe

@@ -16,6 +16,8 @@ private:
 
 public:
 	Coordinador();
+	Coords cell;//celda seleccionada por el raton
+	void sacarcelda(int x, int y);//conversion coordenadas de la pantalla a coordeandas del tablero
 	void dibuja();
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
 	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
