@@ -459,3 +459,19 @@ void Tablero::setMov_siguiente(Coords coord) {
 	mov_siguiente = coord;
 }
 
+bool Tablero::agregarPieza(Pieza* p) {
+	if (numero < NUMERO_DE_PIEZAS) {
+		piezas[numero++] = p;
+		return true;
+	}
+	else
+		return false;
+}
+
+void Tablero::eliminarPieza(int index) {
+	delete piezas[index];
+	for (int i = index; i < numero; i++) {
+		piezas[i] = piezas[i + 1];
+	}
+	numero--;
+}

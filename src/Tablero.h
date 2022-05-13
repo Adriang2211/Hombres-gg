@@ -8,11 +8,11 @@
 
 
 /* SOBRE TABLERO
-* Tablero es una clase que gestiona el dibujo del tablero y que gestiona
-
-
-
+* Tablero es una clase que gestiona el dibujo del tablero y que contiene las piezas en juego
+* Las piezas no son estáticas, es decir, puede haber múltiples tableros con múltiples piezas
+* Esto último es útil si se quieren calcular posibles escenarios.
 */
+
 class Tablero {
 private:
 	//Enroques
@@ -20,6 +20,7 @@ private:
 	bool enroque_largo_negras();
 	bool enroque_corto_blancas();
 	bool enroque_corto_negras();
+
 	//Declaración de amistad para que puedan acceder a los métodos privados de enroque
 	friend void Torre::movimientos();
 	friend void Rey::movimientos();
@@ -27,17 +28,24 @@ private:
 
 	Coords mov_siguiente;
 
-public: //por ahora todo el público
+public: //Por ahora de forma temporal muchas cosas son publicas
 
 	Tablero();
 
 	bool turno;
 	int jugada = 0;
 
-
+private: //Las piezas son privadas
 	int numero; //Numero de piezas que hay en cada momento
-	Pieza* piezas [NUMERO_DE_PIEZAS];
-	//Caballo caballoPrueba;
+	Pieza* piezas[NUMERO_DE_PIEZAS];
+
+public:
+	//Para el acceso a miembro privados de la clase
+	bool agregarPieza(Pieza* p);
+	void eliminarPieza(int index);
+	int getNumeroPiezas() { return numero; };
+	Pieza* getPieza(int i) { return piezas[i]; };
+
 
 	void dibuja();
 	void inicializa(bool guardado = false);
@@ -58,7 +66,7 @@ public: //por ahora todo el público
 	void cambiarTurno();
 
 	//Actualizar vectores de casillas ocupadas
-	void actualizarCasillasOcupadas();////////////////////////////////////////////////////////////////////////////////////////DONDE SE LLAMA A ESTA FUNCION
+	void actualizarCasillasOcupadas();
 
 	Coords getMov_siguiente();
 	void setMov_siguiente(Coords coord);

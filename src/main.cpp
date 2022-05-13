@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
 	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
 	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
-	tablero2.piezas[3]->mover({ e, 2 }); //Prueba para mover la dama a una de las casillas permitidas
+	tablero2.getPieza(3)->mover({e, 2}); //Prueba para mover la dama a una de las casillas permitidas
 	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
 	tablero2.actualizarMovimientosPosibles();
 	std::cout << tablero2;
