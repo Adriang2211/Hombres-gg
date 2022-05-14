@@ -31,7 +31,7 @@ bool Pieza::mover(Coords destino) {
 	for (int i = 0; i < MAX_MOV; i++) {
 		if (destino == coordenadas_disponibles[i]) {
 			if (tab->consultaCasilla(destino)) { //Comprueba si hay una pieza para comerla (eliminarla)
-				tab->eliminarPieza(tab->getIndexPiezaEn(destino));
+				tab->lista_piezas.eliminarPieza(tab->getIndexPiezaEn(destino));
 			}
 
 			coordenadas = destino; //Actualiza la posición de la pieza

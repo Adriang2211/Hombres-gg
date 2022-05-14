@@ -6,14 +6,7 @@
 #include "Rey.h"
 #include "Caballo.h"
 #include "ListaMovimientos.h"
-
-/* SOBRE TABLERO
-* Tablero es una clase que gestiona el dibujo del tablero y que contiene las piezas en juego
-* Las piezas no son estaticas, es decir, puede haber multiples tableros con multiples piezas
-* Esto ultimo es util si se quieren calcular posibles escenarios.
-*/
-
-
+#include "ListaPiezas.h"
 
 
 class Tablero {
@@ -31,6 +24,8 @@ private:
 
 	Coords mov_siguiente;
 
+
+
 public: //Por ahora de forma temporal muchas cosas son publicas
 
 	Tablero();
@@ -38,20 +33,8 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	bool turno;
 	int jugada = 0;
 
-private: //Las piezas son privadas
-	int numero; //Numero de piezas que hay en cada momento
 
-	Pieza* piezas[NUMERO_DE_PIEZAS];
-
-public:
-	//Para el acceso a miembro privados de la clase
-	bool agregarPieza(Pieza* p);
-	void eliminarPieza(int index);
-	int getNumeroPiezas() { return numero; };
-	Pieza* getPieza(int i) { return piezas[i]; };
-	Pieza* getPiezaEn(Coords const coordenada); //Devuelve la referenia la pieza que se encuentra en unas coordenadas dadas
-	int getIndexPiezaEn(Coords const coordenada); //Devuelve la posicion en el array que ocupa una pieza dada.
-
+	ListaPiezas lista_piezas;
 
 
 	void dibuja();
@@ -63,6 +46,9 @@ public:
 	bool casillaAtacada(Coords const coordenada, bool color); //Comprueba si una casilla esta atacada por las piezas de un determinado
 	//color en base a los movimientos posibles de las piezas de ese color que deben haber sido calculados previamente con el método
 	//correspondiente.
+
+	Pieza* getPiezaEn(Coords const coordenada) { return lista_piezas.getPiezaEn(coordenada); };
+	int getIndexPiezaEn(Coords const coordenada) { return lista_piezas.getIndexPiezaEn(coordenada); };
 
 	bool jaqueAlRey(bool color); //Detecta si el rey del color especificado esta en jaque
 	//bool jaqueMate(bool color); //Compreba si se produce jaque mate.
