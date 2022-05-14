@@ -12,7 +12,6 @@
 
 
 Tablero::Tablero() {
-	numero = 0;
 	juego_Terminado = false;
 	turno = true; //empiezan las blancas
 }
@@ -55,12 +54,15 @@ void Tablero::inicializa(bool guardado) {
 
 		//Agregar las piezas al vector 
 		for (int i = 0; i < 32; i++)
-			agregarPieza(piezast[i]);
+			lista_piezas.agregarPieza(piezast[i]);
 	}
 	else {//HAY que inicializar lo que esté guardado en el fichero
 
 	}
-	
+
+	//Actualización de la situación
+	actualizarCasillasOcupadas();
+	actualizarMovimientosPosibles();
 }
 
 
@@ -91,18 +93,11 @@ bool Tablero::consultaCasilla(Coords const coordenada) {
 		return false;
 }
 
-Pieza* Tablero::getPiezaEn(Coords const coordenada)
-{
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getCoordenadas() == coordenada)
-			return piezas[i]; //devuelve puntero a la pieza
-	}
-	return nullptr; //No devuelve nada si en esa casilla no hay ninguna pieza.
-}
+
 
 
 Tablero::~Tablero() {
-	delete[] piezas;
+	lista_piezas.eliminar();;
 }
 
 void Tablero::dibuja() {
@@ -131,8 +126,8 @@ void Tablero::dibuja() {
 	}
 	
 	
-	for (int i = 0; i < numero; i++) {
-		piezas[i]->dibuja();
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		lista_piezas.getPieza(i)->dibuja();
 	}
 }
 
@@ -146,13 +141,13 @@ void Tablero::cambiarTurno() {
 void Tablero::actualizarCasillasOcupadas() {
 	int j = 0, k = 0; //Índices para la escritura en los vectores
 	//Leer las posiciones de las piezas existentes
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor()) { //Para las blancas
-			casillas_ocupadas_blancas[j] = piezas[i]->getCoordenadas();
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor()) { //Para las blancas
+			casillas_ocupadas_blancas[j] = lista_piezas.getPieza(i)->getCoordenadas();
 			j++;
 		}
 		else { //Para las negras
-			casillas_ocupadas_negras[k] = piezas[i]->getCoordenadas();
+			casillas_ocupadas_negras[k] = lista_piezas.getPieza(i)->getCoordenadas();
 			k++;
 		}
 	}
@@ -176,21 +171,21 @@ bool Tablero::enroque_largo_blancas() {
 	bool torre_encontrada = false;
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_torre && lista_piezas.getPieza(i)->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_rey && lista_piezas.getPieza(i)->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
 	}
 	if (torre_encontrada && rey_encontrado) {
 		if (consultaCasilla({ b, 1 }) || consultaCasilla({ c, 1 }) || consultaCasilla({ d, 1 })\
-			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
+			|| !lista_piezas.getPieza(index_t)->getPrimerMovimiento() || !lista_piezas.getPieza(index_r)->getPrimerMovimiento())
 			return false;
 	}
 	else {
@@ -217,14 +212,14 @@ bool Tablero::enroque_largo_negras() {
 	bool torre_encontrada = false;
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
-	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (!lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_torre && lista_piezas.getPieza(i)->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
-	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (!lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_rey && lista_piezas.getPieza(i)->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -232,7 +227,7 @@ bool Tablero::enroque_largo_negras() {
 
 	if (rey_encontrado && torre_encontrada) {
 		if (consultaCasilla({ b, 8 }) || consultaCasilla({ c , 8 }) || consultaCasilla({ d, 8 })\
-			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
+			|| !lista_piezas.getPieza(index_t)->getPrimerMovimiento() || !lista_piezas.getPieza(index_r)->getPrimerMovimiento())
 			return false;
 	}
 	else {
@@ -259,15 +254,15 @@ bool Tablero::enroque_corto_blancas() {
 	bool torre_encontrada = false;
 
 	//En teoría es redundante comprobar las coordenadas y el número el pieza.
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id==TORRE) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_torre && lista_piezas.getPieza(i)->id==TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 			break;
 		}
 	}
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() && piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->getCoordenadas() == coordenada_rey && lista_piezas.getPieza(i)->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 			break;
@@ -275,7 +270,7 @@ bool Tablero::enroque_corto_blancas() {
 	}
 	if (rey_encontrado && torre_encontrada) {
 		if (consultaCasilla({ g, 1 }) || consultaCasilla({ f, 1 })\
-			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
+			|| !lista_piezas.getPieza(index_t)->getPrimerMovimiento() || !lista_piezas.getPieza(index_r)->getPrimerMovimiento())
 			return false;
 	}
 	else {
@@ -298,16 +293,16 @@ bool Tablero::enroque_corto_negras() {
 	bool rey_encontrado = false;
 	bool torre_encontrada = false;
 
-	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->id == 1 && \
-			piezas[i]->getCoordenadas() == coordenada_torre && piezas[i]->id == TORRE) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (!lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->id == 1 && \
+			lista_piezas.getPieza(i)->getCoordenadas() == coordenada_torre && lista_piezas.getPieza(i)->id == TORRE) {
 			index_t = i;
 			torre_encontrada = true;
 		}
 	}
-	for (int i = 0; i < numero; i++) {
-		if (!piezas[i]->getColor() && piezas[i]->id == 5 && \
-			piezas[i]->getCoordenadas() == coordenada_rey && piezas[i]->id == REY) {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (!lista_piezas.getPieza(i)->getColor() && lista_piezas.getPieza(i)->id == 5 && \
+			lista_piezas.getPieza(i)->getCoordenadas() == coordenada_rey && lista_piezas.getPieza(i)->id == REY) {
 			index_r = i;
 			rey_encontrado = true;
 		}
@@ -315,7 +310,7 @@ bool Tablero::enroque_corto_negras() {
 
 	if (rey_encontrado && torre_encontrada) {
 		if (consultaCasilla({ f, 8 }) || consultaCasilla({ g , 8 })
-			|| !piezas[index_t]->getPrimerMovimiento() || !piezas[index_r]->getPrimerMovimiento())
+			|| !lista_piezas.getPieza(index_t)->getPrimerMovimiento() || !lista_piezas.getPieza(index_r)->getPrimerMovimiento())
 			return false;
 	}
 	else {
@@ -327,6 +322,7 @@ bool Tablero::enroque_corto_negras() {
 		return false;
 }
 
+/*
 using namespace std;
 ostream& operator << (ostream& os, const Tablero& tab) {
 	os << "SITUACION ACTUAL DEL TABLERO: " << endl;
@@ -334,7 +330,7 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	os << "Numero de jugada: " << tab.jugada << endl;
 	os << "Piezas y sus posiciones:" << endl;
 	os << "_______________________________________________________________________________________" << endl;
-	for (int i = 0; i < tab.numero; i++) {
+	for (int i = 0; i < NUMERO_DE_PIEZAS; i++) {
 		if (*(tab.piezas + i) != NULL) {
 			switch (tab.piezas[i]->id) {
 			case 1:
@@ -386,10 +382,11 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 		os << tab.casillas_ocupadas_negras[i] << endl;
 	return os;
 }
+*/
 
 void Tablero::actualizarMovimientosPosibles() {
-	for (int i = 0; i < numero; i++) {
-		piezas[i]->movimientos();
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		lista_piezas.getPieza(i)->movimientos();
 	}
 }
 
@@ -432,18 +429,26 @@ void Tablero::generarTest() {
 	piezast[29] = new Caballo(false, c, 6, this);
 	piezast[30] = new Alfil(false, c, 5, this);
 	piezast[31] = new Peon(false, e, 5, this);
-
 	for (int i = 0; i < 32; i++)
-		agregarPieza(piezast[i]);
+		lista_piezas.agregarPieza(piezast[i]);
+
+	//Actualización de la situación
+	//Doble ejecución para garantizar que todos los movimientos se calculan conociendo de antemano
+	//los movimientos posibles de todas las demás piezas (es imortante para los jaques y para los enroques).
+	for (int i = 0; i < 2; i++) {
+		actualizarCasillasOcupadas();
+		actualizarMovimientosPosibles();
+	}
+
 }
 
 
 bool Tablero::casillaAtacada(Coords const coordenada, bool color) {
 	//Color hace referencia a la pieza atacante
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() == color) { //Comprueba que el color sea el elegido
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() == color) { //Comprueba que el color sea el elegido
 			for (int j = 0; j < MAX_MOV; j++) {
-				if (piezas[i]->coordenadas_disponibles[j] == coordenada)
+				if (lista_piezas.getPieza(i)->coordenadas_disponibles[j] == coordenada)
 					return true;
 			}
 		}
@@ -452,9 +457,9 @@ bool Tablero::casillaAtacada(Coords const coordenada, bool color) {
 }
 
 bool Tablero::jaqueAlRey(bool color) {
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() == color && piezas[i]->id == REY)
-			return casillaAtacada(piezas[i]->getCoordenadas(), !color);
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() == color && lista_piezas.getPieza(i)->id == REY)
+			return casillaAtacada(lista_piezas.getPieza(i)->getCoordenadas(), !color);
 	}
 }
 
@@ -466,27 +471,34 @@ void Tablero::setMov_siguiente(Coords coord) {
 	mov_siguiente = coord;
 }
 
-bool Tablero::agregarPieza(Pieza* p) {
-	if (numero < NUMERO_DE_PIEZAS) {
-		piezas[numero++] = p;
-		return true;
-	}
-	else
-		return false;
-}
 
-void Tablero::eliminarPieza(int index) {
-	delete piezas[index];
-	for (int i = index; i < numero; i++) {
-		piezas[i] = piezas[i + 1];
-	}
-	numero--;
-}
 
-int Tablero::getIndexPiezaEn(Coords const coordenada) {
-		for (int i = 0; i < numero; i++) {
-			if (piezas[i]->getCoordenadas() == coordenada)
-				return i; //devuelve puntero a la pieza
+
+
+
+
+
+/* En progreso...
+bool Tablero::jaqueMate(bool color) {
+	int index_rey=0;
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color && piezas[i]->id == REY) {
+			index_rey = i;
+			break;
 		}
-		return NULL; //No devuelve nada si en esa casilla no hay ninguna pieza.
+	}
+}
+*/
+
+void Tablero::generarLista() {
+	Movimiento mov;
+	Coords coordenadas_no_validas = { 9,9 };
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		for (int j = 0; j < lista_piezas.getNumeroPiezas(); j++) {
+			if (lista_piezas.getPieza(i)->getCoordenadas() == coordenadas_no_validas) {
+				mov.index = i; //Guardar la posición de la pieza en el array
+				mov.destino = lista_piezas.getPieza(i)->coordenadas_disponibles[j]; //Guardar el destino
+			}
+		}
+	}
 }

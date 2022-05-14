@@ -22,6 +22,7 @@ public:
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
 	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
 	void te_mueves();
+
 	/*
 	void tu_texto(string txt, int x, int y); //Escribir de izquierda a derecha
 	void tu_print(const char* txt, float x, float y);
