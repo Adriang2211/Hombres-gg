@@ -25,3 +25,9 @@ public:
 	friend bool operator != (const Coords& coordenada1, const Coords& coordenada2);
 
 };
+
+struct Movimiento { //Para el registro de movimientos
+	int index; //Posición de la pieza dentro del vector de piezas al que pertenezca
+	Coords destino; //Coordenadas de las que se puede mover la pieza.
+	bool operator == (const Movimiento& mov);
+};

@@ -88,3 +88,11 @@ bool operator != (const Coords& coordenada1, const Coords& coordenada2) {
 	else
 		return true;
 }
+
+
+bool Movimiento::operator == (const Movimiento& mov) {
+	if (index == mov.index && destino == mov.destino)
+		return true;
+	else
+		return false;
+}

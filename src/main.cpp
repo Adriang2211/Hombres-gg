@@ -41,37 +41,20 @@ int main(int argc, char* argv[])
 
 	//Pruebas
 	//tablero1.inicializa();
-	//tablero1.actualizarCasillasOcupadas();
-	//tablero1.actualizarMovimientosPosibles();
 	//std::cout << tablero1;
 	
 	std::cout << "Prueba movimientos posibles con una partida empezada:" << std::endl << "TABLERO 2:";
 	std::cout << std::endl << "_________________" << std::endl;
 	tablero2.generarTest();
+	tablero2.getPiezaEn({ f, 3 })->mover({ e, 5 });
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posición
-	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
-	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
-	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
-	tablero2.getPieza(3)->mover({e, 2}); //Prueba para mover la dama a una de las casillas permitidas
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.getPiezaEn({ c, 5 })->mover({ f, 2 });
+	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-	tablero2.getPieza(30)->mover({ f, 2 });
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.getPiezaEn({ h, 2 })->mover({ h, 4 });
+	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-
-	std::cout << tablero2; //Se muestra solo el final del test
-
-	//Test unitarios con la función de casillas atacadas
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla g1 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ g, 1 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las blancas?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
 
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();

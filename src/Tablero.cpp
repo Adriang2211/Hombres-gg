@@ -60,7 +60,10 @@ void Tablero::inicializa(bool guardado) {
 	else {//HAY que inicializar lo que esté guardado en el fichero
 
 	}
-	
+
+	//Actualización de la situación
+	actualizarCasillasOcupadas();
+	actualizarMovimientosPosibles();
 }
 
 
@@ -399,42 +402,51 @@ void Tablero::generarTest() {
 	//Situación basada en posición 2 de test pero sin el enroque
 	//información sobre esto no disponible en github todavía.
 	Pieza* piezast [NUMERO_DE_PIEZAS];
-	piezast[0] = new Torre(true, a, 1, this);
-	piezast[1] = new Caballo(true, b, 1, this);
-	piezast[2] = new Alfil(true, c, 1, this);
-	piezast[3] = new Dama(true, d, 1, this);
-	piezast[4] = new Rey(true, e, 1, this);
-	piezast[5] = new Torre(true, h, 1, this);
-	piezast[6] = new Peon(true, a, 2, this);
-	piezast[7] = new Peon(true, b, 2, this);
-	piezast[8] = new Peon(true, c, 2, this);
-	piezast[9] = new Peon(true, d, 2, this);
-	piezast[10] = new Peon(true, f, 2, this);
-	piezast[11] = new Peon(true, g, 2, this);
-	piezast[12] = new Peon(true, h, 2, this);
-	piezast[13] = new Peon(true, e, 4, this);
-	piezast[14] = new Caballo(true, f, 3, this);
-	piezast[15] = new Alfil(true, c, 4, this);
+	piezas[0] = new Torre(true, a, 1, this);
+	piezas[1] = new Caballo(true, b, 1, this);
+	piezas[2] = new Alfil(true, c, 1, this);
+	piezas[3] = new Dama(true, d, 1, this);
+	piezas[4] = new Rey(true, e, 1, this);
+	piezas[5] = new Torre(true, h, 1, this);
+	piezas[6] = new Peon(true, a, 2, this);
+	piezas[7] = new Peon(true, b, 2, this);
+	piezas[8] = new Peon(true, c, 2, this);
+	piezas[9] = new Peon(true, d, 2, this);
+	piezas[10] = new Peon(true, f, 2, this);
+	piezas[11] = new Peon(true, g, 2, this);
+	piezas[12] = new Peon(true, h, 2, this);
+	piezas[13] = new Peon(true, e, 4, this);
+	piezas[14] = new Caballo(true, f, 3, this);
+	piezas[15] = new Alfil(true, c, 4, this);
 
-	piezast[16] = new Torre(false, a, 8, this);
-	piezast[17] = new Alfil(false, c, 8, this);
-	piezast[18] = new Dama(false, d, 8, this);
-	piezast[19] = new Rey(false, e, 8, this);
-	piezast[20] = new Caballo(false, g, 8, this);
-	piezast[21] = new Torre(false, h, 8, this);
-	piezast[22] = new Peon(false, b, 7, this);
-	piezast[23] = new Peon(false, c, 7, this);
-	piezast[24] = new Peon(false, d, 7, this);
-	piezast[25] = new Peon(false, f, 7, this);
-	piezast[26] = new Peon(false, g, 7, this);
-	piezast[27] = new Peon(false, h, 7, this);
-	piezast[28] = new Peon(false, a, 6, this);
-	piezast[29] = new Caballo(false, c, 6, this);
-	piezast[30] = new Alfil(false, c, 5, this);
-	piezast[31] = new Peon(false, e, 5, this);
-
+	piezas[16] = new Torre(false, a, 8, this);
+	piezas[17] = new Alfil(false, c, 8, this);
+	piezas[18] = new Dama(false, d, 8, this);
+	piezas[19] = new Rey(false, e, 8, this);
+	piezas[20] = new Caballo(false, g, 8, this);
+	piezas[21] = new Torre(false, h, 8, this);
+	piezas[22] = new Peon(false, b, 7, this);
+	piezas[23] = new Peon(false, c, 7, this);
+	piezas[24] = new Peon(false, d, 7, this);
+	piezas[25] = new Peon(false, f, 7, this);
+	piezas[26] = new Peon(false, g, 7, this);
+	piezas[27] = new Peon(false, h, 7, this);
+	piezas[28] = new Peon(false, a, 6, this);
+	piezas[29] = new Caballo(false, c, 6, this);
+	piezas[30] = new Alfil(false, c, 5, this);
+	piezas[31] = new Peon(false, e, 5, this);
+	numero = 32;
 	for (int i = 0; i < 32; i++)
 		agregarPieza(piezast[i]);
+
+	//Actualización de la situación
+	//Doble ejecución para garantizar que todos los movimientos se calculan conociendo de antemano
+	//los movimientos posibles de todas las demás piezas (es imortante para los jaques y para los enroques).
+	for (int i = 0; i < 2; i++) {
+		actualizarCasillasOcupadas();
+		actualizarMovimientosPosibles();
+	}
+
 }
 
 
@@ -489,4 +501,30 @@ int Tablero::getIndexPiezaEn(Coords const coordenada) {
 				return i; //devuelve puntero a la pieza
 		}
 		return NULL; //No devuelve nada si en esa casilla no hay ninguna pieza.
+}
+
+
+/* En progreso...
+bool Tablero::jaqueMate(bool color) {
+	int index_rey=0;
+	for (int i = 0; i < numero; i++) {
+		if (piezas[i]->getColor() == color && piezas[i]->id == REY) {
+			index_rey = i;
+			break;
+		}
+	}
+}
+*/
+
+void Tablero::generarLista() {
+	Movimiento mov;
+	Coords coordenadas_no_validas = { 9,9 };
+	for (int i = 0; i < numero; i++) {
+		for (int j = 0; j < numero; j++) {
+			if (piezas[i]->getCoordenadas() == coordenadas_no_validas) {
+				mov.index = i; //Guardar la posición de la pieza en el array
+				mov.destino = piezas[i]->coordenadas_disponibles[j]; //Guardar el destino
+			}
+		}
+	}
 }
