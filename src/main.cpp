@@ -114,10 +114,14 @@ void MouseButton(int button, int down, int x, int y) {
 	//finally cell coordinates
 
 	//master.sacarcelda(x, y);
+	if (button == down)
+	{
+		master.sacarcelda(x, y);
+		master.tu_raton();
+	}
+	
 
-	master.tu_raton();
 
-	master.sacarcelda(x, y);
 
 	
 	glutPostRedisplay();

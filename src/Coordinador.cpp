@@ -8,7 +8,7 @@ Coordinador::Coordinador() {
 	raton = PEDIR_COORDS;
 	cell = {-1, -1};
 	muevete = false;
-	malas = {-4, 1};
+	malas = {-1, 1};
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -318,12 +318,12 @@ void Coordinador::tu_raton() {
 			Coords aux = cell; //obtengo coordenadas de raton
 			if (cell.getXY() != malas) {
 
-				cout << cell.getXY() << endl;
+				cout << "coordenada:"<<cell.getXY() << endl;
 
 				mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
 				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada
 					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
-
+					raton = PEDIR_COORDS;
 				}
 				else {//Si la pieza no se puede mover a la casilla seleccionada
 					raton = PEDIR_COORDS;
@@ -360,9 +360,12 @@ void Coordinador::tu_raton() {
 				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
 					if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
 						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
-						raton = COORDS_RECIBIDAS;
+						
+						cout << cell.getXY() << endl;
 						cout << "Coordenadas de pieza de mover blanca recibida" << endl;
-						cell.setXY(-4,1);
+
+						cell.setXY(-1,1);
+						raton = COORDS_RECIBIDAS;
 					}
 				}
 
@@ -373,9 +376,10 @@ void Coordinador::tu_raton() {
 				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
 					if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
 						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
-						raton = COORDS_RECIBIDAS;
+						
 						cout << "Coordenadas de pieza de mover negra recibida" << endl;
-						cell.setXY(-4, 1);
+						cell.setXY(-1, 1);
+						raton = COORDS_RECIBIDAS;
 					}
 				}
 
