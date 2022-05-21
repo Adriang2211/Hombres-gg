@@ -94,17 +94,17 @@ bool Tablero::consultaCasilla(Coords const coordenada) {
 }
 
 
-
-
 Tablero::~Tablero() {
 	lista_piezas.eliminar();;
 }
 
-void Tablero::dibuja() {
+void Tablero::dibuja(bool marca, Pieza * pieza) {
+
 	int N = 8;
 	for (int j = 0; j < N; j++) {
 		for (int i = 0; i < N; i++) {
-			if ((i + j) % 2 != 0) {
+			Coords aux = { i + 1, j +1};
+			if ((i + j) % 2 != 0) { //si es impar
 				glColor3ub(255, 255, 255);
 				glBegin(GL_QUADS);
 				glVertex3f(i, j, -0.1);
@@ -113,22 +113,35 @@ void Tablero::dibuja() {
 				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
-			else {
+			else {//si es par
 				glColor3ub(128, 64, 0);
 				glBegin(GL_QUADS);
 				glVertex3f(i, j, -0.1);
 				glVertex3f(i, j + 1, -0.1);
-				glVertex3f(i + 1, j + 1,- 0.1);
+				glVertex3f(i + 1, j + 1, -0.1);
 				glVertex3f(i + 1, j, -0.1);
 				glEnd();
 			}
+			if (marca) {
+				for (int z = 0; z < 27; z++) {
+					if (pieza->coordenadas_disponibles[z] == aux) {
+						glColor3ub(254, 107, 95);
+						glBegin(GL_QUADS);
+						glVertex3f(i, j, -0.01);
+						glVertex3f(i, j + 1, -0.01);
+						glVertex3f(i + 1, j + 1, -0.01);
+						glVertex3f(i + 1, j, -0.01);
+						glEnd();
+					}
+				}
+			}
 		}
 	}
-	
-	
+		
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja();
 	}
+	
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);

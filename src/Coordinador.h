@@ -14,6 +14,7 @@ private:
 	Pieza* mov;
 	bool muevete;
 	Coords malas;
+	bool seleccion; //si true, se ha seleccionado jugar 1vs1; false contra maquina
 
 public:
 	Coordinador();

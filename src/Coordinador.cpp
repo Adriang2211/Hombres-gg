@@ -90,10 +90,10 @@ void Coordinador::dibuja() {
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja();
+			tab.dibuja(false, mov);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja();
+			tab.dibuja(true, mov);
 		}
 	}
 	else if (estado == PAUSE) {
@@ -106,6 +106,7 @@ void Coordinador::dibuja() {
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
 		ETSIDI::printxy("MENU DE PAUSE", -19, 31);
 		ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::printxy("PULSE R SI QUIERE VOLVER AL JUEGO", -10, 29);
 		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 29);
 		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 28);
 		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 27);
@@ -157,11 +158,13 @@ void Coordinador::tecla(unsigned char tecla) {
 			case '1':
 				//Ir al estado de 1 vs 1
 				estado = PREGUNTAS_BAT;
+				seleccion = true;
 				//INICIALIZA
 				break;
 			case '2':///////////////////////////////////////////////////////////////
 				//Ir al estado vs la máquina
 				estado = PREGUNTAS_MAQ;
+				seleccion = false;
 				//INICIALIZA
 				break;
 		}	
@@ -243,6 +246,16 @@ void Coordinador::tecla(unsigned char tecla) {
 	else if (estado == PAUSE) {
 		
 		switch (tecla) {
+			case 'r':
+			case 'R':
+				//retornar a la partida
+				if (seleccion) {
+					estado = BATALLA;
+				}
+				else {
+					estado = MAQUINA;
+				}
+
 			case 'f':
 			case 'F':
 				/////destruir lo que sea necesario
