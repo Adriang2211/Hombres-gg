@@ -8,9 +8,10 @@
 void OnDraw(void); //esta funcion sera llamada para dibujar
 void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
 void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla	
+void MouseButton(int button, int down, int x, int y);//cuando se haga click
 
 //Tablero tablero1; //Pruebas - posición inicial de la partida
-Tablero tablero2; //Pruebas - posición 2
+//Tablero tablero2; //Pruebas - posición 2
 
 Coordinador master;
 
@@ -35,43 +36,26 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(OnDraw);
 	glutTimerFunc(25, OnTimer, 0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer(). Por ejemplo una esfera que queremos que se mueva. Cada 25 ms se movera en la direccion que le hemos indicado
 	glutKeyboardFunc(OnKeyboardDown);//Eventos de teclado. Cuando pulsamos una tecla pues se "activa" esta funcion.
-
+	glutMouseFunc(MouseButton);
 	//Inicializar los objetos
 
 	//Pruebas
 	//tablero1.inicializa();
-	//tablero1.actualizarCasillasOcupadas();
-	//tablero1.actualizarMovimientosPosibles();
 	//std::cout << tablero1;
-	
+	/*
 	std::cout << "Prueba movimientos posibles con una partida empezada:" << std::endl << "TABLERO 2:";
 	std::cout << std::endl << "_________________" << std::endl;
 	tablero2.generarTest();
+	tablero2.getPiezaEn({ f, 3 })->mover({ e, 5 });
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-	tablero2.actualizarMovimientosPosibles(); //Cuando se genera un tablero por primera vez y no es en la posición
-	//inicial hay que ejecutar dos veces la función para que actualice todos los elementos para que se comprueben bien
-	//los jaques y los enroques. De lo contrario, puede no haberse calculado todavía el movimiento de una pieza
-	//atacante y considerarse que el enroque es posible o ignorarse un jaque.
-	tablero2.getPieza(3)->mover({e, 2}); //Prueba para mover la dama a una de las casillas permitidas
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.getPiezaEn({ c, 5 })->mover({ f, 2 });
+	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-	tablero2.getPieza(30)->mover({ f, 2 });
-	tablero2.actualizarCasillasOcupadas(); //Actualización del tablero.
+	tablero2.getPiezaEn({ h, 2 })->mover({ h, 4 });
+	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-
-	std::cout << tablero2; //Se muestra solo el final del test
-
-	//Test unitarios con la función de casillas atacadas
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla g1 esta atacada por las negras?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ g, 1 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "La casilla e3 esta atacada por las blancas?" << std::endl;
-	std::cout << tablero2.casillaAtacada({ e, 3 }, false) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey blanco?" << std::endl << tablero2.jaqueAlRey(true) << std::endl;
-	std::cout << std::endl << std::endl << "Jaque al rey negro?" << std::endl << tablero2.jaqueAlRey(false) << std::endl;
-
+	*/
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
@@ -86,7 +70,7 @@ void OnDraw(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(4.0, 4.0, 22,  // posicion del ojo
+	gluLookAt(4.0, 4.0, 19,  // posicion del ojo
 		4.0, 4.0, 0.0,      // hacia que punto mira  (0,0,0) 
 		0.0, 1.0, 0.0);      // definimos hacia arriba (eje Y)    
 
@@ -101,7 +85,7 @@ void OnDraw(void)
 	
 	master.dibuja();
 
-	tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
+	//tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
 	
 
 	//no borrar esta linea ni poner nada despues
@@ -124,5 +108,11 @@ void OnTimer(int value)
 	glutTimerFunc(25, OnTimer, 0);
 	glutPostRedisplay();
 }
+void MouseButton(int button, int down, int x, int y) {
 
+
+	//finally cell coordinates
+	master.sacarcelda(x, y);
+	glutPostRedisplay();
+}
 
