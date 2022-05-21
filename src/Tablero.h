@@ -66,7 +66,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	void setMov_siguiente(Coords coord);
 
 	//Función de prueba para mostrar en la consola la situación
-	friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
+	//friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
 
 	//Destructor
 	~Tablero();

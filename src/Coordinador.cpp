@@ -12,11 +12,11 @@ Coordinador::Coordinador() {
 }
 void Coordinador::sacarcelda(int x, int y)
 {
-	cell.setX((int)(((x - 189) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
-	cell.setY((int)(((588 - y) / 53) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
+	cell.setX((int)(((x - 190) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
+	cell.setY((int)(((709 - y) / 65) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
 	if (cell.getX() < 1 || cell.getY() > 8 || cell.getX() > 8 || cell.getY() < 1)
 		cell.setXY(-1, -1);//por si selecciona fuera de lacelda
-	//cout << "(" << cell.getX() << "," << cell.getY() << ")" << endl; //test realizado para comprobar por consola que la celda seleccionada es la correcta
+	cout << "(" << cell.getX() << "," << cell.getY() << ")" << endl; //test realizado para comprobar por consola que la celda seleccionada es la correcta
 }
 void Coordinador::dibuja() {
 
@@ -25,12 +25,12 @@ void Coordinador::dibuja() {
 			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
 		ETSIDI::setTextColor(1, 1, 0);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
 		ETSIDI::printxy("BIENVENIDO A NUESTRO AJEDREZ, INDIQUE LO QUE QUIERA HACER:", -19, 31);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
 		ETSIDI::setTextColor(1, 1, 1);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-		ETSIDI::printxy("PULSE LA TECLA -I- PARA CONSULTAR LAS INSTRUCCIONES", -12, 29);
+		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 12);
+		ETSIDI::printxy("PULSE LA TECLA -i- PARA CONSULTAR LAS INSTRUCCIONES", -12, 29);
 		ETSIDI::printxy("PULSE LA TECLA -1- PARA INICIAR EL MODO BATALLA", -12, 28);
 		ETSIDI::printxy("PULSE LA TECLA -2- PARA INICIAR EL MODO MAQUINA", -12, 27);
 		ETSIDI::setTextColor(0, 255, 255);
@@ -89,7 +89,12 @@ void Coordinador::dibuja() {
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
-		tab.dibuja();
+		if (raton == PEDIR_COORDS) {
+			tab.dibuja();
+		}
+		else if (raton == COORDS_RECIBIDAS) {
+			tab.dibuja();
+		}
 	}
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
@@ -271,46 +276,10 @@ void Coordinador::tecla(unsigned char tecla) {
 
 }
 
-//ANULADO TEMPORALMENTE HASTA QUE ESTÉ PROGRAMADA LA FUNCIÓN DEL RATÓN
-//para que mientras tanto el programa siga compilando.
-/*
-void Coordinador::tu_raton() {
-
-	if (estado == BATALLA) {
-		
-			}
-
-		}
-		else if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
-			//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
-			bool verificador = true;//Sirve para que si pulsas fuera de las casillas disponibles, vuelvas al estado anterior de PEDIR_COORDS
-
-			Coords aux = tab.mouseButton(); //obtengo coordenadas de raton
-			mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
-			for (int i = 0; i < 27; i++) {//recorrer el vectcor de coordenadas disponibles
-				if (mov->coordenadas_disponibles[i] == aux) {//si las Coords del raton concuerdan con alguna de las
-					//coordenadas disponibles de la pieza apuntada por el puntero mov
-					//Indicar que se puede y debe realizar el movimiento
-					tab.setMov_siguiente(aux); //auctualizamos la casilla a la que se debe mover
-					muevete = true; //autorizamos a que la pieza se mueva
-					raton = PEDIR_COORDS; //cambiamos de estado del ratón a standby
-					tab.cambiarTurno(); //cambiamos el turno
-					verificador = false;
-				}
-			}
-			if (verificador) {
-				raton = PEDIR_COORDS;//si no se pulsó alguna de las casillas disponibles, volvemos al estado de standby
-			}
-
-
-		}
-	}
-}
-*/
 
 void Coordinador::tu_raton() {
 	if (estado == BATALLA) {
-		
+		//cout << tab;
 		if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
 			//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
 			
@@ -372,42 +341,3 @@ void Coordinador::tu_raton() {
 		}
 	}
 }
-
-/*
-void Coordinador::te_mueves() {
-	//tab.actualizarMovimientosPosibles();
-	if ((estado == BATALLA && muevete) || (estado == MAQUINA && muevete)) {
-		mov->mover(tab.getMov_siguiente()); 
-	}
-}
-*/
-
-/*
-void Coordinador::tu_texto(string txt, int x, int y) {
-
-	int i = txt.length(); //almacenamos en i la longitud de la cadena
-	//ahora hay que darle la vuelta
-	string reves(txt);//le asignamos el texto a una nueva string que se llama reves
-	reverse(reves.begin(), reves.end()); //le damos la vuelta
-	float separacion = 0.65;
-	for (int n = 0; n < i; n++) {
-		string aux;
-		aux = reves[n];
-		const char* texto = aux.c_str();
-		tu_print(texto, x - (n * separacion), y);
-		
-	}
-
-}
-
-void Coordinador::tu_print(const char* txt, float x, float y) {
-
-	glPushMatrix();
-	glDisable(GL_LIGHTING);
-	glDisable(GL_DEPTH_TEST);
-	glTranslated(x, y, 0);
-	ETSIDI::print(txt);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
-}*/

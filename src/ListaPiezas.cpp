@@ -39,7 +39,7 @@ int ListaPiezas::getIndexPiezaEn(Coords const coordenada) {
 }
 
 void ListaPiezas::eliminar() {
-	for (int i = numero; i > 0; i--)
+	for (int i = numero  - 1; i > 0; i--)
 		delete piezas[i];
 	numero = 0;
 }

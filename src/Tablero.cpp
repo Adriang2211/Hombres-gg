@@ -128,17 +128,18 @@ void Tablero::dibuja() {
 	
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja();
-	}/*
+	}
+
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		ETSIDI::setTextColor(0, 255, 128);
-		ETSIDI::printxy("TURNO BLANCAS", 4, 10);
+		ETSIDI::printxy("TURNO BLANCAS", 2, 10);
 	}
 	else {//Escribir turno negras
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		ETSIDI::setTextColor(0, 255, 128);
-		ETSIDI::printxy("TURNO NEGRAS", 4, 10);
-	}*/
+		ETSIDI::printxy("TURNO NEGRAS", 2, 10);
+	}
 }
 
 void Tablero::cambiarTurno() {
@@ -341,8 +342,9 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	os << "Piezas y sus posiciones:" << endl;
 	os << "_______________________________________________________________________________________" << endl;
 	for (int i = 0; i < NUMERO_DE_PIEZAS; i++) {
-		if (*(tab.piezas + i) != NULL) {
-			switch (tab.piezas[i]->id) {
+		
+		//if (*(tab.lista_piezas + i) != NULL) {
+			switch (tab.lista_piezas.getPieza(i)->id) {
 			case 1:
 				os << "Torre" << endl;
 				break;
@@ -365,23 +367,23 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 				os << "Ooops. Se ha producido un error." << endl;
 			}
 			//Color de la pieza
-			if (tab.piezas[i]->getColor())
+			if (tab.lista_piezas.getPieza(i)->getColor())
 				os << "\tColor: blanco" << endl;
 			else
 				os << "\tColor: negro" << endl;
 
 			//Coordenadas de la pieza
-			os << "\tCoordenadas: " << tab.piezas[i]->getCoordenadas() << endl;
+			os << "\tCoordenadas: " << tab.lista_piezas.getPieza(i)->getCoordenadas() << endl;
 
 			//Movimientos posibles de la pieza
 			os << "\tLista de casillas a las que puede ir la pieza: " << endl << "\t";
 			Coords coordenadas_vacias = { 9,9 };
 			for (int j = 0; j < MAX_MOV; j++) {
-				if (tab.piezas[i]->coordenadas_disponibles[j] != coordenadas_vacias)
+				if (tab.lista_piezas.getPieza(i)->coordenadas_disponibles[j] != coordenadas_vacias)
 					os << tab.piezas[i]->coordenadas_disponibles[j];
 			}
 			os << endl << "________________________________" << endl;
-		}
+		//}
 	}
 	os << endl << "Casillas ocupadas blancas:" << endl;
 	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
@@ -393,6 +395,7 @@ ostream& operator << (ostream& os, const Tablero& tab) {
 	return os;
 }
 */
+
 
 void Tablero::actualizarMovimientosPosibles() {
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
