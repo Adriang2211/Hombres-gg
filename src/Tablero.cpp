@@ -502,3 +502,14 @@ void Tablero::generarLista() {
 		}
 	}
 }
+
+
+int Tablero::getPuntuacion(bool color) {
+	int suma = 0;
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() == color) {
+			suma += lista_piezas.getPieza(i)->getValor();
+		}
+	}
+	return suma;
+}

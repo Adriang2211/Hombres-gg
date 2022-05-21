@@ -13,5 +13,7 @@ public:
 	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 	void dibuja();
+
+	int getValor() { return valor; };
 };
 
