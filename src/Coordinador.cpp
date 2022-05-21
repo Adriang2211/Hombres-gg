@@ -270,7 +270,7 @@ void Coordinador::tecla(unsigned char tecla) {
 				break;
 			case 'g':
 			case 'G':
-				/// tab.guardar();
+				tab.guardarPartida("partida.txt");
 				estado = GUARDADO;
 
 		}

@@ -82,4 +82,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 
 	//Calcular la puntuacion de un jugador
 	int getPuntuacion(bool color);
+	void guardarPartida(std::string p_guardada);
+
+	void leerPartida(std::string p_guardada);
 };
