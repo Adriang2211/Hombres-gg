@@ -304,7 +304,7 @@ void Coordinador::tu_raton() {
 				tab.actualizarCasillasOcupadas();
 				tab.actualizarMovimientosPosibles();
 
-				mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
+				//mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
 				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
 					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
 					tab.cambiarTurno();
