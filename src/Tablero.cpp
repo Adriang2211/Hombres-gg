@@ -8,7 +8,8 @@
 #include "Rey.h"
 #include "Peon.h"
 #include "freeglut.h"
-
+#include <fstream>
+#include <string>
 
 
 Tablero::Tablero() {
@@ -57,7 +58,7 @@ void Tablero::inicializa(bool guardado) {
 			lista_piezas.agregarPieza(piezast[i]);
 	}
 	else {//HAY que inicializar lo que esté guardado en el fichero
-
+		leerPartida("partida.txt");
 	}
 
 	//Actualización de la situación
@@ -538,4 +539,95 @@ int Tablero::getPuntuacion(bool color) {
 		}
 	}
 	return suma;
+}
+void Tablero::guardarPartida(std::string p_guardada) {
+	std::ofstream guardado;
+
+	guardado.open(p_guardada);
+
+	if (guardado) {
+		int n_piezas = lista_piezas.getNumeroPiezas();
+		Pieza* p;
+		Coords c;
+		std::string nombre, coo, col, res;
+		if (turno) {
+			guardado << "b\n";
+		}
+		else {
+			guardado << "n\n";
+		}
+		for (int i = 0; i < n_piezas; i++) {
+			p = lista_piezas.getPieza(i);
+
+			nombre = std::to_string(p->id);
+
+			if (p->getColor()) {
+				col = "b";
+			}
+			else {
+				col = "n";
+			}
+
+			c = p->getCoordenadas();
+
+			coo = std::to_string(c.getX()) + "-" + std::to_string(c.getY());
+
+			res = nombre + "-" + col + "-" + coo + "\n";
+
+			guardado << res;
+		}
+	}
+
+	guardado.close();
+}
+
+void Tablero::leerPartida(std::string p_guardada) {
+	std::ifstream guardado;
+	std::string p, nombre, col, coo_x, coo_y;
+	int x, y;
+	bool c_p = true;
+
+	guardado.open(p_guardada);
+	guardado >> p;
+	if (p == "n") {
+		cambiarTurno();
+	}
+	while (guardado) {
+		guardado >> p;
+
+		nombre = p[0];
+		col = p[2];
+		coo_x = p[4];
+		coo_y = p[6];
+		x = stoi(coo_x);
+		y = stoi(coo_y);
+		std::cout << nombre << col << coo_x << coo_y;
+		if (col == "b") {
+			c_p = true;
+		}
+		else if (col == "n") {
+			c_p = false;
+		}
+
+		if (nombre == "1") {
+			lista_piezas.agregarPieza(new Torre(c_p, x, y, this));
+		}
+		else if (nombre == "2") {
+			lista_piezas.agregarPieza(new Caballo(c_p, x, y, this));
+		}
+		else if (nombre == "3") {
+			lista_piezas.agregarPieza(new Alfil(c_p, x, y, this));
+		}
+		else if (nombre == "4") {
+			lista_piezas.agregarPieza(new Dama(c_p, x, y, this));
+		}
+		else if (nombre == "5") {
+			lista_piezas.agregarPieza(new Rey(c_p, x, y, this));
+		}
+		else if (nombre == "6") {
+			lista_piezas.agregarPieza(new Peon(c_p, x, y, this));
+		}
+	}
+
+	guardado.close();
 }

@@ -2,7 +2,11 @@
 #include "Posicionamiento.h"
 #include "Piezas.h"
 
-
+ListaPiezas::ListaPiezas() {
+	for (int i = 0; i < NUMERO_DE_PIEZAS; i++)
+		piezas[i] = nullptr;
+	numero = 0;
+}
 
 Pieza* ListaPiezas::getPiezaEn(Coords const coordenada)
 {

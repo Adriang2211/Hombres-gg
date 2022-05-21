@@ -7,10 +7,10 @@
 class ListaPiezas {
 private: //Las piezas son privadas
 	int numero; //Numero de piezas que hay en cada momento
-
 	Pieza* piezas[NUMERO_DE_PIEZAS];
 
 public:
+	ListaPiezas();
 	//Para el acceso a miembro privados de la clase
 	bool agregarPieza(Pieza* p);
 	void eliminarPieza(int index);
