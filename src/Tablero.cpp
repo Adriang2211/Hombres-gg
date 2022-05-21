@@ -11,6 +11,7 @@
 
 
 
+
 Tablero::Tablero() {
 	juego_Terminado = false;
 	turno = true; //empiezan las blancas
@@ -123,12 +124,15 @@ void Tablero::dibuja() {
 				glEnd();
 			}
 		}
+		
 	}
 	
 	
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja();
 	}
+
+
 }
 
 void Tablero::cambiarTurno() {
