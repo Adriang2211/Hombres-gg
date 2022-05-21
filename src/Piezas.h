@@ -16,6 +16,7 @@ protected:
 	Coords coordenadas;
 	bool color; //True=blancas, flase = negras
 	Tablero* tab; //Tablero al que pertenece la pieza, de esta forma se evita tener que pasar la referencia del tablero.
+
 public:
 	int id; //Identifica el tipo de pieza. Se asigna valor en el constructor de cada clase de pieza
 	//Los valores son: 1-Torre, 2-Caballo, 3-Alfil, 4-Dama, 5-Rey, 6-Peon

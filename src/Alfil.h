@@ -6,6 +6,8 @@ using ETSIDI::Sprite;
 class Alfil :public Pieza {
 	Sprite alfilBlancas{ "imagenes/alfilBlanco.png" };
 	Sprite alfilNegras{ "imagenes/alfilNegro.png" };
+	Sprite alfilPlata{ "imagenes/alfilPlata.png" };
+	Sprite alfilDorado{ "imagenes/alfilDorado.png" };
 public:
 	Alfil(bool color, int x, int y, Tablero* t);
 	static const int valor = 3;

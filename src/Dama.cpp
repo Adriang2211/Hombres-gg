@@ -148,7 +148,7 @@ void Dama::movimientos()
 				var4 = 8 - coordenadas.getX();
 			else var4 = coordenadas.getY() - 1;
 		}
-
+		encontrado = false;
 
 		//Primero se comprueba dónde se encuentra la pieza más próxima en el semieje horizontal positivo
 		for (int i = coordenadas.getX() + 1; i <= 8; i++) {
