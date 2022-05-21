@@ -9,8 +9,9 @@ Coordinador::Coordinador() {
 	cell = {-1, -1};
 	muevete = false;
 	malas = {-1, -1};
+	ETSIDI::play("sonidos/ambiente.wav");
 }
-void Coordinador::sacarcelda(int x, int y)
+void Coordinador::sacarcelda(int x, int y)p
 {
 	cell.setX((int)(((x - 190) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
 	cell.setY((int)(((709 - y) / 65) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
@@ -107,9 +108,9 @@ void Coordinador::dibuja() {
 		ETSIDI::printxy("MENU DE PAUSE", -19, 31);
 		ETSIDI::setTextColor(255, 0, 255);
 		ETSIDI::printxy("PULSE R SI QUIERE VOLVER AL JUEGO", -10, 29);
-		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 29);
-		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 28);
-		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 27);
+		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 28);
+		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 27);
+		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 26);
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
@@ -255,7 +256,8 @@ void Coordinador::tecla(unsigned char tecla) {
 				else {
 					estado = MAQUINA;
 				}
-
+				raton = PEDIR_COORDS;
+				break;
 			case 'f':
 			case 'F':
 				/////destruir lo que sea necesario
@@ -314,6 +316,7 @@ void Coordinador::tu_raton() {
 				else {//Si la pieza no se puede mover a la casilla seleccionada
 					raton = PEDIR_COORDS;
 					cout << "Movimiento seleccionado no permitido y vuelta al estado de standby" << endl;
+					ETSIDI::play("sonidos/error.wav"); //linea agregada
 				}
 				
 			}
