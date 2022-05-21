@@ -11,7 +11,7 @@ void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecl
 void MouseButton(int button, int down, int x, int y);//cuando se haga click
 
 //Tablero tablero1; //Pruebas - posición inicial de la partida
-Tablero tablero2; //Pruebas - posición 2
+//Tablero tablero2; //Pruebas - posición 2
 
 Coordinador master;
 
@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
 	//Pruebas
 	//tablero1.inicializa();
 	//std::cout << tablero1;
-	
+	/*
 	std::cout << "Prueba movimientos posibles con una partida empezada:" << std::endl << "TABLERO 2:";
 	std::cout << std::endl << "_________________" << std::endl;
 	tablero2.generarTest();
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 	tablero2.getPiezaEn({ h, 2 })->mover({ h, 4 });
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-
+	*/
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 
@@ -85,7 +85,7 @@ void OnDraw(void)
 	
 	master.dibuja();
 
-	tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
+	//tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
 	
 
 	//no borrar esta linea ni poner nada despues
