@@ -79,4 +79,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	//Calculo de movimientos posibles
 	ListaMovimientos lista;
 	void generarLista();
+
+	//Calcular la puntuacion de un jugador
+	int getPuntuacion(bool color);
 };

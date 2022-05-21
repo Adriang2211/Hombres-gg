@@ -55,7 +55,9 @@ int main(int argc, char* argv[])
 	tablero2.getPiezaEn({ h, 2 })->mover({ h, 4 });
 	tablero2.actualizarCasillasOcupadas();
 	tablero2.actualizarMovimientosPosibles();
-
+	//Test para comprobar las puntuaciones de los jugadores
+	std::cout << (tablero2.getPuntuacion(true) - INT_MAX/2) << std::endl;
+	std::cout << (tablero2.getPuntuacion(false) - INT_MAX/2) << std::endl;
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();
 

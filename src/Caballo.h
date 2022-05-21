@@ -13,4 +13,5 @@ public:
 	void movimientos();
 	void dibuja();
 
+	int getValor() { return valor; };
 };

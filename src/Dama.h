@@ -10,6 +10,8 @@ public:
 	static const int valor = 9;
 	void movimientos() ;
 	void dibuja();
+
+	int getValor() { return valor; };
 };
 
 

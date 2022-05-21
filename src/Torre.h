@@ -13,5 +13,7 @@ public:
 	Torre(bool color, int x, int y, Tablero* t);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 	void dibuja();
+
+	int getValor() { return valor; };
 };
 

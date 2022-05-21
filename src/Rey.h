@@ -5,6 +5,7 @@ using ETSIDI::Sprite;
 class Rey :public Pieza {
 	Sprite reyBlancas{ "imagenes/reyBlanco.png" };
 	Sprite reyNegras{ "imagenes/reyNegro.png" };
+	static const int valor = INT_MAX/2;
 public:
 	Rey(bool color, int x, int y, Tablero* t);
 	//El rey no tiene valor numérico
@@ -13,4 +14,6 @@ public:
 	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
 	void dibuja();
+
+	int getValor() { return valor; };
 };
