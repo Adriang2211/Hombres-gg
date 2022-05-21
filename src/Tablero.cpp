@@ -128,7 +128,17 @@ void Tablero::dibuja() {
 	
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja();
+	}/*
+	if (turno) {//Escribir turno blancas
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::setTextColor(0, 255, 128);
+		ETSIDI::printxy("TURNO BLANCAS", 4, 10);
 	}
+	else {//Escribir turno negras
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		ETSIDI::setTextColor(0, 255, 128);
+		ETSIDI::printxy("TURNO NEGRAS", 4, 10);
+	}*/
 }
 
 void Tablero::cambiarTurno() {

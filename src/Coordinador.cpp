@@ -319,11 +319,15 @@ void Coordinador::tu_raton() {
 			if (cell.getXY() != malas) {
 
 				cout << "coordenada:"<<cell.getXY() << endl;
+				tab.actualizarCasillasOcupadas();
+				tab.actualizarMovimientosPosibles();
 
 				mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
-				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada
+				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
 					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
-					raton = PEDIR_COORDS;
+					tab.cambiarTurno();
+
+					raton = PEDIR_COORDS;//cambiamos el estado del raton
 				}
 				else {//Si la pieza no se puede mover a la casilla seleccionada
 					raton = PEDIR_COORDS;
@@ -332,26 +336,6 @@ void Coordinador::tu_raton() {
 				
 			}
 
-			/*
-			for (int i = 0; i < 27; i++) {//recorrer el vector de coordenadas disponibles
-				if (mov->coordenadas_disponibles[i] == aux) {//si las Coords del raton concuerdan con alguna de las
-					//coordenadas disponibles de la pieza apuntada por el puntero mov
-					//Indicar que se puede y debe realizar el movimiento
-					tab.setMov_siguiente(aux); //auctualizamos la casilla a la que se debe mover
-					mov->mover(tab.getMov_siguiente());
-					//muevete = true; //autorizamos a que la pieza se mueva
-					raton = PEDIR_COORDS; //cambiamos de estado del ratón a standby
-					tab.cambiarTurno(); //cambiamos el turno
-					verificador = false;
-					cout << "Movimiento realizado" << endl;
-				}
-			}
-			
-			if (verificador) {
-				raton = PEDIR_COORDS;//si no se pulsó alguna de las casillas disponibles, volvemos al estado de standby
-				cout << "Movimiento seleccionado no permitido y vuelta al estado de standby" << endl;
-			}
-			*/
 		}
 		else if (raton == PEDIR_COORDS) {
 			if (tab.turno) {//turno blancas
