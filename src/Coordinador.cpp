@@ -9,9 +9,9 @@ Coordinador::Coordinador() {
 	cell = {-1, -1};
 	muevete = false;
 	malas = {-1, -1};
-	ETSIDI::play("sonidos/ambiente.wav");
+	ETSIDI::playMusica("sonidos/ambiente.wav", true);
 }
-void Coordinador::sacarcelda(int x, int y)p
+void Coordinador::sacarcelda(int x, int y)
 {
 	cell.setX((int)(((x - 190) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
 	cell.setY((int)(((709 - y) / 65) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
