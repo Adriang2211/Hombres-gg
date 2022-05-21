@@ -8,7 +8,7 @@ Coordinador::Coordinador() {
 	raton = PEDIR_COORDS;
 	cell = {-1, -1};
 	muevete = false;
-	malas = {-1, 1};
+	malas = {-1, -1};
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -348,7 +348,7 @@ void Coordinador::tu_raton() {
 						cout << cell.getXY() << endl;
 						cout << "Coordenadas de pieza de mover blanca recibida" << endl;
 
-						cell.setXY(-1,1);
+						cell.setXY(-1,-1);
 						raton = COORDS_RECIBIDAS;
 					}
 				}
@@ -362,7 +362,7 @@ void Coordinador::tu_raton() {
 						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
 						
 						cout << "Coordenadas de pieza de mover negra recibida" << endl;
-						cell.setXY(-1, 1);
+						cell.setXY(-1,-1);
 						raton = COORDS_RECIBIDAS;
 					}
 				}

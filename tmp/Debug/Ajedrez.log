@@ -1,14 +1,1 @@
-﻿  Coordinador.cpp
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(30,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(37,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(47,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(70,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(79,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(88,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(109,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(113,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(131,48): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-C:\Users\nacho\Documents\GitHub\Hombres-gg\src\Coordinador.cpp(135,79): warning C4305: 'argumento': truncamiento de 'double' a 'float'
-  main.cpp
-  Generando código...
-  Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe
+﻿  Ajedrez.vcxproj -> C:\Users\nacho\Documents\GitHub\Hombres-gg\bin\Ajedrez.exe
