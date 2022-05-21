@@ -303,7 +303,7 @@ bool Rey::mover(Coords destino) {
 		return false;
 	if (primer_movimiento)
 		primer_movimiento = false;
-	return false;
+	return true;
 }
 
 void Rey::dibuja() {

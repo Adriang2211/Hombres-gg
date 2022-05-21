@@ -102,7 +102,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 void OnTimer(int value)
 {
 
-	master.te_mueves();
+	//master.te_mueves();
 
 	//No borrar estas lineas, siempre tienen que ir al final:
 	glutTimerFunc(25, OnTimer, 0);
@@ -112,7 +112,18 @@ void MouseButton(int button, int down, int x, int y) {
 
 
 	//finally cell coordinates
-	master.sacarcelda(x, y);
+
+	//master.sacarcelda(x, y);
+	if (button == down)
+	{
+		master.sacarcelda(x, y);
+		master.tu_raton();
+	}
+	
+
+
+
+	
 	glutPostRedisplay();
 }
 

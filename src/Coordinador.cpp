@@ -6,7 +6,9 @@ Coordinador::Coordinador() {
 
 	estado = INICIO;
 	raton = PEDIR_COORDS;
+	cell = {-1, -1};
 	muevete = false;
+	malas = {-1, -1};
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -88,97 +90,52 @@ void Coordinador::dibuja() {
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
 		tab.dibuja();
-		if (raton == PEDIR_COORDS) {
-			if (tab.turno) {//turno blancas
-				//solo es válido obtener una pieza blanca
-				Coords aux = cell; //obtengo coordenadas
-				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
-					if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
-						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
-						raton = COORDS_RECIBIDAS;
-					}
-				}
-
-			}
-			else {//turno negras
-				//solo es válido obtener una pieza negra
-				Coords aux = cell; //obtengo coordenadas
-				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
-					if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
-						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
-						raton = COORDS_RECIBIDAS;
-					}
-				}
-
-
-			}
-		}
-		else if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
-			//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
-			bool verificador = true;//Sirve para que si pulsas fuera de las casillas disponibles, vuelvas al estado anterior de PEDIR_COORDS
-
-			Coords aux = cell; //obtengo coordenadas de raton
-			mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
-			for (int i = 0; i < 27; i++) {//recorrer el vectcor de coordenadas disponibles
-				if (mov->coordenadas_disponibles[i] == aux) {//si las Coords del raton concuerdan con alguna de las
-					//coordenadas disponibles de la pieza apuntada por el puntero mov
-					//Indicar que se puede y debe realizar el movimiento
-					tab.setMov_siguiente(aux); //auctualizamos la casilla a la que se debe mover
-					muevete = true; //autorizamos a que la pieza se mueva
-					raton = PEDIR_COORDS; //cambiamos de estado del ratón a standby
-					tab.cambiarTurno(); //cambiamos el turno
-					verificador = false;
-				}
-			}
-			if (verificador) {
-				raton = PEDIR_COORDS;//si no se pulsó alguna de las casillas disponibles, volvemos al estado de standby
-			}
-		}
-		else if (estado == PAUSE) {
-			//INTERFAZDE PAUSE
-			gluLookAt(0, 10, 30, // posicion del ojo
-				0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
-				0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
-
-			ETSIDI::setTextColor(0, 255, 0);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-			ETSIDI::printxy("MENU DE PAUSE", -19, 31);
-			ETSIDI::setTextColor(255, 0, 255);
-			ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 29);
-			ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 28);
-			ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 27);
-			ETSIDI::setTextColor(1, 1, 0);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-			AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-			//ETSIDI::printxy("HOMBRES GG", 15, 2);
-			ETSIDI::setTextColor(0, 255, 255);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-			AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-			//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
-		}
-		else if (estado == FIN) {
-			//estado final
-			//INTERFAZDE PAUSE
-			gluLookAt(0, 10, 30, // posicion del ojo
-				0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
-				0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
-
-			ETSIDI::setTextColor(0, 255, 0);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-			ETSIDI::printxy("FIN DEL JUEGO", -19, 31);
-			ETSIDI::setTextColor(255, 0, 255);
-			ETSIDI::printxy("MUCHAS GRACIAS POR JUGAR", -19, 29);
-			ETSIDI::printxy("QUE TENGA UN BUEN DIA", -19, 28);
-			ETSIDI::setTextColor(1, 1, 0);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
-			AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-			//ETSIDI::printxy("HOMBRES GG", 15, 2);
-			ETSIDI::setTextColor(0, 255, 255);
-			ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
-			AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-			//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
-		}
 	}
+	else if (estado == PAUSE) {
+		//INTERFAZDE PAUSE
+		gluLookAt(0, 10, 30, // posicion del ojo
+			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+
+		ETSIDI::setTextColor(0, 255, 0);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+		ETSIDI::printxy("MENU DE PAUSE", -19, 31);
+		ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 29);
+		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 28);
+		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 27);
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
+		//ETSIDI::printxy("HOMBRES GG", 15, 2);
+		ETSIDI::setTextColor(0, 255, 255);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
+		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
+		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
+	}
+	else if (estado == FIN) {
+		//estado final
+		//INTERFAZDE PAUSE
+		gluLookAt(0, 10, 30, // posicion del ojo
+			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+
+		ETSIDI::setTextColor(0, 255, 0);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+		ETSIDI::printxy("FIN DEL JUEGO", -19, 31);
+		ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::printxy("MUCHAS GRACIAS POR JUGAR", -19, 29);
+		ETSIDI::printxy("QUE TENGA UN BUEN DIA", -19, 28);
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
+		//ETSIDI::printxy("HOMBRES GG", 15, 2);
+		ETSIDI::setTextColor(0, 255, 255);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
+		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
+		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
+	}
+	
 }
 void Coordinador::tecla(unsigned char tecla) {
 
@@ -351,13 +308,79 @@ void Coordinador::tu_raton() {
 }
 */
 
+void Coordinador::tu_raton() {
+	if (estado == BATALLA) {
+		
+		if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
+			//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
+			
+			cout << "listo para mover" << endl;
+			Coords aux = cell; //obtengo coordenadas de raton
+			if (cell.getXY() != malas) {
+
+				cout << "coordenada:"<<cell.getXY() << endl;
+				tab.actualizarCasillasOcupadas();
+				tab.actualizarMovimientosPosibles();
+
+				mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
+				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
+					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
+					tab.cambiarTurno();
+
+					raton = PEDIR_COORDS;//cambiamos el estado del raton
+				}
+				else {//Si la pieza no se puede mover a la casilla seleccionada
+					raton = PEDIR_COORDS;
+					cout << "Movimiento seleccionado no permitido y vuelta al estado de standby" << endl;
+				}
+				
+			}
+
+		}
+		else if (raton == PEDIR_COORDS) {
+			if (tab.turno) {//turno blancas
+				//solo es válido obtener una pieza blanca
+				Coords aux = cell; //obtengo coordenadas
+				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
+					if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
+						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
+						
+						cout << cell.getXY() << endl;
+						cout << "Coordenadas de pieza de mover blanca recibida" << endl;
+
+						cell.setXY(-1,-1);
+						raton = COORDS_RECIBIDAS;
+					}
+				}
+
+			}
+			else {//turno negras
+				//solo es válido obtener una pieza negra
+				Coords aux = cell; //obtengo coordenadas
+				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
+					if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
+						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
+						
+						cout << "Coordenadas de pieza de mover negra recibida" << endl;
+						cell.setXY(-1,-1);
+						raton = COORDS_RECIBIDAS;
+					}
+				}
+
+
+			}
+		}
+	}
+}
+
+/*
 void Coordinador::te_mueves() {
 	//tab.actualizarMovimientosPosibles();
 	if ((estado == BATALLA && muevete) || (estado == MAQUINA && muevete)) {
 		mov->mover(tab.getMov_siguiente()); 
 	}
 }
-
+*/
 
 /*
 void Coordinador::tu_texto(string txt, int x, int y) {

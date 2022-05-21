@@ -13,6 +13,7 @@ private:
 	Tablero tab;
 	Pieza* mov;
 	bool muevete;
+	Coords malas;
 
 public:
 	Coordinador();
@@ -21,7 +22,7 @@ public:
 	void dibuja();
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
 	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
-	void te_mueves();
+	//void te_mueves();
 
 	/*
 	void tu_texto(string txt, int x, int y); //Escribir de izquierda a derecha
