@@ -94,9 +94,12 @@ bool Tablero::consultaCasilla(Coords const coordenada) {
 		return false;
 }
 
+void Tablero::borrarTab() {
+	lista_piezas.eliminar();;
+}
 
 Tablero::~Tablero() {
-	lista_piezas.eliminar();;
+	borrarTab();
 }
 
 void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
@@ -142,7 +145,30 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja(opcion);
 	}
-	
+	int z = 0;
+	int q = 9;
+	glColor3ub(255, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(z, q, -0.1);
+	glVertex3f(z, q + 1, -0.1);
+	glVertex3f(z + 1, q + 1, -0.1);
+	glVertex3f(z + 1, q, -0.1);
+	glEnd();
+
+	z = 7;
+	q = 9;
+	glColor3ub(0, 0, 255);
+	glBegin(GL_QUADS);
+	glVertex3f(z, q, -0.1);
+	glVertex3f(z, q + 1, -0.1);
+	glVertex3f(z + 1, q + 1, -0.1);
+	glVertex3f(z + 1, q, -0.1);
+	glEnd();
+
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
+	ETSIDI::setTextColor(0, 255, 128);
+	ETSIDI::printxy("BLANCAS SE RINDEN", -2, 8);
+	ETSIDI::printxy("NEGRAS SE RINDEN", 7, 8);
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
