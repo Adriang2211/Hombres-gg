@@ -58,7 +58,7 @@ void Tablero::inicializa(bool guardado) {
 			lista_piezas.agregarPieza(piezast[i]);
 	}
 	else {//HAY que inicializar lo que esté guardado en el fichero
-		leerPartida("partida.txt");
+		NombrePartidaCargar();
 	}
 
 	//Actualización de la situación
@@ -671,4 +671,10 @@ void Tablero::coronar(int opcion) {
 		lista_piezas.agregarPieza(nueva_pieza);
 		break;
 	}
+}
+void Tablero::NombrePartidaCargar() {
+	std::string nombrepartida;
+	std::cout << "introduce el nombre de la partida sin espacios" << std::endl;
+	std::cin >> nombrepartida;
+	leerPartida(nombrepartida);
 }

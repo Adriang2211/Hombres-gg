@@ -151,7 +151,27 @@ void Coordinador::dibuja() {
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
-	
+	else if (estado == GUARDADO)
+	{
+	gluLookAt(0, 10, 30, // posicion del ojo
+		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+	ETSIDI::setTextColor(1, 1, 0);
+	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+	ETSIDI::printxy("PULSE G OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+	ETSIDI::printxy("DE LA PARTIDA QUE DESEA GUARDAR (SIN ESPACIOS)", -10, 25);
+	ETSIDI::printxy("PULSE F PARA FINALIZAR", -10, 23);
+ }
+	else if (estado == CARGAR)
+	{
+	gluLookAt(0, 10, 30, // posicion del ojo
+		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+	ETSIDI::setTextColor(1, 1, 0);
+	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+	ETSIDI::printxy("PULSE 2 OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+	ETSIDI::printxy("DE LA PARTIDA QUE DESEA CARGAR (SIN ESPACIOS)", -10, 25);
+	 }
 }
 void Coordinador::tecla(unsigned char tecla) {
 
@@ -207,10 +227,10 @@ void Coordinador::tecla(unsigned char tecla) {
 				tab.inicializa();
 				break;
 			case '2':
-				estado = BATALLA;
+				
 				//INICIALIZACIÓN
-				tab.inicializa(true);
-
+				
+				estado = CARGAR;
 				break;
 			case 'i':
 			case 'I':
@@ -241,6 +261,14 @@ void Coordinador::tecla(unsigned char tecla) {
 			///
 
 			break;
+		}
+	}
+	else if (estado == CARGAR)
+	{
+		if (tecla == '2')
+		{
+			tab.inicializa(true);
+			estado = BATALLA;
 		}
 	}
 	else if (estado == BATALLA) {
@@ -287,15 +315,20 @@ void Coordinador::tecla(unsigned char tecla) {
 				break;
 			case 'g':
 			case 'G':
-				tab.guardarPartida("partida.txt");
+				
 				estado = GUARDADO;
-
+				break;
 		}
 	}
 	else if (estado == GUARDADO) {
-		
+	
+	
 		if (tecla == 'f' || tecla == 'F') {
 			estado = FIN;
+		}
+		else if (tecla == 'g' || tecla == 'G')
+		{
+		NombrePartidaGuardar();
 		}
 	}
 
@@ -398,4 +431,12 @@ void Coordinador::tu_raton() {
 		if (tab.detectarCoronar())
 			estado = CORONAR;
 	}
+}
+void Coordinador::NombrePartidaGuardar() {
+	std::string nombrepartida;
+	
+
+	std::cout << "introduce el nombre de la partida sin espacios" << std::endl;
+	std::cin >> nombrepartida;
+	tab.guardarPartida(nombrepartida);
 }

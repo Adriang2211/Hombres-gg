@@ -88,4 +88,5 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 
 	bool detectarCoronar();
 	void coronar(int opcion);
+	void NombrePartidaCargar();
 };
