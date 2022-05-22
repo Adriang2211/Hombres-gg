@@ -97,24 +97,24 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-	
+
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
-		
+
 		/*ETSIDI::setTextColor(255, 0, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
 		ETSIDI::printxy("PULSE 1 SI QUIERE PIEZAS CLASICAS", -10, 29);
 		ETSIDI::printxy("PULSE 2 SI QUIERE PIEZAS ", -10, 20);
 		*/
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja(false, mov,opcion);
+			tab.dibuja(false, mov, opcion);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja(true, mov,opcion);
+			tab.dibuja(true, mov, opcion);
 		}
 	}
-	
+
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
@@ -209,28 +209,29 @@ void Coordinador::dibuja() {
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
 
 	}
-	
+
 	else if (estado == GUARDADO)
 	{
-	gluLookAt(0, 10, 30, // posicion del ojo
-		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
-	ETSIDI::setTextColor(1, 1, 0);
-	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
-	ETSIDI::printxy("PULSE G OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
-	ETSIDI::printxy("DE LA PARTIDA QUE DESEA GUARDAR (SIN ESPACIOS)", -10, 25);
-	ETSIDI::printxy("PULSE F PARA FINALIZAR", -10, 23);
- }
+		gluLookAt(0, 10, 30, // posicion del ojo
+			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+		ETSIDI::printxy("PULSE G OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+		ETSIDI::printxy("DE LA PARTIDA QUE DESEA GUARDAR (SIN ESPACIOS)", -10, 25);
+		ETSIDI::printxy("PULSE F PARA FINALIZAR", -10, 23);
+	}
 	else if (estado == CARGAR)
 	{
-	gluLookAt(0, 10, 30, // posicion del ojo
-		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
-		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
-	ETSIDI::setTextColor(1, 1, 0);
-	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
-	ETSIDI::printxy("PULSE 2 OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
-	ETSIDI::printxy("DE LA PARTIDA QUE DESEA CARGAR (SIN ESPACIOS)", -10, 25);
-	
+		gluLookAt(0, 10, 30, // posicion del ojo
+			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+		ETSIDI::printxy("PULSE 2 OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+		ETSIDI::printxy("DE LA PARTIDA QUE DESEA CARGAR (SIN ESPACIOS)", -10, 25);
+
+	}
 }
 void Coordinador::tecla(unsigned char tecla) {
 
