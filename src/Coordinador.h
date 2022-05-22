@@ -6,7 +6,7 @@ using namespace std;
 
 class Coordinador {
 private:
-	enum Estado {INICIO, INSTRUCCIONES, PREGUNTAS_BAT, PREGUNTAS_MAQ, BATALLA, MAQUINA, PAUSE, GUARDADO, FIN};
+	enum Estado { INICIO, INSTRUCCIONES, PREGUNTAS_BAT, PREGUNTAS_MAQ, BATALLA, MAQUINA, PAUSE, GUARDADO, FIN, REND_BLANCO, REND_NEGRO };
 	Estado estado;
 	enum Raton {PEDIR_COORDS, COORDS_RECIBIDAS};
 	Raton raton;
@@ -15,6 +15,8 @@ private:
 	bool muevete;
 	Coords malas;
 	bool seleccion; //si true, se ha seleccionado jugar 1vs1; false contra maquina
+	bool rendicion_blanco = false;
+	bool rendicion_negro = false;
 
 public:
 	Coordinador();
@@ -23,7 +25,6 @@ public:
 	void dibuja();
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
 	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
-	//void te_mueves();
 
 	/*
 	void tu_texto(string txt, int x, int y); //Escribir de izquierda a derecha

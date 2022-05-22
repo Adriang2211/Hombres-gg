@@ -65,6 +65,8 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	Coords getMov_siguiente();
 	void setMov_siguiente(Coords coord);
 
+	void borrarTab();
+
 	//Función de prueba para mostrar en la consola la situación
 	//friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
 
