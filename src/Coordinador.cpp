@@ -10,6 +10,7 @@ Coordinador::Coordinador() {
 	malas = {-1, -1};
 	ETSIDI::playMusica("sonidos/ambiente.wav", true);
 	opcion = 0;
+	habilitar_mate = true;
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -29,11 +30,10 @@ void Coordinador::sacarcelda(int x, int y)
 		aux = cor;
 
 	}
-		
 	
 	if ((cell.getX() < 1 || cell.getY() > 8 || cell.getX() > 8 || cell.getY() < 1)) 
 		cell.setXY(-1, -1);//por si selecciona fuera de lacelda
-	cout << "(" << cell.getX() << "," << cell.getY() << ")" << endl; //test realizado para comprobar por consola que la celda seleccionada es la correcta
+	//cout << "(" << cell.getX() << "," << cell.getY() << ")" << endl; //test realizado para comprobar por consola que la celda seleccionada es la correcta
 }
 void Coordinador::dibuja() {
 
@@ -49,7 +49,6 @@ void Coordinador::dibuja() {
 		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 12);
 		ETSIDI::printxy("PULSE LA TECLA -i- PARA CONSULTAR LAS INSTRUCCIONES", -12, 29);
 		ETSIDI::printxy("PULSE LA TECLA -1- PARA INICIAR EL MODO BATALLA", -12, 28);
-		ETSIDI::printxy("PULSE LA TECLA -2- PARA INICIAR EL MODO MAQUINA", -12, 27);
 		ETSIDI::setTextColor(0, 255, 255);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);//ADRIAN & IGNACIO & SAMUEL & JOSHUA & ELOY
 
@@ -126,9 +125,12 @@ void Coordinador::dibuja() {
 		ETSIDI::printxy("MENU DE PAUSE", -19, 31);
 		ETSIDI::setTextColor(255, 0, 255);
 		ETSIDI::printxy("PULSE R SI QUIERE VOLVER AL JUEGO", -10, 29);
-		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 28);
-		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 27);
-		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 26);
+		ETSIDI::printxy("PULSE H SI QUIERE HABILITAR LA DETECCION DEL JAQUE MATE", -10, 28);
+		ETSIDI::printxy("PULSE D SI QUIERE DESHABILITAR LA DETECCION DEL JAQUE MATE", -10, 27);
+		ETSIDI::printxy("PULSE R SI QUIERE VOLVER AL JUEGO", -10, 26);
+		ETSIDI::printxy("PULSE F SI QUIERE FINALIZAR EL JUEGO", -10, 25);
+		ETSIDI::printxy("PULSE I SI QUIERE VOLVER AL INICIO", -10, 24);
+		ETSIDI::printxy("PULSE G SI QUIERE GUARDAR Y FINALIZAR EL JUEGO", -10, 23);
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
@@ -145,10 +147,11 @@ void Coordinador::dibuja() {
 
 		ETSIDI::setTextColor(0, 255, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-		ETSIDI::printxy("FIN DEL JUEGO", -19, 31);
-		ETSIDI::setTextColor(255, 0, 255);
-		ETSIDI::printxy("MUCHAS GRACIAS POR JUGAR", -19, 29);
-		ETSIDI::printxy("QUE TENGA UN BUEN DIA", -19, 28);
+		ETSIDI::printxy("FIN DEL JUEGO", -10, 38);
+		ETSIDI::setTextColor(0, 255, 0);
+		ETSIDI::printxy("MUCHAS GRACIAS POR JUGAR", -10, 27);
+		ETSIDI::printxy("QUE TENGA UN BUEN DIA", -10, 26);
+		ETSIDI::printxy("PULSE CUALQUIER TECLA PARA TERMINAR CON EL PROGRAMA", -10, 25);
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
@@ -224,6 +227,22 @@ void Coordinador::dibuja() {
 		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
 		ETSIDI::printxy("PULSE 2 OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
 		ETSIDI::printxy("DE LA PARTIDA QUE DESEA CARGAR (SIN ESPACIOS)", -10, 25);
+
+	}
+	else if (estado == JAQUE_MATE) {
+		gluLookAt(0, 10, 30, // posicion del ojo
+			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+		ETSIDI::setTextColor(1, 1, 0);
+		ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+		ETSIDI::printxy("SE HA DETECTADO UN JAQUE MATE", -10, 26);
+		if (tab.turno) {
+			ETSIDI::printxy("DE LAS PIEZAS NEGRAS", -10, 25);
+		}
+		else{
+			ETSIDI::printxy("DE LAS PIEZAS BLANCAS", -10, 25);
+		}
+		ETSIDI::printxy("PULSE F PARA FINALIZAR", -10, 24);
 
 	}
 }
@@ -312,6 +331,14 @@ void Coordinador::tecla(unsigned char tecla) {
 				estado = BATALLA;
 				raton = PEDIR_COORDS;//ASEGUNRARNOS DE PONER AL RATON EN STANBY
 				break;
+			case 'h':
+			case 'H'://cambiar la habilitacion del jaque
+				setMate(true);
+				break;
+			case 'd':
+			case 'D'://cambiar la habilitacion del jaque
+				setMate(false);
+				break;
 			case 'f':
 			case 'F':
 				//FINALIZAR
@@ -323,7 +350,7 @@ void Coordinador::tecla(unsigned char tecla) {
 
 				//borrar la partida anterior, de otra forma al volver a iniciar otra partida, continuariamos con aquella donde nos hemos rendido
 				tab.borrarTab();
-
+				tab.turno = true;
 				estado = INICIO;
 				break;
 			case 'g':
@@ -356,64 +383,39 @@ void Coordinador::tecla(unsigned char tecla) {
 			exit(1);
 		}
 	}
+	else if (estado == JAQUE_MATE) {//SE HA DETECTADO UN JAQUE MATE
+		if (tecla == 'f' || tecla == 'F') {
+			estado = FIN;
+		}
+	}
 
 	else if (estado == FIN) {//el juego ha finalizado, cualquier tecla para finalizar
 		//HAY QUE FINALIZAR EL JUEGO
 		exit(1);
 	}
-	/*
-	else if (estado == CORONAR) {
-		switch (tecla) {
-			case 't':
-			case 'T':
-				tab.coronar(1);
-				estado = BATALLA;
-				break;
-			case 'c':
-			case 'C':
-				tab.coronar(2);
-				estado = BATALLA;
-				break;
-			case 'A':
-			case 'a':
-				tab.coronar(3);
-				estado = BATALLA;
-				break;
-			case 'D':
-			case 'd':
-				tab.coronar(4);
-				estado = BATALLA;
-				break;
-		}
-		
-
-	}*/
 
 }
 
 
 void Coordinador::tu_raton() {
 	if (estado == BATALLA) {
-		//cout << tab;
 		if (raton == COORDS_RECIBIDAS) {//coordenadas recibidas
 			//No es necesario hacer distincion entre color al que le toque jugar(la implementacion es la misma)
 			
-			cout << "listo para mover" << endl;
 			Coords aux = cell; //obtengo coordenadas de raton
 			if (cell.getXY() != malas) {
 
-				cout << "coordenada:"<<cell.getXY() << endl;
 				tab.actualizarCasillasOcupadas();
 				tab.actualizarMovimientosPosibles();
 
 				//mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso 
 				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
-					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
 					tab.cambiarTurno();
 					if (tab.jaqueAlRey(true) || tab.jaqueAlRey(false)) {
-						std::cout << "Jaque detectado" << std::endl;
-						if (tab.jaqueMate(true) || tab.jaqueMate(false)) {
-							std::cout << "Jaque mate" << std::endl;
+						if (habilitar_mate) {
+							if (tab.jaqueMate(true) || tab.jaqueMate(false)) {
+								estado = JAQUE_MATE;
+							}
 						}
 					}
 
@@ -421,7 +423,6 @@ void Coordinador::tu_raton() {
 				}
 				else {//Si la pieza no se puede mover a la casilla seleccionada
 					raton = PEDIR_COORDS;
-					cout << "Movimiento seleccionado no permitido y vuelta al estado de standby" << endl;
 					ETSIDI::play("sonidos/error.wav"); //linea agregada
 				}
 				
@@ -436,9 +437,6 @@ void Coordinador::tu_raton() {
 					if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
 						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
 						
-						cout << cell.getXY() << endl;
-						cout << "Coordenadas de pieza de mover blanca recibida" << endl;
-
 						cell.setXY(-1,-1);
 						raton = COORDS_RECIBIDAS;
 					}
@@ -452,7 +450,6 @@ void Coordinador::tu_raton() {
 					if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
 						mov = tab.getPiezaEn(aux); // nuestro puntero a pieza que se mueve corresponde con uno de la lista de piezas
 						
-						cout << "Coordenadas de pieza de mover negra recibida" << endl;
 						cell.setXY(-1,-1);
 						raton = COORDS_RECIBIDAS;
 					}
@@ -494,9 +491,12 @@ void Coordinador::tu_raton() {
 }
 void Coordinador::NombrePartidaGuardar() {
 	std::string nombrepartida;
-	
 
 	std::cout << "introduce el nombre de la partida sin espacios" << std::endl;
 	std::cin >> nombrepartida;
 	tab.guardarPartida(nombrepartida);
+}
+
+void Coordinador::setMate(bool op) {
+	habilitar_mate = op;
 }

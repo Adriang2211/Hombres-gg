@@ -239,7 +239,11 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion, bool coronacion) {
 	ETSIDI::printxy("QUIERE PIEZA CLASICA", -2, -1);
 	ETSIDI::printxy("PULSE 2 SI", 8, 0);
 	ETSIDI::printxy("QUIERE PIEZA BARROCA", 7, -1);
-	
+
+	if (jaqueAlRey(true) || jaqueAlRey(false)) {//si se tecta JAQUE
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 20);
+		ETSIDI::printxy("JAQUE", 3, 9);
+	}
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
