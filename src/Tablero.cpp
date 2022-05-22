@@ -448,69 +448,6 @@ bool Tablero::enroque_corto_negras() {
 		return false;
 }
 
-/*
-using namespace std;
-ostream& operator << (ostream& os, const Tablero& tab) {
-	os << "SITUACION ACTUAL DEL TABLERO: " << endl;
-	os << "Turno: " << tab.turno << endl;
-	os << "Numero de jugada: " << tab.jugada << endl;
-	os << "Piezas y sus posiciones:" << endl;
-	os << "_______________________________________________________________________________________" << endl;
-	for (int i = 0; i < NUMERO_DE_PIEZAS; i++) {
-		
-		//if (*(tab.lista_piezas + i) != NULL) {
-			switch (tab.lista_piezas.getPieza(i)->id) {
-			case 1:
-				os << "Torre" << endl;
-				break;
-			case 2:
-				os << "Caballo" << endl;
-				break;
-			case 3:
-				os << "Alfil" << endl;
-				break;
-			case 4:
-				os << "Dama" << endl;
-				break;
-			case 5:
-				os << "Rey" << endl;
-				break;
-			case 6:
-				os << "Peon" << endl;
-				break;
-			default:
-				os << "Ooops. Se ha producido un error." << endl;
-			}
-			//Color de la pieza
-			if (tab.lista_piezas.getPieza(i)->getColor())
-				os << "\tColor: blanco" << endl;
-			else
-				os << "\tColor: negro" << endl;
-
-			//Coordenadas de la pieza
-			os << "\tCoordenadas: " << tab.lista_piezas.getPieza(i)->getCoordenadas() << endl;
-
-			//Movimientos posibles de la pieza
-			os << "\tLista de casillas a las que puede ir la pieza: " << endl << "\t";
-			Coords coordenadas_vacias = { 9,9 };
-			for (int j = 0; j < MAX_MOV; j++) {
-				if (tab.lista_piezas.getPieza(i)->coordenadas_disponibles[j] != coordenadas_vacias)
-					os << tab.piezas[i]->coordenadas_disponibles[j];
-			}
-			os << endl << "________________________________" << endl;
-		//}
-	}
-	os << endl << "Casillas ocupadas blancas:" << endl;
-	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
-		os << tab.casillas_ocupadas_blancas[i] << endl;
-	os << "___________________________________" << endl;
-	os << endl << "Casillas ocupadas negras:" << endl;
-	for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++)
-		os << tab.casillas_ocupadas_negras[i] << endl;
-	return os;
-}
-*/
-
 
 void Tablero::actualizarMovimientosPosibles() {
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
@@ -599,37 +536,6 @@ void Tablero::setMov_siguiente(Coords coord) {
 	mov_siguiente = coord;
 }
 
-
-
-
-
-
-
-
-/* En progreso...
-bool Tablero::jaqueMate(bool color) {
-	int index_rey=0;
-	for (int i = 0; i < numero; i++) {
-		if (piezas[i]->getColor() == color && piezas[i]->id == REY) {
-			index_rey = i;
-			break;
-		}
-	}
-}
-*/
-
-void Tablero::generarLista() {
-	Movimiento mov;
-	Coords coordenadas_no_validas = { 9,9 };
-	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
-		for (int j = 0; j < lista_piezas.getNumeroPiezas(); j++) {
-			if (lista_piezas.getPieza(i)->getCoordenadas() == coordenadas_no_validas) {
-				mov.index = i; //Guardar la posición de la pieza en el array
-				mov.destino = lista_piezas.getPieza(i)->coordenadas_disponibles[j]; //Guardar el destino
-			}
-		}
-	}
-}
 
 
 int Tablero::getPuntuacion(bool color) {

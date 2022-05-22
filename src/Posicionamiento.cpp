@@ -31,7 +31,7 @@ Coords Coords::getXY() const{
 }
 
 using namespace std;
-ostream& operator << (ostream& os, const Coords& coordenadas) {
+ostream& operator << (ostream& os, const Coords& coordenadas) { //Sobrecarga para pruebas por consola
 	os << "[";
 	switch (coordenadas.getX()) {
 	case 0: //Para cuando una pieza se ha comido y se ha "sacado" del tablero

@@ -5,7 +5,6 @@
 #include "Torre.h"
 #include "Rey.h"
 #include "Caballo.h"
-#include "ListaMovimientos.h"
 #include "ListaPiezas.h"
 
 
@@ -22,19 +21,15 @@ private:
 	friend void Rey::movimientos();
 	bool juego_Terminado;
 
+	ListaPiezas lista_piezas;
 	Coords mov_siguiente;
+
+	friend bool Pieza::mover(Coords destino); //Para que pueda acceder a la lista de piezas
 
 public: //Por ahora de forma temporal muchas cosas son publicas
 
 	Tablero();
-
 	bool turno;
-	int jugada = 0;
-
-
-	ListaPiezas lista_piezas;
-
-
 	void dibuja(bool marca, Pieza * pieza, int opcion, bool coronacion);
 	void inicializa(bool guardado = false);
 	void actualizarMovimientosPosibles();
@@ -65,20 +60,12 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 
 	void borrarTab();
 
-	//Función de prueba para mostrar en la consola la situación
-	//friend std::ostream& operator << (std::ostream& os, const Tablero& tab);
-
 	//Destructor
 	~Tablero();
 
 
 	//Test
 	void generarTest(); //Genera una situacion de test correspondiente a una partida recien comenzada.
-
-
-	//Calculo de movimientos posibles
-	ListaMovimientos lista;
-	void generarLista();
 
 	//Calcular la puntuacion de un jugador
 	int getPuntuacion(bool color);
