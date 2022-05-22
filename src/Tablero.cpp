@@ -234,10 +234,12 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion, bool coronacion) {
 	AyudaTexto::tu_texto("SE RINDEN", 10, 9, 0.25);
 	ETSIDI::setTextColor(255, 0, 255);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-	/*
-	ETSIDI::printxy("PULSE 1 SI QUIERE PIEZA CLASICA", -2, -1);
-	ETSIDI::printxy("PULSE 2 SI QUIERE PIEZA BARROCA", 5, -1);
-	*/
+	
+	ETSIDI::printxy("PULSE 1 SI", -2, 0);
+	ETSIDI::printxy("QUIERE PIEZA CLASICA", -2, -1);
+	ETSIDI::printxy("PULSE 2 SI", 8, 0);
+	ETSIDI::printxy("QUIERE PIEZA BARROCA", 7, -1);
+	
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
