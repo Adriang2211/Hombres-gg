@@ -49,7 +49,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	int getIndexPiezaEn(Coords const coordenada) { return lista_piezas.getIndexPiezaEn(coordenada); };
 
 	bool jaqueAlRey(bool color); //Detecta si el rey del color especificado esta en jaque
-	//bool jaqueMate(bool color); //Compreba si se produce jaque mate.
+	bool jaqueMate(bool color); //Compreba si se produce jaque mate.
 
 	Coords casillas_ocupadas_blancas[NUMERO_DE_PIEZAS/2];
 	Coords casillas_ocupadas_negras[NUMERO_DE_PIEZAS/2];

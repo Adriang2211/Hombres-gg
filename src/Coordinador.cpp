@@ -410,6 +410,12 @@ void Coordinador::tu_raton() {
 				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
 					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
 					tab.cambiarTurno();
+					if (tab.jaqueAlRey(true) || tab.jaqueAlRey(false)) {
+						std::cout << "Jaque detectado" << std::endl;
+						if (tab.jaqueMate(true) || tab.jaqueMate(false)) {
+							std::cout << "Jaque mate" << std::endl;
+						}
+					}
 
 					raton = PEDIR_COORDS;//cambiamos el estado del raton
 				}
