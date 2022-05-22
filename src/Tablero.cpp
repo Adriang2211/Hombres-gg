@@ -103,7 +103,7 @@ Tablero::~Tablero() {
 	borrarTab();
 }
 
-void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
+void Tablero::dibuja(bool marca, Pieza * pieza, int opcion, bool coronacion) {
 
 	int N = 8;
 	for (int j = 0; j < N; j++) {
@@ -146,6 +146,66 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
 		lista_piezas.getPieza(i)->dibuja(opcion);
 	}
+
+	bool turno_cont;
+	if (turno)
+		turno_cont = false;
+	else
+		turno_cont = true;
+
+	if (coronacion) {//si estamos en el estado de coronacion
+		if (turno_cont) {
+			for (int i = 0; i < 4; i++) {
+				int j = 8;
+				glColor3ub(255, 255, 0);
+				glBegin(GL_QUADS);
+				glVertex3f(2 + i, j, -0.1);
+				glVertex3f(2 + i, j + 1, -0.1);
+				glVertex3f(i + 1 + 2, j + 1, -0.1);
+				glVertex3f(i + 1 + 2, j, -0.1);
+				glEnd();
+			}
+
+
+			Dama d(turno_cont, 3, 9, this);
+			d.dibuja(opcion);
+
+			Torre t(turno_cont, 4, 9, this);
+			t.dibuja(opcion);
+
+			Caballo c(turno_cont, 5, 9, this);
+			c.dibuja(opcion);
+
+			Alfil a(turno_cont, 6, 9, this);
+			a.dibuja(opcion);
+		}
+		else {
+			for (int i = 0; i < 4; i++) {
+				int j = -1;
+				glColor3ub(255, 255, 0);
+				glBegin(GL_QUADS);
+				glVertex3f(2 + i, j, -0.1);
+				glVertex3f(2 + i, j + 1, -0.1);
+				glVertex3f(i + 1 + 2, j + 1, -0.1);
+				glVertex3f(i + 1 + 2, j, -0.1);
+				glEnd();
+			}
+
+
+			Dama d(turno_cont, 3, 0, this);
+			d.dibuja(opcion);
+
+			Torre t(turno_cont, 4, 0, this);
+			t.dibuja(opcion);
+
+			Caballo c(turno_cont, 5, 0, this);
+			c.dibuja(opcion);
+
+			Alfil a(turno_cont, 6, 0, this);
+			a.dibuja(opcion);
+		}
+	}
+
 	int z = 0;
 	int q = 9;
 	glColor3ub(255, 0, 0);
@@ -174,8 +234,10 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 	AyudaTexto::tu_texto("SE RINDEN", 10, 9, 0.25);
 	ETSIDI::setTextColor(255, 0, 255);
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+	/*
 	ETSIDI::printxy("PULSE 1 SI QUIERE PIEZA CLASICA", -2, -1);
 	ETSIDI::printxy("PULSE 2 SI QUIERE PIEZA BARROCA", 5, -1);
+	*/
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
@@ -668,7 +730,7 @@ void Tablero::leerPartida(std::string p_guardada) {
 
 bool Tablero::detectarCoronar() {
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
-		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8) {
+		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8 || lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 1) {
 			return true;
 		}
 	}
@@ -678,7 +740,7 @@ bool Tablero::detectarCoronar() {
 void Tablero::coronar(int opcion) {
 	Pieza peon_que_corona;
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
-		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8) {
+		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8 || lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 1) {
 			peon_que_corona = *lista_piezas.getPieza(i);
 			lista_piezas.eliminarPieza(i);
 		}

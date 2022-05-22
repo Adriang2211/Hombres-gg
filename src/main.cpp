@@ -1,7 +1,5 @@
 #include "freeglut.h"
 #include <iostream>
-#include "ETSIDI.h"
-#include "Piezas.h"
 #include "Coordinador.h"
 
 void OnDraw(void); //esta funcion sera llamada para dibujar
@@ -55,11 +53,7 @@ void OnDraw(void)
 
 	//aqui es donde hay que poner el código de dibujo
 
-	
-	master.dibuja();
-
-	//tablero2.dibuja(); //Prueba, no se elimina porque todavía no está 100% operativo el coordinador.
-	
+	master.dibuja();	
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
@@ -80,7 +74,6 @@ void OnTimer(int value)
 	glutPostRedisplay();
 }
 void MouseButton(int button, int down, int x, int y) {
-
 
 	//finally cell coordinates
 
