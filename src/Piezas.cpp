@@ -2,6 +2,11 @@
 #include "Posicionamiento.h"
 #include "Tablero.h"
 #include <iostream>
+#include "Torre.h"
+#include "caballo.h"
+#include "Alfil.h"
+#include "Dama.h"
+#include "Peon.h"
 
 bool Pieza::getColor()
 {
@@ -28,12 +33,17 @@ bool Pieza::mover(Coords destino) {
 	//también si se producen jaques descubiertos, que son más difíciles de detectar antes de haber probado a hacer
 	//el movimiento, cosa que se hace en esta función.
 	Coords coordenadas_originales = coordenadas;
-	Pieza* copia_comida = nullptr;
+	Pieza* devolver = nullptr;
+	int id_copia;
+	Coords coordenadas_copia;
+	bool color_copia;
 	bool intenta_comer = false;
 	for (int i = 0; i < MAX_MOV; i++) {
 		if (destino == coordenadas_disponibles[i]) {
 			if (tab->consultaCasilla(destino)) { //Comprueba si hay una pieza para comerla (eliminarla)
-				copia_comida = tab->getPiezaEn(destino);
+				id_copia = tab->getPiezaEn(destino)->id;
+				coordenadas_copia = tab->getPiezaEn(destino)->getCoordenadas();
+				color_copia = tab->getPiezaEn(destino)->getColor();
 				intenta_comer = true;
 				tab->lista_piezas.eliminarPieza(tab->getIndexPiezaEn(destino));
 			}
@@ -76,18 +86,37 @@ bool Pieza::mover(Coords destino) {
 
 			tab->actualizarCasillasOcupadas();
 			tab->actualizarMovimientosPosibles();
-
+			
 			//En caso de jaque reestablecer la situación inicial y salir devolviendo false.
 			if (tab->jaqueAlRey(getColor())) {
 				coordenadas = coordenadas_originales;
-				if (intenta_comer)
-					tab->lista_piezas.agregarPieza(copia_comida);
+				if (intenta_comer) {
+					switch (id_copia) {
+					case 1:
+						devolver = new Torre(color_copia, coordenadas_copia.getX(), coordenadas_copia.getY(), this->tab);
+						tab->lista_piezas.agregarPieza(devolver);
+						break;
+					case 2:
+						devolver = new Caballo(color_copia, coordenadas_copia.getX(), coordenadas_copia.getY(), this->tab);
+						tab->lista_piezas.agregarPieza(devolver);
+						break;
+					case 3:
+						devolver = new Alfil (color_copia, coordenadas_copia.getX(), coordenadas_copia.getY(), this->tab);
+						tab->lista_piezas.agregarPieza(devolver);
+						break;
+					case 4:
+						devolver = new Dama(color_copia, coordenadas_copia.getX(), coordenadas_copia.getY(), this->tab);
+						tab->lista_piezas.agregarPieza(devolver);
+						break;
+					case 6:
+						devolver = new Peon(color_copia, coordenadas_copia.getX(), coordenadas_copia.getY(), this -> tab);
+						tab->lista_piezas.agregarPieza(devolver);
+						break;
+					}
+				}
+					
 				return false;
 			}
-
-				
-
-
 			tab->actualizarCasillasOcupadas();
 			tab->actualizarMovimientosPosibles();
 			return true;
