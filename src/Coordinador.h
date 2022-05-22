@@ -6,16 +6,14 @@ using namespace std;
 
 class Coordinador {
 private:
-	enum Estado { INICIO, INSTRUCCIONES, PREGUNTAS_BAT, PREGUNTAS_MAQ, BATALLA, MAQUINA, PAUSE, GUARDADO, FIN, REND_BLANCO, REND_NEGRO, CORONAR,CARGAR };
-
+	enum Estado { INICIO, INSTRUCCIONES, PREGUNTAS_BAT,  BATALLA, PAUSE, GUARDADO, FIN, REND_BLANCO, REND_NEGRO, CORONAR,CARGAR };
 	Estado estado;
-	enum Raton {PEDIR_COORDS, COORDS_RECIBIDAS};
+	enum Raton {PEDIR_COORDS, COORDS_RECIBIDAS, DETENCION};
 	Raton raton;
 	Tablero tab;
 	Pieza* mov;
-	bool muevete;
 	Coords malas;
-	bool seleccion; //si true, se ha seleccionado jugar 1vs1; false contra maquina
+	Coords aux;
 
 	bool rendicion_blanco = false;
 	bool rendicion_negro = false;
@@ -29,10 +27,9 @@ public:
 	void dibuja();
 
 	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
-	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
+	void tu_raton(); //Funcion para la gestion de los turnos que se introducen por el raton
 	int getopcion(){ return opcion; };
 	void setopcion(int a) { opcion = a; }
-					 //void te_mueves();
 	void NombrePartidaGuardar(); //poner nombre a la partida
 	//cargar partida con nombre ""
 

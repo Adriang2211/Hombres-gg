@@ -7,7 +7,6 @@ Coordinador::Coordinador() {
 	estado = INICIO;
 	raton = PEDIR_COORDS;
 	cell = {-1, -1};
-	muevete = false;
 	malas = {-1, -1};
 	ETSIDI::playMusica("sonidos/ambiente.wav", true);
 	opcion = 0;
@@ -16,6 +15,7 @@ void Coordinador::sacarcelda(int x, int y)
 {
 	Coords r_1 = {1, 10};
 	Coords r_2 = { 8, 10 };
+	
 	cell.setX((int)(((x - 190) / 65) + 1));//las variables son x: pos x del click del mouse, 189, separacion a la izquierda tab-ventana, 65 ancho de casilla
 	cell.setY((int)(((709 - y) / 65) + 1));//las variables son y: pos y del click del mouse, 588, separacion de arriba a la esquina inferior izqd del tablero, 65 ancho de casilla
 	
@@ -23,6 +23,12 @@ void Coordinador::sacarcelda(int x, int y)
 		rendicion_blanco = true;
 	if (cell.getXY() == r_2 && tab.turno == false)
 		rendicion_negro = true;
+
+	if (estado == CORONAR) {
+		Coords cor(cell.getX(), cell.getY());
+		aux = cor;
+
+	}
 		
 	
 	if ((cell.getX() < 1 || cell.getY() > 8 || cell.getX() > 8 || cell.getY() < 1)) 
@@ -55,8 +61,7 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		ETSIDI::printxy("INSTRUCCIONES DEL AJEDREZ:", -13, 31);
-		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);///////////////////////////////////////////////////////////////////////////////////////////
-		//ETSIDI::printxy("HOMBRES GG", 11, 2);
+		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
 		ETSIDI::setTextColor(1, 1, 1);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		ETSIDI::printxy("EL AJEDREZ ES UN JUEGO DE 1 CONTRA 1", -12, 29);
@@ -79,16 +84,14 @@ void Coordinador::dibuja() {
 		ETSIDI::printxy("PULSE LA TECLA -F- PARA FINALIZAR EL PROGRAMA", -12, 15);
 		ETSIDI::setTextColor(0, 255, 255);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);//Adrian & Ignacio & Samuel & Joshua & Eloy
 	}
-	else if (estado == PREGUNTAS_BAT || estado == PREGUNTAS_MAQ) {
+	else if (estado == PREGUNTAS_BAT) {
 		gluLookAt(0, 10, 30, // posicion del ojo
 			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-		//ETSIDI::printxy("HOMBRES GG", 15, 2);
 		ETSIDI::setTextColor(0, 255, 128);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
 		ETSIDI::printxy("SI QUIERE COMENZAR UNA NUEVA PARTIDA PULSE 1", -10, 29);
@@ -98,22 +101,22 @@ void Coordinador::dibuja() {
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
 
-		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
-	else if (estado == BATALLA || estado == MAQUINA) {
+	else if (estado == BATALLA) {
 
-
-		
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja(false, mov, opcion);
+			tab.dibuja(false, mov, opcion, false);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja(true, mov, opcion);
+			tab.dibuja(true, mov, opcion, false);
 		}
+	}
+	else if(estado == CORONAR) {
+		tab.dibuja(false, mov, opcion, true);
 	}
 
 	else if (estado == PAUSE) {
-		//INTERFAZDE PAUSE
+		//INTERFAZ DE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
 			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
@@ -129,15 +132,13 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-		//ETSIDI::printxy("HOMBRES GG", 15, 2);
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
+
 	}
 	else if (estado == FIN) {
 		//estado final
-		//INTERFAZDE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
 			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
 			0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
@@ -151,11 +152,9 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-		//ETSIDI::printxy("HOMBRES GG", 15, 2);
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
-		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 
 	else if (estado == REND_BLANCO) {//Los blancos se han rendido
@@ -176,7 +175,6 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-		//ETSIDI::printxy("HOMBRES GG", 15, 2);
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
@@ -200,7 +198,6 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(1, 1, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		AyudaTexto::tu_texto("HOMBRES GG", 16, 2, 0.7);
-		//ETSIDI::printxy("HOMBRES GG", 15, 2);
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
@@ -233,26 +230,21 @@ void Coordinador::dibuja() {
 void Coordinador::tecla(unsigned char tecla) {
 
 	if (estado == INICIO) {
-		//INICILIZAR
 
 		switch (tecla) {
 			case 'i':
 			case 'I':
 				//Ir al estado de INSTRUCCIONES
 				estado = INSTRUCCIONES;
-				//Hay que hacer algo más?
 				break;
 			case '1':
 				//Ir al estado de 1 vs 1
 				estado = PREGUNTAS_BAT;
-				seleccion = true;
-				//INICIALIZA
 				break;
-			case '2':///////////////////////////////////////////////////////////////
-				//Ir al estado vs la máquina
-				estado = PREGUNTAS_MAQ;
-				seleccion = false;
-				//INICIALIZA
+			case 'f':
+			case 'F':
+				//finalizar el programa
+				estado = FIN;
 				break;
 		}	
 	}
@@ -263,14 +255,12 @@ void Coordinador::tecla(unsigned char tecla) {
 			case 'I':
 				//Regresar al estado inicial
 				estado = INICIO;
-				///
 
 				break;
 			case 'f':
 			case 'F':
 				//Ir al final del todo
 				estado = FIN;
-				///
 
 				break;
 		}
@@ -283,41 +273,15 @@ void Coordinador::tecla(unsigned char tecla) {
 				//INICIALIZACIÓN
 				tab.inicializa();
 				break;
-			case '2':
-				
-				//INICIALIZACIÓN
-				
+			case '2'://caso en el que hay que cargar una partida
+				//pasamos al estado de CARGAR
 				estado = CARGAR;
 				break;
 			case 'i':
 			case 'I':
 				//Regresar al estado inicial
 				estado = INICIO;
-				///
-
 				break;
-		}
-	}
-	else if (estado == PREGUNTAS_MAQ) {
-		switch (tecla) {
-		case '1'://caso en el que hay que empezar una partida nueva
-			estado = MAQUINA;
-			//INICIALIZACIÓN
-			tab.inicializa();
-			break;
-		case '2':
-			estado = MAQUINA;
-			//INICIALIZACIÓN
-			tab.inicializa(true);
-
-			break;
-		case 'i':
-		case 'I':
-			//Regresar al estado inicial
-			estado = INICIO;
-			///
-
-			break;
 		}
 	}
 	else if (estado == CARGAR)
@@ -332,16 +296,11 @@ void Coordinador::tecla(unsigned char tecla) {
 		if (tecla == 'p' || tecla == 'P') {
 			estado = PAUSE;
 		}
-		else if (tecla == '1') {
+		else if (tecla == '1') {//FUNCIONES PARA CAMBIAR LA TEXTURA DE LAS PIEZAS
 			setopcion(0);
 		}
 		else if (tecla == '2') {
 			setopcion(1);
-		}
-	}
-	else if (estado == MAQUINA) {
-		if (tecla == 'p' || tecla == 'P') {
-			estado = PAUSE;
 		}
 	}
 	else if (estado == PAUSE) {
@@ -350,25 +309,22 @@ void Coordinador::tecla(unsigned char tecla) {
 			case 'r':
 			case 'R':
 				//retornar a la partida
-				if (seleccion) {
-					estado = BATALLA;
-				}
-				else {
-					estado = MAQUINA;
-				}
-				raton = PEDIR_COORDS;
+				estado = BATALLA;
+				raton = PEDIR_COORDS;//ASEGUNRARNOS DE PONER AL RATON EN STANBY
 				break;
 			case 'f':
 			case 'F':
-				/////destruir lo que sea necesario
+				//FINALIZAR
 				estado = FIN;
-				
 				break;
 			case 'i':
 			case 'I':
 				//destruir lo que sea necesario y volver al inicio
-				estado = INICIO;
 
+				//borrar la partida anterior, de otra forma al volver a iniciar otra partida, continuariamos con aquella donde nos hemos rendido
+				tab.borrarTab();
+
+				estado = INICIO;
 				break;
 			case 'g':
 			case 'G':
@@ -405,6 +361,7 @@ void Coordinador::tecla(unsigned char tecla) {
 		//HAY QUE FINALIZAR EL JUEGO
 		exit(1);
 	}
+	/*
 	else if (estado == CORONAR) {
 		switch (tecla) {
 			case 't':
@@ -428,8 +385,9 @@ void Coordinador::tecla(unsigned char tecla) {
 				estado = BATALLA;
 				break;
 		}
+		
 
-	}
+	}*/
 
 }
 
@@ -448,7 +406,7 @@ void Coordinador::tu_raton() {
 				tab.actualizarCasillasOcupadas();
 				tab.actualizarMovimientosPosibles();
 
-				//mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso ////////////////////////////////////////////////////////////////////////////CONSULTAR GRUPO
+				//mov->movimientos(); //Actualizamos la lista de movimientos disponibles por si acaso 
 				if (mov->mover(aux)) {//Si se puede mover la pieza a la casilla seleccionada, se mueve
 					cout << "Movimiento seleccionado permitido, bien jugado" << endl;
 					tab.cambiarTurno();
@@ -498,8 +456,6 @@ void Coordinador::tu_raton() {
 			}
 		}
 
-		
-		//
 		if (rendicion_blanco == true) {//los blancos se rinden
 			estado = REND_BLANCO;
 		}
@@ -507,9 +463,27 @@ void Coordinador::tu_raton() {
 			estado = REND_NEGRO;
 		}
 
-		if (tab.detectarCoronar())
+		if (tab.detectarCoronar()) { //se cambia al estado de coronacion
 			estado = CORONAR;
+		}
 
+	}
+	else if (estado == CORONAR) {
+		Coords d_b(3, 9), t_b(4, 9), c_b(5,9), a_b(6,9);
+		Coords d_n(3, 1), t_n(4, 1), c_n(5, 1), a_n(6, 1);
+		if (aux == d_b || aux == d_n) {//se han seleccionado la dama
+			tab.coronar(4);
+		}
+		else if (aux == t_b || aux == t_n) {//se ha seleccionado la torre
+			tab.coronar(1);
+		}
+		else if (aux == c_b || aux == t_n) {//se ha seleccionado el caballo
+			tab.coronar(2);
+		}
+		else if (aux == a_b || aux == a_n) {//se ha seleccionado el alfil
+			tab.coronar(3);
+		}
+		estado = BATALLA;
 	}
 }
 void Coordinador::NombrePartidaGuardar() {

@@ -24,8 +24,6 @@ private:
 
 	Coords mov_siguiente;
 
-
-
 public: //Por ahora de forma temporal muchas cosas son publicas
 
 	Tablero();
@@ -37,7 +35,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	ListaPiezas lista_piezas;
 
 
-	void dibuja(bool marca, Pieza * pieza, int opcion);
+	void dibuja(bool marca, Pieza * pieza, int opcion, bool coronacion);
 	void inicializa(bool guardado = false);
 	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords const coordenada);
