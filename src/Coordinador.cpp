@@ -91,6 +91,11 @@ void Coordinador::dibuja() {
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
+
+		ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+		ETSIDI::printxy("PULSE 1 SI QUIERE PIEZAS CLASICAS", -20, 29);
+		ETSIDI::printxy("PULSE 2 SI QUIERE PIEZAS ", -10,0);
 		if (raton == PEDIR_COORDS) {
 			tab.dibuja(false, mov,opcion);
 		}
@@ -98,6 +103,7 @@ void Coordinador::dibuja() {
 			tab.dibuja(true, mov,opcion);
 		}
 	}
+	
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
