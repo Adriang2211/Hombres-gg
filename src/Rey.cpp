@@ -337,7 +337,7 @@ void Rey::dibuja(int opc) {
 	}
 	else if (opc == 1)
 	{
-		if (color == true) {
+		if (color == false) {
 			reyDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			reyDorado.setSize(1, 1);
 			reyDorado.draw();

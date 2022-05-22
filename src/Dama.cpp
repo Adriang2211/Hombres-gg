@@ -320,7 +320,7 @@ void Dama::dibuja(int opc) {
 	}
 	else if (opc == 1)
 	{
-		if (color == true) {
+		if (color == false) {
 			damaDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			damaDorado.setSize(1, 1);
 			damaDorado.draw();

@@ -202,7 +202,7 @@ void Alfil::dibuja(int opc) {
 	else if (opc == 1)
 	{
 
-		if (color == true) {
+		if (color == false) {
 			alfilDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			alfilDorado.setSize(1, 1);
 			alfilDorado.draw();

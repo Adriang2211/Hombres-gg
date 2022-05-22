@@ -134,7 +134,7 @@ void Peon::dibuja(int opc) {
 	}
 	else if (opc == 1)
 	{
-		if (color == true) {
+		if (color == false) {
 			peonDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			peonDorado.setSize(1, 1);
 			peonDorado.draw();

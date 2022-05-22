@@ -203,7 +203,7 @@ void Torre::dibuja(int opc) {
 	}
 	else if (opc == 1)
 	{
-		if (color == true) {
+		if (color == false) {
 			torreDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			torreDorado.setSize(1, 1);
 			torreDorado.draw();

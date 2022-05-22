@@ -154,7 +154,7 @@ void Caballo::dibuja(int opc) {
 	}
 	else if (opc == 1)
 	{
-		if (color == true) {
+		if (color == false) {
 			caballoDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
 			caballoDorado.setSize(1, 1);
 			caballoDorado.draw();
