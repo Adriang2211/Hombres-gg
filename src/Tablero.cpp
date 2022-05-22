@@ -711,3 +711,16 @@ void Tablero::NombrePartidaCargar() {
 	std::cin >> nombrepartida;
 	leerPartida(nombrepartida);
 }
+
+bool Tablero::jaqueMate(bool color) {
+	bool movimiento_encontrado = false;;
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->getColor() == color && lista_piezas.getPieza(i)->id == REY) {
+			for (int j = 0; j < MAX_MOV; j++) {
+				if (!casillaAtacada(lista_piezas.getPieza(i)->coordenadas_disponibles[j], !color))
+					return false;
+			}
+		}
+	}
+	return true;
+}
