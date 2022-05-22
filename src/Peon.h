@@ -5,6 +5,9 @@ using ETSIDI::Sprite;
 class Peon :public Pieza {
 	Sprite peonBlancas{ "imagenes/peonBlanco.png" };
 	Sprite peonNegras{ "imagenes/peonNegro.png" };
+
+	Sprite peonDorado{ "imagenes/peonDorado.png" };
+	Sprite peonPlata{ "imagenes/peonPlata.png" };
 public:
 	Peon(bool color, int x, int y, Tablero* t);
 	bool primer_movimiento;

@@ -5,6 +5,8 @@ using ETSIDI::Sprite;
 class Torre :public Pieza {
 	Sprite torreBlancas{ "imagenes/torreBlanca.png" };
 	Sprite torreNegras{ "imagenes/torreNegra.png" };
+	Sprite torreDorado{ "imagenes/torreDorado.png" };
+	Sprite torrePlata{ "imagenes/torrePlata.png" };
 public:
 	void movimientos();
 	static const int valor = 5;
