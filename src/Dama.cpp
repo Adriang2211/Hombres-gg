@@ -304,15 +304,32 @@ void Dama::movimientos()
 }
 
 
-void Dama::dibuja() {
-	if (color == true) {
-		damaBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		damaBlancas.setSize(1, 1);
-		damaBlancas.draw();
+void Dama::dibuja(int opc) {
+	if (opc == 0)
+	{
+		if (color == true) {
+			damaBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			damaBlancas.setSize(1, 1);
+			damaBlancas.draw();
+		}
+		else {
+			damaNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			damaNegras.setSize(1, 1);
+			damaNegras.draw();
+		}
 	}
-	else {
-		damaNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		damaNegras.setSize(1, 1);
-		damaNegras.draw();
+	else if (opc == 1)
+	{
+		if (color == true) {
+			damaDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			damaDorado.setSize(1, 1);
+			damaDorado.draw();
+		}
+		else {
+			damaPlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			damaPlata.setSize(1, 1);
+			damaPlata.draw();
+		}
 	}
+	
 }

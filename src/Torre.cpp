@@ -185,15 +185,34 @@ bool Torre::mover(Coords destino) {
 	return true;
 }
 
-void Torre::dibuja() {
-	if (color == true) {
-		torreBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
-		torreBlancas.setSize(1, 1);
-		torreBlancas.draw();
+void Torre::dibuja(int opc) {
+
+
+	if (opc == 0)
+	{
+		if (color == true) {
+			torreBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			torreBlancas.setSize(1, 1);
+			torreBlancas.draw();
+		}
+		else {
+			torreNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			torreNegras.setSize(1, 1);
+			torreNegras.draw();
+		}
 	}
-	else {
-		torreNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
-		torreNegras.setSize(1, 1);
-		torreNegras.draw();
+	else if (opc == 1)
+	{
+		if (color == true) {
+			torreDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			torreDorado.setSize(1, 1);
+			torreDorado.draw();
+		}
+		else {
+			torrePlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			torrePlata.setSize(1, 1);
+			torrePlata.draw();
+		}
 	}
+
 }

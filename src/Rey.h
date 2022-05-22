@@ -15,7 +15,7 @@ public:
 	bool primer_movimiento; //Para el enroque, el rey no se puede haber movido.
 	bool mover(Coords destino);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
-	void dibuja();
+	void dibuja(int opc);
 
 	int getValor() { return valor; };
 };

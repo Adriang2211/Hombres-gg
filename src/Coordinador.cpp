@@ -10,6 +10,7 @@ Coordinador::Coordinador() {
 	muevete = false;
 	malas = {-1, -1};
 	ETSIDI::playMusica("sonidos/ambiente.wav", true);
+	opcion = 0;
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -91,10 +92,10 @@ void Coordinador::dibuja() {
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja(false, mov);
+			tab.dibuja(false, mov,opcion);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja(true, mov);
+			tab.dibuja(true, mov,opcion);
 		}
 	}
 	else if (estado == PAUSE) {

@@ -118,15 +118,32 @@ bool Peon::mover(Coords destino) {
 	return true;
 }
 
-void Peon::dibuja() {
-	if (color == true) {
-		peonBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		peonBlancas.setSize(1, 1);
-		peonBlancas.draw();
+void Peon::dibuja(int opc) {
+	if (opc == 0)
+	{
+		if (color == true) {
+			peonBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			peonBlancas.setSize(1, 1);
+			peonBlancas.draw();
+		}
+		else {
+			peonNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			peonNegras.setSize(1, 1);
+			peonNegras.draw();
+		}
 	}
-	else {
-		peonNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		peonNegras.setSize(1, 1);
-		peonNegras.draw();
+	else if (opc == 1)
+	{
+		if (color == true) {
+			peonDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			peonDorado.setSize(1, 1);
+			peonDorado.draw();
+		}
+		else {
+			peonPlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			peonPlata.setSize(1, 1);
+			peonPlata.draw();
+		}
 	}
+	
 }

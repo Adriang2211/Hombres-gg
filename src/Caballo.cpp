@@ -137,15 +137,33 @@ void Caballo::tuPetitInteraccion(Coords coordenadas_de_consulta, Coords coordena
 }
 
 
-void Caballo::dibuja() {
-	if (color == true) {
-		caballoBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		caballoBlancas.setSize(1, 1);
-		caballoBlancas.draw();
+void Caballo::dibuja(int opc) {
+	if (opc == 0)
+	{
+
+		if (color == true) {
+			caballoBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			caballoBlancas.setSize(1, 1);
+			caballoBlancas.draw();
+		}
+		else {
+			caballoNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			caballoNegras.setSize(1, 1);
+			caballoNegras.draw();
+		}
 	}
-	else {
-		caballoNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		caballoNegras.setSize(1, 1);
-		caballoNegras.draw();
+	else if (opc == 1)
+	{
+		if (color == true) {
+			caballoDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			caballoDorado.setSize(1, 1);
+			caballoDorado.draw();
+		}
+		else {
+			caballoPlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			caballoPlata.setSize(1, 1);
+			caballoPlata.draw();
+		}
 	}
+
 }
