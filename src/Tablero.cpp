@@ -10,6 +10,7 @@
 #include "freeglut.h"
 #include <fstream>
 #include <string>
+#include "AyudaTexto.h"
 
 
 Tablero::Tablero() {
@@ -167,18 +168,24 @@ void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 
 	ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 	ETSIDI::setTextColor(0, 255, 128);
-	ETSIDI::printxy("BLANCAS SE RINDEN", -2, 8);
-	ETSIDI::printxy("NEGRAS SE RINDEN", 7, 8);
+	ETSIDI::printxy("BLANCAS", -2, 10);
+	ETSIDI::printxy("SE RINDEN", -2, 9);
+	AyudaTexto::tu_texto("NEGRAS", 10, 10,0.3);
+	AyudaTexto::tu_texto("SE RINDEN", 10, 9, 0.25);
+	ETSIDI::setTextColor(255, 0, 255);
+	ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+	ETSIDI::printxy("PULSE 1 SI QUIERE PIEZA CLASICA", -2, -1);
+	ETSIDI::printxy("PULSE 2 SI QUIERE PIEZA BARROCA", 5, -1);
 
 	if (turno) {//Escribir turno blancas
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		ETSIDI::setTextColor(0, 255, 128);
-		ETSIDI::printxy("TURNO BLANCAS", 2, 10);
+		ETSIDI::printxy("TURNO BLANCAS", 3, 10);
 	}
 	else {//Escribir turno negras
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 16);
 		ETSIDI::setTextColor(0, 255, 128);
-		ETSIDI::printxy("TURNO NEGRAS", 2, 10);
+		ETSIDI::printxy("TURNO NEGRAS", 3, 10);
 	}
 }
 

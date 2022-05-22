@@ -36,8 +36,4 @@ public:
 	void NombrePartidaGuardar(); //poner nombre a la partida
 	//cargar partida con nombre ""
 
-	/*
-	void tu_texto(string txt, int x, int y); //Escribir de izquierda a derecha
-	void tu_print(const char* txt, float x, float y);
-	*/
 };

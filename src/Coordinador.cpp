@@ -102,11 +102,8 @@ void Coordinador::dibuja() {
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
 
-		/*ETSIDI::setTextColor(255, 0, 255);
-		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-		ETSIDI::printxy("PULSE 1 SI QUIERE PIEZAS CLASICAS", -10, 29);
-		ETSIDI::printxy("PULSE 2 SI QUIERE PIEZAS ", -10, 20);
-		*/
+
+		
 		if (raton == PEDIR_COORDS) {
 			tab.dibuja(false, mov, opcion);
 		}
