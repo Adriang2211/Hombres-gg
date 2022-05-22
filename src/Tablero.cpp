@@ -99,7 +99,7 @@ Tablero::~Tablero() {
 	lista_piezas.eliminar();;
 }
 
-void Tablero::dibuja(bool marca, Pieza * pieza) {
+void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 
 	int N = 8;
 	for (int j = 0; j < N; j++) {
@@ -140,7 +140,7 @@ void Tablero::dibuja(bool marca, Pieza * pieza) {
 	}
 		
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
-		lista_piezas.getPieza(i)->dibuja();
+		lista_piezas.getPieza(i)->dibuja(opcion);
 	}
 	
 

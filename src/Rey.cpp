@@ -321,16 +321,33 @@ bool Rey::mover(Coords destino) {
 	return true;
 }
 
-void Rey::dibuja() {
-	if (color == true) {
-		reyBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		reyBlancas.setSize(1, 1);
-		reyBlancas.draw();
+void Rey::dibuja(int opc) {
+	if (opc == 0)
+	{
+		if (color == true) {
+			reyBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			reyBlancas.setSize(1, 1);
+			reyBlancas.draw();
+		}
+		else {
+			reyNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			reyNegras.setSize(1, 1);
+			reyNegras.draw();
+		}
 	}
-	else {
-		reyNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		reyNegras.setSize(1, 1);
-		reyNegras.draw();
+	else if (opc == 1)
+	{
+		if (color == false) {
+			reyDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			reyDorado.setSize(1, 1);
+			reyDorado.draw();
+		}
+		else {
+			reyPlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			reyPlata.setSize(1, 1);
+			reyPlata.draw();
+		}
 	}
+	
 	
 }

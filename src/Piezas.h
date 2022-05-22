@@ -30,7 +30,7 @@ public:
 	virtual bool getPrimerMovimiento() { return false; };
 	virtual bool mover(Coords destino);
 	virtual void movimientos() {}; //Define la obligatoriedad de definir en todas las clases hijas la función de movimientos.
-	virtual void dibuja(); //Metodo que hace que se dibujen las piezas.
+	virtual void dibuja(int opc); //Metodo que hace que se dibujen las piezas.
 
 	virtual int getValor() { return 0; };
 };

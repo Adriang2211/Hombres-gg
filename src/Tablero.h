@@ -37,7 +37,7 @@ public: //Por ahora de forma temporal muchas cosas son publicas
 	ListaPiezas lista_piezas;
 
 
-	void dibuja(bool marca, Pieza * pieza);
+	void dibuja(bool marca, Pieza * pieza, int opcion);
 	void inicializa(bool guardado = false);
 	void actualizarMovimientosPosibles();
 	bool consultaBlancas(Coords const coordenada);

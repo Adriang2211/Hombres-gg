@@ -10,6 +10,7 @@ Coordinador::Coordinador() {
 	muevete = false;
 	malas = {-1, -1};
 	ETSIDI::playMusica("sonidos/ambiente.wav", true);
+	opcion = 0;
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -87,16 +88,24 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
+	
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
+		
+		/*ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+		ETSIDI::printxy("PULSE 1 SI QUIERE PIEZAS CLASICAS", -10, 29);
+		ETSIDI::printxy("PULSE 2 SI QUIERE PIEZAS ", -10, 20);
+		*/
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja(false, mov);
+			tab.dibuja(false, mov,opcion);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja(true, mov);
+			tab.dibuja(true, mov,opcion);
 		}
 	}
+	
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
@@ -237,6 +246,12 @@ void Coordinador::tecla(unsigned char tecla) {
 	else if (estado == BATALLA) {
 		if (tecla == 'p' || tecla == 'P') {
 			estado = PAUSE;
+		}
+		else if (tecla == '1') {
+			setopcion(0);
+		}
+		else if (tecla == '2') {
+			setopcion(1);
 		}
 	}
 	else if (estado == MAQUINA) {

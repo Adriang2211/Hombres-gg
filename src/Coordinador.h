@@ -15,15 +15,17 @@ private:
 	bool muevete;
 	Coords malas;
 	bool seleccion; //si true, se ha seleccionado jugar 1vs1; false contra maquina
-
+	int opcion;
 public:
 	Coordinador();
 	Coords cell;//celda seleccionada por el raton
 	void sacarcelda(int x, int y);//conversion coordenadas de la pantalla a coordeandas del tablero
 	void dibuja();
-	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
-	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
-	//void te_mueves();
+	void tecla(unsigned char tecla); //las usaremos para Â´avanzarÂ´ de estados
+	void tu_raton(); //Comentado el cuerpo hasta que estÃ© operativa la funciÃ³n del ratÃ³n.
+	int getopcion(){ return opcion; };
+	void setopcion(int a) { opcion = a; }
+					 //void te_mueves();
 
 	/*
 	void tu_texto(string txt, int x, int y); //Escribir de izquierda a derecha

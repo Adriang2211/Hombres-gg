@@ -97,6 +97,6 @@ bool Pieza::mover(Coords destino) {
 }
 
 
-void Pieza::dibuja() {
+void Pieza::dibuja(int opc) {
 	;
 }

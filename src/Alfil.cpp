@@ -184,15 +184,33 @@ void Alfil::movimientos() {
 }
 
 
-void Alfil::dibuja() {
-	if (color == true) {
-		alfilBlancas.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		alfilBlancas.setSize(1, 1);
-		alfilBlancas.draw();
+void Alfil::dibuja(int opc) {
+	if (opc == 0)
+	{
+
+		if (color == true) {
+			alfilBlancas.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			alfilBlancas.setSize(1, 1);
+			alfilBlancas.draw();
+		}
+		else {
+			alfilNegras.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			alfilNegras.setSize(1, 1);
+			alfilNegras.draw();
+		}
 	}
-	else {
-		alfilNegras.setCenter(-coordenadas.getX()+1, -coordenadas.getY()+1);
-		alfilNegras.setSize(1, 1);
-		alfilNegras.draw();
+	else if (opc == 1)
+	{
+
+		if (color == false) {
+			alfilDorado.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			alfilDorado.setSize(1, 1);
+			alfilDorado.draw();
+		}
+		else {
+			alfilPlata.setCenter(-coordenadas.getX() + 1, -coordenadas.getY() + 1);
+			alfilPlata.setSize(1, 1);
+			alfilPlata.draw();
+		}
 	}
 }

@@ -13,7 +13,7 @@ public:
 	Caballo(bool color, int x, int y, Tablero* t);
 	static const int valor = 3;
 	void movimientos();
-	void dibuja();
+	void dibuja(int opc);
 
 	int getValor() { return valor; };
 };

@@ -14,7 +14,7 @@ public:
 	bool mover(Coords destino);
 	Torre(bool color, int x, int y, Tablero* t);
 	virtual bool getPrimerMovimiento() { return primer_movimiento; }
-	void dibuja();
+	void dibuja(int opc);
 
 	int getValor() { return valor; };
 };
