@@ -303,6 +303,31 @@ void Coordinador::tecla(unsigned char tecla) {
 		//HAY QUE FINALIZAR EL JUEGO
 		exit(1);
 	}
+	else if (estado == CORONAR) {
+		switch (tecla) {
+			case 't':
+			case 'T':
+				tab.coronar(1);
+				estado = BATALLA;
+				break;
+			case 'c':
+			case 'C':
+				tab.coronar(2);
+				estado = BATALLA;
+				break;
+			case 'A':
+			case 'a':
+				tab.coronar(3);
+				estado = BATALLA;
+				break;
+			case 'D':
+			case 'd':
+				tab.coronar(4);
+				estado = BATALLA;
+				break;
+		}
+
+	}
 
 }
 
@@ -370,5 +395,7 @@ void Coordinador::tu_raton() {
 
 			}
 		}
+		if (tab.detectarCoronar())
+			estado = CORONAR;
 	}
 }

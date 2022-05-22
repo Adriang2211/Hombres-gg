@@ -6,7 +6,7 @@ using namespace std;
 
 class Coordinador {
 private:
-	enum Estado {INICIO, INSTRUCCIONES, PREGUNTAS_BAT, PREGUNTAS_MAQ, BATALLA, MAQUINA, PAUSE, GUARDADO, FIN, CONFIGURACION};
+	enum Estado {INICIO, INSTRUCCIONES, PREGUNTAS_BAT, PREGUNTAS_MAQ, BATALLA, MAQUINA, PAUSE, GUARDADO, FIN, CORONAR};
 	Estado estado;
 	enum Raton {PEDIR_COORDS, COORDS_RECIBIDAS};
 	Raton raton;
@@ -21,8 +21,8 @@ public:
 	Coords cell;//celda seleccionada por el raton
 	void sacarcelda(int x, int y);//conversion coordenadas de la pantalla a coordeandas del tablero
 	void dibuja();
-	void tecla(unsigned char tecla); //las usaremos para ´avanzar´ de estados
-	void tu_raton(); //Comentado el cuerpo hasta que esté operativa la función del ratón.
+	void tecla(unsigned char tecla); //las usaremos para Â´avanzarÂ´ de estados
+	void tu_raton(); //Comentado el cuerpo hasta que estÃ© operativa la funciÃ³n del ratÃ³n.
 	int getopcion(){ return opcion; };
 	void setopcion(int a) { opcion = a; }
 					 //void te_mueves();
