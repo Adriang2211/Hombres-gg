@@ -58,7 +58,7 @@ void Tablero::inicializa(bool guardado) {
 			lista_piezas.agregarPieza(piezast[i]);
 	}
 	else {//HAY que inicializar lo que esté guardado en el fichero
-		leerPartida("partida.txt");
+		NombrePartidaCargar();
 	}
 
 	//Actualización de la situación
@@ -102,7 +102,7 @@ Tablero::~Tablero() {
 	borrarTab();
 }
 
-void Tablero::dibuja(bool marca, Pieza * pieza) {
+void Tablero::dibuja(bool marca, Pieza * pieza, int opcion) {
 
 	int N = 8;
 	for (int j = 0; j < N; j++) {
@@ -143,7 +143,7 @@ void Tablero::dibuja(bool marca, Pieza * pieza) {
 	}
 		
 	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
-		lista_piezas.getPieza(i)->dibuja();
+		lista_piezas.getPieza(i)->dibuja(opcion);
 	}
 	int z = 0;
 	int q = 9;
@@ -656,4 +656,51 @@ void Tablero::leerPartida(std::string p_guardada) {
 	}
 
 	guardado.close();
+}
+
+
+bool Tablero::detectarCoronar() {
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Tablero::coronar(int opcion) {
+	Pieza peon_que_corona;
+	for (int i = 0; i < lista_piezas.getNumeroPiezas(); i++) {
+		if (lista_piezas.getPieza(i)->id == PEON && lista_piezas.getPieza(i)->getCoordenadas().getY() == 8) {
+			peon_que_corona = *lista_piezas.getPieza(i);
+			lista_piezas.eliminarPieza(i);
+		}
+	}
+	Pieza* nueva_pieza;
+	switch (opcion) {
+	case 1:
+		nueva_pieza = new Torre(peon_que_corona.getColor(), peon_que_corona.getCoordenadas().getX(), peon_que_corona.getCoordenadas().getY(), this);
+		lista_piezas.agregarPieza(nueva_pieza);
+		break;
+	case 2:
+		nueva_pieza = new Caballo(peon_que_corona.getColor(), peon_que_corona.getCoordenadas().getX(), peon_que_corona.getCoordenadas().getY(), this);
+		lista_piezas.agregarPieza(nueva_pieza);
+		break;
+
+	case 3:	
+		nueva_pieza = new Alfil(peon_que_corona.getColor(), peon_que_corona.getCoordenadas().getX(), peon_que_corona.getCoordenadas().getY(), this);
+		lista_piezas.agregarPieza(nueva_pieza);
+		break;
+
+	case 4:
+		nueva_pieza = new Dama(peon_que_corona.getColor(), peon_que_corona.getCoordenadas().getX(), peon_que_corona.getCoordenadas().getY(), this);
+		lista_piezas.agregarPieza(nueva_pieza);
+		break;
+	}
+}
+void Tablero::NombrePartidaCargar() {
+	std::string nombrepartida;
+	std::cout << "introduce el nombre de la partida sin espacios" << std::endl;
+	std::cin >> nombrepartida;
+	leerPartida(nombrepartida);
 }

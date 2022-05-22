@@ -39,6 +39,41 @@ bool Pieza::mover(Coords destino) {
 			}
 
 			coordenadas = destino; //Actualiza la posición de la pieza
+
+			//Comprobación de si es un enroque (debe hacerse antes de actualizar coordenadas disponibles)
+
+			//Enorque corto blancas
+			if (id == REY && destino == (Coords{ g, 1 }) && coordenadas_originales == (Coords{ e, 1 })) {
+				tab->getPiezaEn({ h, 1 })->setCoordenadas({ f, 1 });
+				tab->actualizarCasillasOcupadas();
+				tab->actualizarMovimientosPosibles();
+				return true; //Ya se hicieron el resto de comprobaciones al detectar la posibilidad de enrocar
+			}
+			//Enroque largo blancas
+			if (id == REY && destino == (Coords{ c, 1 }) && coordenadas_originales == (Coords{ e, 1 })) {
+				tab->getPiezaEn({ a, 1 })->setCoordenadas({ d, 1 });
+				tab->actualizarCasillasOcupadas();
+				tab->actualizarMovimientosPosibles();
+				return true;
+			}
+
+			//Enroque corto negras
+			if (id == REY && destino == (Coords{ g, 8 }) && coordenadas_originales == (Coords{ e, 8 })) {
+				tab->getPiezaEn({ h, 8 })->setCoordenadas({ f, 8 });
+				tab->actualizarCasillasOcupadas();
+				tab->actualizarMovimientosPosibles();
+				return true;
+			}
+
+			//Enroque largo negras
+			if (id == REY && destino == (Coords{ c, 8 }) && coordenadas_originales == (Coords{ e, 8 })) {
+				tab->getPiezaEn({ a, 8 })->setCoordenadas({ d, 8 });
+				tab->actualizarCasillasOcupadas();
+				tab->actualizarMovimientosPosibles();
+				return true;
+			}
+
+
 			tab->actualizarCasillasOcupadas();
 			tab->actualizarMovimientosPosibles();
 
@@ -49,6 +84,10 @@ bool Pieza::mover(Coords destino) {
 					tab->lista_piezas.agregarPieza(copia_comida);
 				return false;
 			}
+
+				
+
+
 			tab->actualizarCasillasOcupadas();
 			tab->actualizarMovimientosPosibles();
 			return true;
@@ -58,6 +97,6 @@ bool Pieza::mover(Coords destino) {
 }
 
 
-void Pieza::dibuja() {
+void Pieza::dibuja(int opc) {
 	;
 }

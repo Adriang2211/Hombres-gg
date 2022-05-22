@@ -10,6 +10,7 @@ Coordinador::Coordinador() {
 	muevete = false;
 	malas = {-1, -1};
 	ETSIDI::playMusica("sonidos/ambiente.wav", true);
+	opcion = 0;
 }
 void Coordinador::sacarcelda(int x, int y)
 {
@@ -96,16 +97,24 @@ void Coordinador::dibuja() {
 		ETSIDI::setTextColor(0, 255, 255);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 12);
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
+	
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
 	else if (estado == BATALLA || estado == MAQUINA) {
+		
+		/*ETSIDI::setTextColor(255, 0, 255);
+		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
+		ETSIDI::printxy("PULSE 1 SI QUIERE PIEZAS CLASICAS", -10, 29);
+		ETSIDI::printxy("PULSE 2 SI QUIERE PIEZAS ", -10, 20);
+		*/
 		if (raton == PEDIR_COORDS) {
-			tab.dibuja(false, mov);
+			tab.dibuja(false, mov,opcion);
 		}
 		else if (raton == COORDS_RECIBIDAS) {
-			tab.dibuja(true, mov);
+			tab.dibuja(true, mov,opcion);
 		}
 	}
+	
 	else if (estado == PAUSE) {
 		//INTERFAZDE PAUSE
 		gluLookAt(0, 10, 30, // posicion del ojo
@@ -151,6 +160,7 @@ void Coordinador::dibuja() {
 		AyudaTexto::tu_texto("Adrian & Ignacio & Samuel & Joshua & Eloy", 16, 1, 0.4);
 		//ETSIDI::printxy("Adrian & Ignacio & Samuel & Joshua & Eloy", 2, 1);
 	}
+
 	else if (estado == REND_BLANCO) {//Los blancos se han rendido
 		gluLookAt(0, 10, 30, // posicion del ojo
 			0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
@@ -158,7 +168,7 @@ void Coordinador::dibuja() {
 
 		ETSIDI::setTextColor(0, 255, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-		ETSIDI::printxy("¡LAS BLANCAS SE HAN RENDIDO!", -10, 29);
+		ETSIDI::printxy("Â¡LAS BLANCAS SE HAN RENDIDO!", -10, 29);
 		ETSIDI::printxy("ENHORABUENA NEGRAS", -10, 28);
 		ETSIDI::printxy("NO TAN BIEN JUGADO BLANCAS.. ", -10, 27);
 		ETSIDI::printxy("PULSE LA TECLA I PARA VOLVER AL MENU DE INICIO ", -10, 26);
@@ -182,7 +192,7 @@ void Coordinador::dibuja() {
 
 		ETSIDI::setTextColor(0, 255, 0);
 		ETSIDI::setFont("fuentes/Bitwise.ttf", 14);
-		ETSIDI::printxy("¡LAS NEGRAS SE HAN RENDIDO!", -10, 29);
+		ETSIDI::printxy("Â¡LAS NEGRAS SE HAN RENDIDO!", -10, 29);
 		ETSIDI::printxy("ENHORABUENA BLANCAS", -10, 28);
 		ETSIDI::printxy("NO TAN BIEN JUGADO NEGRAS.. ", -10, 27);
 		ETSIDI::printxy("PULSE LA TECLA I PARA VOLVER AL MENU DE INICIO ", -10, 26);
@@ -200,6 +210,27 @@ void Coordinador::dibuja() {
 
 	}
 	
+	else if (estado == GUARDADO)
+	{
+	gluLookAt(0, 10, 30, // posicion del ojo
+		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+	ETSIDI::setTextColor(1, 1, 0);
+	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+	ETSIDI::printxy("PULSE G OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+	ETSIDI::printxy("DE LA PARTIDA QUE DESEA GUARDAR (SIN ESPACIOS)", -10, 25);
+	ETSIDI::printxy("PULSE F PARA FINALIZAR", -10, 23);
+ }
+	else if (estado == CARGAR)
+	{
+	gluLookAt(0, 10, 30, // posicion del ojo
+		0.0, 10, 0.0, // hacia que punto mira (0,7.5,0) 
+		0.0, 1.0, 0.0); // definimos hacia arriba (eje Y) 
+	ETSIDI::setTextColor(1, 1, 0);
+	ETSIDI::setFont("fuentes/Rubik-Regular.ttf", 16);
+	ETSIDI::printxy("PULSE 2 OTRA VEZ E INSERTE EN LA CONSOLA EL NOMBRE ", -10, 26);
+	ETSIDI::printxy("DE LA PARTIDA QUE DESEA CARGAR (SIN ESPACIOS)", -10, 25);
+	
 }
 void Coordinador::tecla(unsigned char tecla) {
 
@@ -211,7 +242,7 @@ void Coordinador::tecla(unsigned char tecla) {
 			case 'I':
 				//Ir al estado de INSTRUCCIONES
 				estado = INSTRUCCIONES;
-				//Hay que hacer algo más?
+				//Hay que hacer algo mÃ¡s?
 				break;
 			case '1':
 				//Ir al estado de 1 vs 1
@@ -220,7 +251,7 @@ void Coordinador::tecla(unsigned char tecla) {
 				//INICIALIZA
 				break;
 			case '2':///////////////////////////////////////////////////////////////
-				//Ir al estado vs la máquina
+				//Ir al estado vs la mÃ¡quina
 				estado = PREGUNTAS_MAQ;
 				seleccion = false;
 				//INICIALIZA
@@ -251,14 +282,14 @@ void Coordinador::tecla(unsigned char tecla) {
 		switch (tecla) {
 			case '1'://caso en el que hay que empezar una partida nueva
 				estado = BATALLA;
-				//INICIALIZACIÓN
+				//INICIALIZACIÃ“N
 				tab.inicializa();
 				break;
 			case '2':
-				estado = BATALLA;
-				//INICIALIZACIÓN
-				tab.inicializa(true);
-
+				
+				//INICIALIZACIÃ“N
+				
+				estado = CARGAR;
 				break;
 			case 'i':
 			case 'I':
@@ -273,12 +304,12 @@ void Coordinador::tecla(unsigned char tecla) {
 		switch (tecla) {
 		case '1'://caso en el que hay que empezar una partida nueva
 			estado = MAQUINA;
-			//INICIALIZACIÓN
+			//INICIALIZACIÃ“N
 			tab.inicializa();
 			break;
 		case '2':
 			estado = MAQUINA;
-			//INICIALIZACIÓN
+			//INICIALIZACIÃ“N
 			tab.inicializa(true);
 
 			break;
@@ -291,9 +322,23 @@ void Coordinador::tecla(unsigned char tecla) {
 			break;
 		}
 	}
+	else if (estado == CARGAR)
+	{
+		if (tecla == '2')
+		{
+			tab.inicializa(true);
+			estado = BATALLA;
+		}
+	}
 	else if (estado == BATALLA) {
 		if (tecla == 'p' || tecla == 'P') {
 			estado = PAUSE;
+		}
+		else if (tecla == '1') {
+			setopcion(0);
+		}
+		else if (tecla == '2') {
+			setopcion(1);
 		}
 	}
 	else if (estado == MAQUINA) {
@@ -329,15 +374,20 @@ void Coordinador::tecla(unsigned char tecla) {
 				break;
 			case 'g':
 			case 'G':
-				tab.guardarPartida("partida.txt");
+				
 				estado = GUARDADO;
-
+				break;
 		}
 	}
 	else if (estado == GUARDADO) {
-		
+	
+	
 		if (tecla == 'f' || tecla == 'F') {
 			estado = FIN;
+		}
+		else if (tecla == 'g' || tecla == 'G')
+		{
+		NombrePartidaGuardar();
 		}
 	}
 	else if (estado == REND_BLANCO || estado == REND_NEGRO) {
@@ -356,6 +406,31 @@ void Coordinador::tecla(unsigned char tecla) {
 	else if (estado == FIN) {//el juego ha finalizado, cualquier tecla para finalizar
 		//HAY QUE FINALIZAR EL JUEGO
 		exit(1);
+	}
+	else if (estado == CORONAR) {
+		switch (tecla) {
+			case 't':
+			case 'T':
+				tab.coronar(1);
+				estado = BATALLA;
+				break;
+			case 'c':
+			case 'C':
+				tab.coronar(2);
+				estado = BATALLA;
+				break;
+			case 'A':
+			case 'a':
+				tab.coronar(3);
+				estado = BATALLA;
+				break;
+			case 'D':
+			case 'd':
+				tab.coronar(4);
+				estado = BATALLA;
+				break;
+		}
+
 	}
 
 }
@@ -393,7 +468,7 @@ void Coordinador::tu_raton() {
 		}
 		else if (raton == PEDIR_COORDS) {
 			if (tab.turno) {//turno blancas
-				//solo es válido obtener una pieza blanca
+				//solo es vÃ¡lido obtener una pieza blanca
 				Coords aux = cell; //obtengo coordenadas
 				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
 					if (tab.casillas_ocupadas_blancas[i] == aux) { //si en la casilla seleccionada hay pieza blanca
@@ -409,7 +484,7 @@ void Coordinador::tu_raton() {
 
 			}
 			else {//turno negras
-				//solo es válido obtener una pieza negra
+				//solo es vÃ¡lido obtener una pieza negra
 				Coords aux = cell; //obtengo coordenadas
 				for (int i = 0; i < NUMERO_DE_PIEZAS / 2; i++) {
 					if (tab.casillas_ocupadas_negras[i] == aux) { //si en la casilla seleccionada hay pieza negra
@@ -424,6 +499,7 @@ void Coordinador::tu_raton() {
 
 			}
 		}
+
 		
 		//
 		if (rendicion_blanco == true) {//los blancos se rinden
@@ -432,5 +508,17 @@ void Coordinador::tu_raton() {
 		if (rendicion_negro == true) {//los negros se rinden
 			estado = REND_NEGRO;
 		}
+
+		if (tab.detectarCoronar())
+			estado = CORONAR;
+
 	}
+}
+void Coordinador::NombrePartidaGuardar() {
+	std::string nombrepartida;
+	
+
+	std::cout << "introduce el nombre de la partida sin espacios" << std::endl;
+	std::cin >> nombrepartida;
+	tab.guardarPartida(nombrepartida);
 }

@@ -15,7 +15,7 @@ public:
 	//conservar los alfiles en lugar de los caballos.
 
 	void movimientos();
-    void dibuja();
+    void dibuja(int opc);
 
 	int getValor() { return valor; };
 };
